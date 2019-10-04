@@ -1,9 +1,6 @@
 package com.binance.api.client;
 
-import com.binance.api.client.impl.BinanceApiAsyncMarginRestClientImpl;
-import com.binance.api.client.impl.BinanceApiAsyncRestClientImpl;
-import com.binance.api.client.impl.BinanceApiRestClientImpl;
-import com.binance.api.client.impl.BinanceApiWebSocketClientImpl;
+import com.binance.api.client.impl.*;
 
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.getSharedClient;
 
@@ -64,13 +61,15 @@ public class BinanceApiClientFactory {
   /**
    * Creates a new asynchronous/non-blocking REST client.
    */
-  public BinanceApiAsyncRestClient newAsyncRestClient() {return new BinanceApiAsyncRestClientImpl(apiKey, secret);
+  public BinanceApiAsyncRestClient newAsyncRestClient() {
+    return new BinanceApiAsyncRestClientImpl(apiKey, secret);
   }
 
   /**
    * Creates a new asynchronous/non-blocking Margin REST client.
    */
-  public BinanceApiAsyncMarginRestClient newAsyncMarginRestClient() {return new BinanceApiAsyncMarginRestClientImpl(apiKey, secret);
+  public BinanceApiAsyncMarginRestClient newAsyncMarginRestClient() {
+    return new BinanceApiAsyncMarginRestClientImpl(apiKey, secret);
   }
 
   /**

@@ -3,9 +3,12 @@ package com.binance.api.client.impl;
 import com.binance.api.client.BinanceApiAsyncMarginRestClient;
 import com.binance.api.client.BinanceApiCallback;
 import com.binance.api.client.constant.BinanceApiConstants;
-import com.binance.api.client.domain.account.MarginAccount;
-import com.binance.api.client.domain.account.Order;
+import com.binance.api.client.domain.account.*;
+import com.binance.api.client.domain.account.request.CancelOrderRequest;
+import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
+import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.domain.event.ListenKey;
 
 import java.util.List;
 
@@ -39,5 +42,43 @@ public class BinanceApiAsyncMarginRestClientImpl implements BinanceApiAsyncMargi
   public void getOpenOrders(OrderRequest orderRequest, BinanceApiCallback<List<Order>> callback) {
       binanceApiService.getOpenMarginOrders(orderRequest.getSymbol(), orderRequest.getRecvWindow(),
               orderRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+
+  @Override
+  public void newOrder(NewOrder order, BinanceApiCallback<NewOrderResponse> callback) {
+    binanceApiService.newMarginOrder(order.getSymbol(), order.getSide(), order.getType(),
+            order.getTimeInForce(), order.getQuantity(), order.getPrice(), order.getNewClientOrderId(), order.getStopPrice(),
+            order.getIcebergQty(), order.getNewOrderRespType(), order.getRecvWindow(), order.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+
+  @Override
+  public void cancelOrder(CancelOrderRequest cancelOrderRequest, BinanceApiCallback<CancelOrderResponse> callback) {
+    binanceApiService.cancelMarginOrder(cancelOrderRequest.getSymbol(),
+            cancelOrderRequest.getOrderId(), cancelOrderRequest.getOrigClientOrderId(), cancelOrderRequest.getNewClientOrderId(),
+            cancelOrderRequest.getRecvWindow(), cancelOrderRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+
+  @Override
+  public void getOrderStatus(OrderStatusRequest orderStatusRequest, BinanceApiCallback<Order> callback) {
+    binanceApiService.getMarginOrderStatus(orderStatusRequest.getSymbol(),
+            orderStatusRequest.getOrderId(), orderStatusRequest.getOrigClientOrderId(),
+            orderStatusRequest.getRecvWindow(), orderStatusRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+
+  @Override
+  public void getMyTrades(String symbol, BinanceApiCallback<List<Trade>> callback) {
+    binanceApiService.getMyTrades(symbol, null, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+
+  // user stream endpoints
+
+  @Override
+  public void startUserDataStream(BinanceApiCallback<ListenKey> callback) {
+    binanceApiService.startMarginUserDataStream().enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+
+  @Override
+  public void keepAliveUserDataStream(String listenKey, BinanceApiCallback<Void> callback) {
+    binanceApiService.keepAliveMarginUserDataStream(listenKey).enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 }
