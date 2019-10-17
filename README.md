@@ -3,7 +3,7 @@
 binance-java-api is a lightweight Java library for interacting with the [Binance API](https://www.binance.com/restapipub.html), providing complete API coverage, and supporting synchronous and asynchronous requests, as well as event streaming using WebSockets.
 
 ## Features
-* Support for synchronous and asynchronous REST requests to all [General](https://www.binance.com/restapipub.html#user-content-general-endpoints), [Market Data](https://www.binance.com/restapipub.html#user-content-market-data-endpoints), [Account](https://www.binance.com/restapipub.html#user-content-account-endpoints) endpoints, and [User](https://www.binance.com/restapipub.html#user-content-user-data-stream-endpoints) stream endpoints.
+* Support for synchronous and asynchronous REST requests to all [General](https://www.binance.com/restapipub.html#user-content-general-endpoints), [Market Data](https://www.binance.com/restapipub.html#user-content-market-data-endpoints), [Account](https://www.binance.com/restapipub.html#user-content-account-endpoints) , [Margin](https://github.com/binance-exchange/binance-official-api-docs/blob/master/margin-api.md) endpoints, and [User](https://www.binance.com/restapipub.html#user-content-user-data-stream-endpoints) stream endpoints.
 * Support for User Data, Trade, Kline, and Depth event streaming using [Binance WebSocket API](https://www.binance.com/restapipub.html#wss-endpoint).
 
 ## Installation
@@ -23,11 +23,13 @@ Alternatively, you can clone this repository and run the [examples](https://gith
 
 ### Getting Started
 
-There are three main client classes that can be used to interact with the API:
+There are five main client classes that can be used to interact with the API:
 
-1. [`BinanceApiRestClient`](https://github.com/joaopsilva/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiRestClient.java), a synchronous/blocking [Binance API](https://www.binance.com/restapipub.html) client;
-2. [`BinanceApiAsyncRestClient`](https://github.com/joaopsilva/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiAsyncRestClient.java), an asynchronous/non-blocking [Binance API](https://www.binance.com/restapipub.html) client;
-3. [`BinanceApiWebSocketClient`](https://github.com/joaopsilva/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiWebSocketClient.java), a data streaming client using [Binance WebSocket API](https://www.binance.com/restapipub.html#wss-endpoint).
+1. [`BinanceApiRestClient`](https://github.com/binance-exchange/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiRestClient.java), a synchronous/blocking [Binance API](https://www.binance.com/restapipub.html) client;
+2. [`BinanceApiAsyncRestClient`](https://github.com/binance-exchange/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiAsyncRestClient.java), an asynchronous/non-blocking [Binance API](https://www.binance.com/restapipub.html) client;
+3. [`BinanceApiMarginRestClient`](https://github.com/binance-exchange/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiMarginRestClient.java), a synchronous/blocking [Binance Margin API](https://github.com/binance-exchange/binance-official-api-docs/blob/master/margin-api.md) client;
+4. [`BinanceApiAsyncMarginRestClient`](https://github.com/binance-exchange/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiAsyncMarginRestClient.java), an asynchronous/non-blocking [Binance Margin API](https://github.com/binance-exchange/binance-official-api-docs/blob/master/margin-api.md) client;
+5. [`BinanceApiWebSocketClient`](https://github.com/binance-exchange/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiWebSocketClient.java), a data streaming client using [Binance WebSocket API](https://www.binance.com/restapipub.html#wss-endpoint).
 
 These can be instantiated through the corresponding factory method of [`BinanceApiClientFactory`](https://github.com/joaopsilva/binance-java-api/blob/master/src/main/java/com/binance/api/client/BinanceApiClientFactory.java), by passing the [security parameters](https://www.binance.com/restapipub.html#user-content-endpoint-security-type) `API-KEY` and `SECRET`, which can be created at [https://www.binance.com/userCenter/createApi.html](https://www.binance.com/userCenter/createApi.html).
 
@@ -261,6 +263,24 @@ System.out.println(depositAddress);
  
  ```java
 DepositAddress[address=0x99...,success=true,addressTag=,asset=ETH]
+```
+</details>
+
+### Margin account endpoints
+
+#### Get margin account balances
+
+```java
+MarginAccount marginAccount = client.getAccount();
+System.out.println(marginAccount);
+System.out.println(account.getAssetBalance("ETH").getFree());
+```
+<details>
+ <summary>View Response</summary>
+ 
+ ```java
+MarginAccount[borrowEnabled=true,marginLevel=999.00000000,totalAssetOfBtc=0.00000000,totalLiabilityOfBtc=0.00000000,totalNetAssetOfBtc=0.00000000,tradeEnabled=true,transferEnabled=true,userAssets=[MarginAssetBalance[asset=ETH,borrowed=0.00000000,free=0.10000000,interest=0.00000000,locked=0.00000000,netAsset=0.00000000]]]]
+0.10000000
 ```
 </details>
 
