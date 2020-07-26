@@ -5,6 +5,7 @@ import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.domain.general.MarginPair;
 
 import java.util.List;
 
@@ -52,6 +53,8 @@ public interface BinanceApiMarginRestClient {
      */
     List<Trade> getMyTrades(String symbol);
 
+    List<MarginPair> getAllPairs();
+
     // User stream endpoints
 
     /**
@@ -60,6 +63,7 @@ public interface BinanceApiMarginRestClient {
      * @return a listen key that can be used with data streams
      */
     String startUserDataStream();
+
 
     /**
      * PING a user data stream to prevent a time out.
