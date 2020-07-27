@@ -6,7 +6,9 @@ import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
 import com.binance.api.client.domain.general.MarginPair;
+import retrofit2.http.Query;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface BinanceApiMarginRestClient {
@@ -39,8 +41,8 @@ public interface BinanceApiMarginRestClient {
 
     /**
      * Check margin order's status.
-     * @param orderStatusRequest order status request options/filters
      *
+     * @param orderStatusRequest order status request options/filters
      * @return an order
      */
     Order getOrderStatus(OrderStatusRequest orderStatusRequest);
@@ -54,6 +56,12 @@ public interface BinanceApiMarginRestClient {
     List<Trade> getMyTrades(String symbol);
 
     List<MarginPair> getAllPairs();
+
+    MaxBorrowable getMaxBorrowable(String asset);
+
+    MarginLoan newMarginLoan(String asset, String amount);
+
+    MarginLoan newMarginRepay(String asset, String amount);
 
     // User stream endpoints
 

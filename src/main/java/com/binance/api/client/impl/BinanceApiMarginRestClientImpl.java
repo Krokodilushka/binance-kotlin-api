@@ -68,6 +68,21 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
         return executeSync(binanceApiService.getAllPairs());
     }
 
+    @Override
+    public MaxBorrowable getMaxBorrowable(String asset) {
+        return executeSync(binanceApiService.getMaxBorrowable(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
+    public MarginLoan newMarginLoan(String asset, String amount) {
+        return executeSync(binanceApiService.newMarginLoan(asset, amount, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
+    public MarginLoan newMarginRepay(String asset, String amount) {
+        return executeSync(binanceApiService.newMarginRepay(asset, amount, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
     // user stream endpoints
 
     @Override
