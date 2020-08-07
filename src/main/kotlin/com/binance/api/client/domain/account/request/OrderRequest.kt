@@ -34,6 +34,6 @@ open class OrderRequest(val symbol: String) {
 
     init {
         timestamp = System.currentTimeMillis()
-        recvWindow = BinanceApiConstants.DEFAULT_RECEIVING_WINDOW
+        recvWindow = BinanceApiConstants.SPOT_RECEIVING_WINDOW
     }
 }

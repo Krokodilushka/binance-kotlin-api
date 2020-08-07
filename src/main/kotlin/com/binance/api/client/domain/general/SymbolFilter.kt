@@ -1,5 +1,6 @@
 package com.binance.api.client.domain.general
 
+import com.binance.api.client.domain.FilterType
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 /**

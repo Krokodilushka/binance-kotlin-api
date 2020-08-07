@@ -1,26 +1,22 @@
 package com.binance.api.client
 
-import com.binance.api.client.constant.BinanceApiConstants
-import org.apache.commons.lang3.builder.ToStringBuilder
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 
-/**
- * Binance API error object.
- */
-class BinanceApiError {
-    /**
-     * Error code.
-     */
-    var code = 0
-
-    /**
-     * Error message.
-     */
-    var msg: String? = null
-
-    override fun toString(): String {
-        return ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
-                .append("code", code)
-                .append("msg", msg)
-                .toString()
-    }
-}
+@JsonIgnoreProperties
+data class BinanceApiError(
+        @JsonProperty("code")
+        val code: Int,
+        @JsonProperty("msg")
+        val msg: String?,
+        @JsonProperty("message")
+        val message: String?,
+        @JsonProperty("error")
+        val error: String?,
+        @JsonProperty("timestamp")
+        val timestamp: Long,
+        @JsonProperty("status")
+        val status: String?,
+        @JsonProperty("path")
+        val path: String?
+)

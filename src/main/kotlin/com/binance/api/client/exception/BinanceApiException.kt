@@ -20,7 +20,7 @@ class BinanceApiException : RuntimeException {
      *
      * @param error an error response object
      */
-    constructor(error: BinanceApiError?) {
+    constructor(error: BinanceApiError) {
         this.error = error
     }
 

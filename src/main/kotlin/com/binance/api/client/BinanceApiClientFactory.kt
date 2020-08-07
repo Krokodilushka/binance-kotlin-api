@@ -1,6 +1,9 @@
 package com.binance.api.client
 
-import com.binance.api.client.impl.*
+import com.binance.api.client.impl.BinanceApiMarginRestClientImpl
+import com.binance.api.client.impl.BinanceApiSpotRestClientImpl
+import com.binance.api.client.impl.BinanceWebSocketClientImpl
+import com.binance.api.client.service.BinanceApiServiceGenerator
 
 /**
  * A factory for creating BinanceApi client objects.
@@ -11,7 +14,8 @@ class BinanceApiClientFactory
  *
  * @param apiKey the API key
  * @param secret the Secret
- */ private constructor(
+ */
+private constructor(
         /**
          * API Key
          */
@@ -24,8 +28,8 @@ class BinanceApiClientFactory
     /**
      * Creates a new synchronous/blocking REST client.
      */
-    fun newRestClient(): BinanceApiRestClient {
-        return BinanceApiRestClientImpl(apiKey, secret)
+    fun newSpotRestClient(): BinanceApiSpotRestClient {
+        return BinanceApiSpotRestClientImpl(apiKey, secret)
     }
 
     /**
@@ -36,17 +40,10 @@ class BinanceApiClientFactory
     }
 
     /**
-     * Creates a new synchronous/blocking Margin REST client.
-     */
-    fun newIsolatedMarginRestClient(): BinanceApiIsolatedMarginRestClient {
-        return BinanceApiIsolatedMarginRestClientImpl(apiKey, secret)
-    }
-
-    /**
      * Creates a new web socket client used for handling data streams.
      */
-    fun newWebSocketClient(): BinanceApiWebSocketClient {
-        return BinanceApiWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient)
+    fun newWebSocketClient(): BinanceWebSocketClient {
+        return BinanceWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient)
     }
 
     companion object {
@@ -57,7 +54,7 @@ class BinanceApiClientFactory
          * @param secret the Secret
          * @return the binance api client factory
          */
-        fun newInstance(apiKey: String?, secret: String?): BinanceApiClientFactory {
+        fun newInstance(apiKey: String, secret: String): BinanceApiClientFactory {
             return BinanceApiClientFactory(apiKey, secret)
         }
 

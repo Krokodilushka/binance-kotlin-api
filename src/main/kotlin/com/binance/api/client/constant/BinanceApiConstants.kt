@@ -39,14 +39,15 @@ object BinanceApiConstants {
     const val ENDPOINT_SECURITY_TYPE_SIGNED_HEADER = "$ENDPOINT_SECURITY_TYPE_SIGNED: #"
 
     /**
-     * Default receiving window.
+     * Spot receiving window.
      */
-    const val DEFAULT_RECEIVING_WINDOW = 60000L
+    const val SPOT_RECEIVING_WINDOW = 60000L
 
     /**
-     * Default margin receiving window.
+     * Margin receiving window.
      */
-    const val DEFAULT_MARGIN_RECEIVING_WINDOW = 5000L
+    const val MARGIN_RECEIVING_WINDOW = 60000L
+
 
     /**
      * Default ToStringStyle used by toString methods.

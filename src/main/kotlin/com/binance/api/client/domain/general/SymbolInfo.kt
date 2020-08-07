@@ -1,7 +1,9 @@
 package com.binance.api.client.domain.general
 
 import com.binance.api.client.constant.BinanceApiConstants
+import com.binance.api.client.domain.FilterType
 import com.binance.api.client.domain.OrderType
+import com.binance.api.client.domain.SymbolStatus
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.apache.commons.lang3.builder.ToStringBuilder
 

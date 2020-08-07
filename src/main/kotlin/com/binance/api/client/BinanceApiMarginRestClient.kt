@@ -1,71 +1,190 @@
 package com.binance.api.client
 
-import com.binance.api.client.domain.account.*
-import com.binance.api.client.domain.account.request.CancelOrderRequest
-import com.binance.api.client.domain.account.request.CancelOrderResponse
-import com.binance.api.client.domain.account.request.OrderRequest
-import com.binance.api.client.domain.account.request.OrderStatusRequest
-import com.binance.api.client.domain.general.MarginPair
+import com.binance.api.client.domain.*
+import com.binance.api.client.domain.account.Amount
+import com.binance.api.client.domain.account.EmptyResponse
+import com.binance.api.client.domain.account.Transaction
+import com.binance.api.client.domain.account.margin.*
+import com.binance.api.client.domain.account.request.IsolatedMarginPair
+import com.binance.api.client.domain.event.ListenKey
 
 interface BinanceApiMarginRestClient {
-    /**
-     * Get current margin account information using default parameters.
-     */
-    fun getAccount(): MarginAccount
 
-    /**
-     * Get all open orders on margin account for a symbol.
-     *
-     * @param orderRequest order request parameters
-     */
-    fun getOpenOrders(orderRequest: OrderRequest): List<Order>
+    fun newCrossTransfer(
+            asset: String,
+            amount: String,
+            type: Short
+    ): Transaction
 
-    /**
-     * Send in a new margin order.
-     *
-     * @param order the new order to submit.
-     * @return a response containing details about the newly placed order.
-     */
-    fun newOrder(order: NewOrder): NewOrderResponse
+    fun newLoan(
+            asset: String,
+            isIsolated: Boolean?,
+            symbol: String?,
+            amount: String
+    ): Transaction
 
-    /**
-     * Cancel an active margin order.
-     *
-     * @param cancelOrderRequest order status request parameters
-     */
-    fun cancelOrder(cancelOrderRequest: CancelOrderRequest): CancelOrderResponse
+    fun newRepay(
+            asset: String,
+            isIsolated: Boolean?,
+            symbol: String?,
+            amount: String
+    ): Transaction
 
-    /**
-     * Check margin order's status.
-     *
-     * @param orderStatusRequest order status request options/filters
-     * @return an order
-     */
-    fun getOrderStatus(orderStatusRequest: OrderStatusRequest): Order?
+    fun asset(symbol: String): CrossMarginAsset
 
-    /**
-     * Get margin trades for a specific symbol.
-     *
-     * @param symbol symbol to get trades from
-     * @return a list of trades
-     */
-    fun getMyTrades(symbol: String?): List<Trade>
-    fun getAllPairs(): List<MarginPair>
-    fun getMaxBorrowable(asset: String?): MaxBorrowable
-    fun newMarginLoan(asset: String?, amount: String?): MarginLoan
-    fun newMarginRepay(asset: String?, amount: String?): MarginLoan
-    // User stream endpoints
-    /**
-     * Start a new user data stream.
-     *
-     * @return a listen key that can be used with data streams
-     */
-    fun startUserDataStream(): String
+    fun pair(symbol: String): MarginPair
 
-    /**
-     * PING a user data stream to prevent a time out.
-     *
-     * @param listenKey listen key that identifies a data stream
-     */
-    fun keepAliveUserDataStream(listenKey: String?)
+    fun allAssets(): List<CrossMarginAsset>
+
+    fun allPairs(): List<MarginPair>
+
+    fun priceIndex(symbol: String): PriceIndex
+
+    fun newOrder(
+            symbol: String,
+            isIsolated: Boolean?,
+            side: OrderSide,
+            type: OrderType,
+            quantity: String,
+            price: String?,
+            stopPrice: String?,
+            icebergQty: String?,
+            newClientOrderId: String?,
+            sideEffectType: OrderSideEffectType?,
+            timeInForce: OrderTimeInForce?
+    ): NewOrder
+
+    fun cancelOrder(
+            symbol: String,
+            isIsolated: Boolean?,
+            orderId: Long?,
+            origClientOrderId: String?,
+            newClientOrderId: String?
+    ): CancelOrder
+
+    fun crossTransfer(
+            asset: String?,
+            type: TransferType?,
+            startTime: String?,
+            endTime: String?,
+            current: String?,
+            size: String?
+    ): TransferHistory
+
+    fun loan(
+            asset: String,
+            isolatedSymbol: String?,
+            txId: Long?,
+            startTime: Long?,
+            endTime: Long?,
+            current: Long?,
+            size: Long?
+    ): LoanRecord
+
+    fun repay(
+            asset: String,
+            isolatedSymbol: Boolean?,
+            txId: Long?,
+            startTime: Long?,
+            endTime: Long?,
+            current: Long?,
+            size: Long?
+    ): Order
+
+    fun interestHistory(
+            asset: String?,
+            isolatedSymbol: String?,
+            startTime: Long?,
+            endTime: Long?,
+            current: Long?,
+            size: Long?
+    ): InterestHistory
+
+    fun forceLiquidationRec(
+            startTime: Long?,
+            endTime: Long?,
+            isolatedSymbol: Boolean?,
+            current: Long?,
+            size: Long?
+    ): Order
+
+    fun account(): com.binance.api.client.domain.account.margin.Account
+
+    fun order(
+            symbol: String,
+            isIsolated: Boolean?,
+            orderId: String?,
+            origClientOrderId: String?
+    ): com.binance.api.client.domain.account.margin.Order
+
+    fun openOrders(
+            symbol: String?,
+            isIsolated: Boolean?
+    ): List<com.binance.api.client.domain.account.margin.Order>
+
+    fun allOrders(
+            symbol: String,
+            isIsolated: Boolean?,
+            orderId: Long?,
+            startTime: Long?,
+            endTime: Long?,
+            limit: Int?
+    ): List<com.binance.api.client.domain.account.margin.Order>
+
+    fun myTrades(
+            symbol: String,
+            isIsolated: Boolean?,
+            startTime: Long?,
+            endTime: Long?,
+            fromId: Long?,
+            limit: Int?
+    ): List<com.binance.api.client.domain.account.margin.Trade>
+
+    fun maxBorrowable(
+            asset: String,
+            isolatedSymbol: String?
+    ): Amount
+
+    fun maxTransferable(
+            asset: String,
+            isolatedSymbol: String?
+    ): Amount
+
+    fun isolatedCreate(
+            base: String,
+            quote: String
+    ): CreateIsolatedAccount
+
+    fun newIsolatedTransfer(
+            asset: String,
+            symbol: String,
+            transFrom: TransactionTarget,
+            transTo: TransactionTarget,
+            amount: String
+    ): Transaction
+
+    fun isolatedTransfer(
+            asset: String?,
+            symbol: String,
+            transFrom: TransactionTarget?,
+            transTo: TransactionTarget?,
+            startTime: Long?,
+            endTime: Long?,
+            current: Long?,
+            size: Long?
+    ): IsolatedTransferHistory
+
+    fun isolatedAccount(): IsolatedAccountInfo
+
+    fun isolatedPair(symbol: String): IsolatedMarginPair
+
+    fun isolatedAllPairs(): List<IsolatedMarginPair>
+
+    fun startMarginUserDataStream(): ListenKey
+
+    fun keepAliveMarginUserDataStream(listenKey: String): EmptyResponse
+
+    fun startIsolatedMarginUserDataStream(symbol: String): ListenKey
+
+    fun keepAliveIsolatedMarginUserDataStream(listenKey: String): EmptyResponse
 }

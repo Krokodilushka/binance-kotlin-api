@@ -2,8 +2,8 @@ package com.binance.api.client.domain.event
 
 import com.binance.api.client.domain.OrderSide
 import com.binance.api.client.domain.OrderStatus
+import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
-import com.binance.api.client.domain.TimeInForce
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
@@ -29,7 +29,7 @@ data class OrderTradeUpdateEvent(
         @JsonProperty("o")
         val orderType: OrderType,
         @JsonProperty("f")
-        val timeInForce: TimeInForce,
+        val timeInForce: OrderTimeInForce,
         @JsonProperty("q")
         val quantity: String,
         @JsonProperty("p")
