@@ -220,4 +220,12 @@ public interface BinanceApiService {
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @PUT("/sapi/v1/userDataStream")
     Call<Void> keepAliveMarginUserDataStream(@Query("listenKey") String listenKey);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
+    @POST("/sapi/v1/userDataStream/isolated")
+    Call<ListenKey> startIsolatedMarginUserDataStream(@Query("symbol") String symbol);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
+    @PUT("/sapi/v1/userDataStream/isolated")
+    Call<Void> keepAliveIsolatedMarginUserDataStream(@Query("listenKey") String listenKey);
 }
