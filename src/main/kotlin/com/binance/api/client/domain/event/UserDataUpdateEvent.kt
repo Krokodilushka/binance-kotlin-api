@@ -26,14 +26,11 @@ class UserDataUpdateEvent {
         val sb = ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
                 .append("eventType", eventType)
                 .append("eventTime", eventTime)
-        if (eventType == UserDataUpdateEventType.ACCOUNT_UPDATE) {
-            sb.append("accountUpdateEvent", accountUpdateEvent)
-        } else if (eventType == UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE) {
-            sb.append("accountPositionUpdateEvent", accountUpdateEvent)
-        } else if (eventType == UserDataUpdateEventType.ORDER_TRADE_UPDATE) {
-            sb.append("orderTradeUpdateEvent", orderTradeUpdateEvent)
-        } else {
-            sb.append("balanceUpdateEvent", balanceUpdateEvent)
+        when (eventType) {
+            UserDataUpdateEventType.ACCOUNT_UPDATE -> sb.append("accountUpdateEvent", accountUpdateEvent)
+            UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE -> sb.append("accountPositionUpdateEvent", accountUpdateEvent)
+            UserDataUpdateEventType.ORDER_TRADE_UPDATE -> sb.append("orderTradeUpdateEvent", orderTradeUpdateEvent)
+            else -> sb.append("balanceUpdateEvent", balanceUpdateEvent)
         }
         return sb.toString()
     }
@@ -42,19 +39,13 @@ class UserDataUpdateEvent {
         ACCOUNT_UPDATE("outboundAccountInfo"), ACCOUNT_POSITION_UPDATE("outboundAccountPosition"), ORDER_TRADE_UPDATE("executionReport"), BALANCE_UPDATE("balanceUpdate");
 
         companion object {
-            fun fromEventTypeId(eventTypeId: String): UserDataUpdateEventType {
-                if (ACCOUNT_UPDATE.eventTypeId == eventTypeId) {
-                    return ACCOUNT_UPDATE
-                } else if (ORDER_TRADE_UPDATE.eventTypeId == eventTypeId) {
-                    return ORDER_TRADE_UPDATE
-                } else if (ACCOUNT_POSITION_UPDATE.eventTypeId == eventTypeId) {
-                    return ACCOUNT_POSITION_UPDATE
-                } else if (BALANCE_UPDATE.eventTypeId == eventTypeId) {
-                    return BALANCE_UPDATE
-                }
-                throw IllegalArgumentException("Unrecognized user data update event type id: $eventTypeId")
+            fun fromEventTypeId(eventTypeId: String) = when (eventTypeId) {
+                ACCOUNT_UPDATE.eventTypeId -> ACCOUNT_UPDATE
+                ORDER_TRADE_UPDATE.eventTypeId -> ORDER_TRADE_UPDATE
+                ACCOUNT_POSITION_UPDATE.eventTypeId -> ACCOUNT_POSITION_UPDATE
+                BALANCE_UPDATE.eventTypeId -> BALANCE_UPDATE
+                else -> throw IllegalArgumentException("Unrecognized user data update event type id: $eventTypeId")
             }
         }
-
     }
 }

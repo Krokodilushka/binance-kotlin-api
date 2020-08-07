@@ -16,7 +16,7 @@ class IsolatedMarginUserDataStreamExample {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val factory = newInstance("API_KEY", "API_SECRET")
+            val factory = newInstance(args[0], args[1])
             val client = factory.newIsolatedMarginRestClient()
 
             // First, we obtain a listenKey which is required to interact with the user data stream
@@ -28,28 +28,28 @@ class IsolatedMarginUserDataStreamExample {
             // Listen for changes in the account
             webSocketClient.onUserDataUpdateEvent(listenKey, object : BinanceApiCallback<UserDataUpdateEvent> {
                 override fun onResponse(response: UserDataUpdateEvent) {
-                    println(response)
-                    when {
-                        response.eventType === UserDataUpdateEventType.ACCOUNT_UPDATE -> {
-                            val accountUpdateEvent = response.accountUpdateEvent
-                            // Print new balances of every available asset
-                            println(accountUpdateEvent!!.balances)
+                    println("${response.eventType}:")
+                    when (response.eventType) {
+                        UserDataUpdateEventType.ACCOUNT_UPDATE, UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE -> {
+                            println(response.accountUpdateEvent)
                         }
-                        response.eventType === UserDataUpdateEventType.BALANCE_UPDATE -> {
+                        UserDataUpdateEventType.BALANCE_UPDATE -> {
                             println(response.balanceUpdateEvent)
                         }
-                        else -> {
-                            val orderTradeUpdateEvent = response.orderTradeUpdateEvent
+                        UserDataUpdateEventType.ORDER_TRADE_UPDATE -> {
+                            val orderTradeUpdateEvent = response.orderTradeUpdateEvent!!
                             // Print details about an order/trade
                             println(orderTradeUpdateEvent)
-
                             // Print original quantity
-                            println(orderTradeUpdateEvent!!.originalQuantity)
-
+                            println(orderTradeUpdateEvent.originalQuantity)
                             // Or price
                             println(orderTradeUpdateEvent.price)
                         }
                     }
+                }
+
+                override fun onFailure(cause: Throwable) {
+                    throw cause
                 }
             })
             println("Waiting for events...")
