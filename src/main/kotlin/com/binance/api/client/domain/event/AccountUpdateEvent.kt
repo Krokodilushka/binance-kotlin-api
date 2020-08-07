@@ -1,11 +1,11 @@
 package com.binance.api.client.domain.event
 
-import com.binance.api.client.constant.BinanceApiConstants
+import com.binance.api.client.domain.Permission
 import com.binance.api.client.domain.account.AssetBalance
+import com.binance.api.client.domain.event.deserializer.AssetBalanceDeserializer
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import org.apache.commons.lang3.builder.ToStringBuilder
 
 /**
  * Account update event which will reflect the current position/balances of the account.
@@ -15,22 +15,33 @@ import org.apache.commons.lang3.builder.ToStringBuilder
  * @see UserDataUpdateEvent
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class AccountUpdateEvent {
-    @JsonProperty("e")
-    var eventType: String? = null
+data class AccountUpdateEvent(
+        @JsonProperty("e")
+        val eventType: String,
+        @JsonProperty("E")
+        val eventTime: Long,
 
-    @JsonProperty("E")
-    var eventTime: Long = 0
+        @JsonProperty("m")
+        val makerCommissionRate: Long? = null,
+        @JsonProperty("t")
+        val takerCommissionRate: Long? = null,
+        @JsonProperty("b")
+        val buyerCommissionRate: Long? = null,
+        @JsonProperty("s")
+        val sellerCommissionRate: Long? = null,
+        @JsonProperty("T")
+        val canTrade: Boolean? = null,
+        @JsonProperty("W")
+        val canWithdraw: Boolean? = null,
+        @JsonProperty("D")
+        val canDeposit: Boolean? = null,
+        @JsonProperty("u")
+        val timeOfLastAccountUpdate: Long? = null,
 
-    @JsonProperty("B")
-    @JsonDeserialize(contentUsing = AssetBalanceDeserializer::class)
-    var balances: List<AssetBalance>? = null
+        @JsonProperty("B")
+        @JsonDeserialize(contentUsing = AssetBalanceDeserializer::class)
+        val balances: List<AssetBalance>,
 
-    override fun toString(): String {
-        return ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
-                .append("eventType", eventType)
-                .append("eventTime", eventTime)
-                .append("balances", balances)
-                .toString()
-    }
-}
+        @JsonProperty("P")
+        val permissions: List<Permission>? = null
+)

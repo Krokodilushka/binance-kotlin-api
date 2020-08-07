@@ -7,12 +7,12 @@ interface BinanceApiIsolatedMarginRestClient {
      *
      * @return a listen key that can be used with data streams
      */
-    fun startUserDataStream(symbol: String?): String
+    fun startUserDataStream(symbol: String): String
 
     /**
      * PING a user data stream to prevent a time out.
      *
      * @param listenKey listen key that identifies a data stream
      */
-    fun keepAliveUserDataStream(listenKey: String?)
+    fun keepAliveUserDataStream(listenKey: String)
 }

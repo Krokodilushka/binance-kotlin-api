@@ -1,5 +1,9 @@
-package com.binance.api.client.domain.event
+package com.binance.api.client.domain.event.deserializer
 
+import com.binance.api.client.domain.event.AccountUpdateEvent
+import com.binance.api.client.domain.event.BalanceUpdateEvent
+import com.binance.api.client.domain.event.OrderTradeUpdateEvent
+import com.binance.api.client.domain.event.UserDataUpdateEvent
 import com.binance.api.client.domain.event.UserDataUpdateEvent.UserDataUpdateEventType
 import com.binance.api.client.exception.BinanceApiException
 import com.fasterxml.jackson.core.JsonParser
@@ -15,13 +19,9 @@ import java.io.IOException
  * @see UserDataUpdateEvent
  */
 class UserDataUpdateEventDeserializer : JsonDeserializer<UserDataUpdateEvent>() {
-    private var mapper: ObjectMapper? = null
+    private var mapper = ObjectMapper()
 
-    @Throws(IOException::class)
     override fun deserialize(jp: JsonParser, ctx: DeserializationContext): UserDataUpdateEvent {
-        if (mapper == null) {
-            mapper = ObjectMapper()
-        }
         val oc = jp.codec
         val node = oc.readTree<JsonNode>(jp)
         val json = node.toString()
@@ -31,21 +31,21 @@ class UserDataUpdateEventDeserializer : JsonDeserializer<UserDataUpdateEvent>() 
         val userDataUpdateEvent = UserDataUpdateEvent()
         userDataUpdateEvent.eventType = userDataUpdateEventType
         userDataUpdateEvent.eventTime = eventTime
-        if (userDataUpdateEventType == UserDataUpdateEventType.ACCOUNT_UPDATE ||
-                userDataUpdateEventType == UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE) {
-            val accountUpdateEvent = getUserDataUpdateEventDetail(json, AccountUpdateEvent::class.java, mapper!!)
-            userDataUpdateEvent.accountUpdateEvent = accountUpdateEvent
-        } else if (userDataUpdateEventType == UserDataUpdateEventType.BALANCE_UPDATE) {
-            val balanceUpdateEvent = getUserDataUpdateEventDetail(json, BalanceUpdateEvent::class.java, mapper!!)
-            userDataUpdateEvent.balanceUpdateEvent = balanceUpdateEvent
-        } else { // userDataUpdateEventType == UserDataUpdateEventType.ORDER_TRADE_UPDATE
-            val orderTradeUpdateEvent = getUserDataUpdateEventDetail(json, OrderTradeUpdateEvent::class.java, mapper!!)
-            userDataUpdateEvent.orderTradeUpdateEvent = orderTradeUpdateEvent
+        when (userDataUpdateEventType) {
+            UserDataUpdateEventType.ACCOUNT_UPDATE, UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE -> {
+                userDataUpdateEvent.accountUpdateEvent = getUserDataUpdateEventDetail(json, AccountUpdateEvent::class.java, mapper)
+            }
+            UserDataUpdateEventType.BALANCE_UPDATE -> {
+                userDataUpdateEvent.balanceUpdateEvent = getUserDataUpdateEventDetail(json, BalanceUpdateEvent::class.java, mapper)
+            }
+            UserDataUpdateEventType.ORDER_TRADE_UPDATE -> {
+                userDataUpdateEvent.orderTradeUpdateEvent = getUserDataUpdateEventDetail(json, OrderTradeUpdateEvent::class.java, mapper)
+            }
         }
         return userDataUpdateEvent
     }
 
-    fun <T> getUserDataUpdateEventDetail(json: String?, clazz: Class<T>?, mapper: ObjectMapper): T {
+    private fun <T> getUserDataUpdateEventDetail(json: String?, clazz: Class<T>?, mapper: ObjectMapper): T {
         return try {
             mapper.readValue(json, clazz)
         } catch (e: IOException) {

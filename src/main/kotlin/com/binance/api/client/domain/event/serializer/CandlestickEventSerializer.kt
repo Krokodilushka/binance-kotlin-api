@@ -1,5 +1,6 @@
-package com.binance.api.client.domain.event
+package com.binance.api.client.domain.event.serializer
 
+import com.binance.api.client.domain.event.CandlestickEvent
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.SerializerProvider
@@ -22,18 +23,18 @@ class CandlestickEventSerializer : JsonSerializer<CandlestickEvent>() {
 
         // Write candlestick data
         gen.writeObjectFieldStart("k")
-        gen.writeNumberField("t", candlestickEvent.openTime!!)
-        gen.writeNumberField("T", candlestickEvent.closeTime!!)
-        gen.writeStringField("i", candlestickEvent.intervalId)
-        gen.writeNumberField("f", candlestickEvent.firstTradeId!!)
-        gen.writeNumberField("L", candlestickEvent.lastTradeId!!)
+        gen.writeNumberField("t", candlestickEvent.openTime)
+        gen.writeNumberField("T", candlestickEvent.closeTime)
+        gen.writeStringField("i", candlestickEvent.interval)
+        gen.writeNumberField("f", candlestickEvent.firstTradeId)
+        gen.writeNumberField("L", candlestickEvent.lastTradeId)
         gen.writeStringField("o", candlestickEvent.open)
         gen.writeStringField("c", candlestickEvent.close)
         gen.writeStringField("h", candlestickEvent.high)
         gen.writeStringField("l", candlestickEvent.low)
-        gen.writeStringField("v", candlestickEvent.volume)
-        gen.writeNumberField("n", candlestickEvent.numberOfTrades!!)
-        gen.writeBooleanField("x", candlestickEvent.barFinal!!)
+        gen.writeStringField("v", candlestickEvent.baseAssetVolume)
+        gen.writeNumberField("n", candlestickEvent.numberOfTrades)
+        gen.writeBooleanField("x", candlestickEvent.isClosed)
         gen.writeStringField("q", candlestickEvent.quoteAssetVolume)
         gen.writeStringField("V", candlestickEvent.takerBuyBaseAssetVolume)
         gen.writeStringField("Q", candlestickEvent.takerBuyQuoteAssetVolume)

@@ -8,6 +8,7 @@ import com.binance.api.client.domain.event.UserDataUpdateEvent.UserDataUpdateEve
 /**
  * User data stream endpoints examples.
  *
+ *
  * It illustrates how to create a stream to obtain updates on a user account,
  * as well as update on trades/orders on a user account.
  */
@@ -15,11 +16,14 @@ class UserDataStreamExample {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val factory = newInstance("API_KEY", "API_SECRET")
-            val client = factory.newRestClient()
+            val factory = newInstance(args[0], args[1])
 
-            // First, we obtain a listenKey which is required to interact with the user data stream
-            val listenKey = client.startUserDataStream()
+            // regular
+//            val listenKey = factory.newRestClient().startUserDataStream()
+            // margin
+//            val listenKey = factory.newMarginRestClient().startUserDataStream()
+            // isolated margin
+            val listenKey = factory.newIsolatedMarginRestClient().startUserDataStream("BNBBTC")
 
             // Then, we open a new web socket client, and provide a callback that is called on every update
             val webSocketClient = factory.newWebSocketClient()
@@ -27,21 +31,30 @@ class UserDataStreamExample {
             // Listen for changes in the account
             webSocketClient.onUserDataUpdateEvent(listenKey, object : BinanceApiCallback<UserDataUpdateEvent> {
                 override fun onResponse(response: UserDataUpdateEvent) {
-                    if (response.eventType === UserDataUpdateEventType.ACCOUNT_UPDATE) {
-                        val accountUpdateEvent = response.accountUpdateEvent
-                        // Print new balances of every available asset
-                        println(accountUpdateEvent!!.balances)
-                    } else {
-                        val orderTradeUpdateEvent = response.orderTradeUpdateEvent
-                        // Print details about an order/trade
-                        println(orderTradeUpdateEvent)
-
-                        // Print original quantity
-                        println(orderTradeUpdateEvent?.originalQuantity)
-
-                        // Or price
-                        println(orderTradeUpdateEvent?.price)
+                    println("${response.eventType}:")
+                    println("$response")
+                    when (response.eventType) {
+                        UserDataUpdateEventType.ACCOUNT_UPDATE, UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE -> {
+                            println(response.accountUpdateEvent)
+                        }
+                        UserDataUpdateEventType.BALANCE_UPDATE -> {
+                            println(response.balanceUpdateEvent)
+                        }
+                        UserDataUpdateEventType.ORDER_TRADE_UPDATE -> {
+                            val orderTradeUpdateEvent = response.orderTradeUpdateEvent!!
+                            // Print details about an order/trade
+                            println(orderTradeUpdateEvent)
+                            // Print original quantity
+                            println(orderTradeUpdateEvent.quantity)
+                            // Or price
+                            println(orderTradeUpdateEvent.price)
+                        }
                     }
+                    println("")
+                }
+
+                override fun onFailure(cause: Throwable) {
+                    throw cause
                 }
             })
             println("Waiting for events...")

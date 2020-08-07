@@ -1,6 +1,7 @@
 package com.binance.api.client.domain.event
 
 import com.binance.api.client.constant.BinanceApiConstants
+import com.binance.api.client.domain.event.deserializer.UserDataUpdateEventDeserializer
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import org.apache.commons.lang3.builder.ToStringBuilder

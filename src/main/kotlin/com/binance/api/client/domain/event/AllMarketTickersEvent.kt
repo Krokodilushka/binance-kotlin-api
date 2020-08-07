@@ -1,108 +1,56 @@
 package com.binance.api.client.domain.event
 
-import com.binance.api.client.constant.BinanceApiConstants
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
-import org.apache.commons.lang3.builder.ToStringBuilder
 
 /**
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class AllMarketTickersEvent {
-    @JsonProperty("e")
-    var eventType: String? = null
-
-    @JsonProperty("E")
-    var eventTime: Long = 0
-
-    @JsonProperty("s")
-    var symbol: String? = null
-
-    @JsonProperty("p")
-    var priceChange: String? = null
-
-    @JsonProperty("P")
-    var priceChangePercent: String? = null
-
-    @JsonProperty("w")
-    var weightedAveragePrice: String? = null
-
-    @JsonProperty("x")
-    var previousDaysClosePrice: String? = null
-
-    @JsonProperty("c")
-    var currentDaysClosePrice: String? = null
-
-    @JsonProperty("Q")
-    var closeTradesQuantity: String? = null
-
-    @JsonProperty("b")
-    var bestBidPrice: String? = null
-
-    @JsonProperty("B")
-    var bestBidQuantity: String? = null
-
-    @JsonProperty("a")
-    var bestAskPrice: String? = null
-
-    @JsonProperty("A")
-    var bestAskQuantity: String? = null
-
-    @JsonProperty("o")
-    var openPrice: String? = null
-
-    @JsonProperty("h")
-    var highPrice: String? = null
-
-    @JsonProperty("l")
-    var lowPrice: String? = null
-
-    @JsonProperty("v")
-    var totalTradedBaseAssetVolume: String? = null
-
-    @JsonProperty("q")
-    var totalTradedQuoteAssetVolume: String? = null
-
-    @JsonProperty("O")
-    var statisticesOpenTime: Long = 0
-
-    @JsonProperty("C")
-    var statisticesCloseTime: Long = 0
-
-    @JsonProperty("F")
-    var firstTradeId: Long = 0
-
-    @JsonProperty("L")
-    var lastTradeId: Long = 0
-
-    @JsonProperty("n")
-    var totalNumberOfTrades: Long = 0
-
-    override fun toString(): String {
-        return ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
-                .append("eventType", eventType)
-                .append("eventTime", eventTime)
-                .append("symbol", symbol)
-                .append("priceChange", priceChange)
-                .append("priceChangePercent", priceChangePercent)
-                .append("weightedAveragePrice", weightedAveragePrice)
-                .append("previousDaysClosePrice", previousDaysClosePrice)
-                .append("currentDaysClosePrice", currentDaysClosePrice)
-                .append("closeTradesQuantity", closeTradesQuantity)
-                .append("bestBidPrice", bestBidPrice)
-                .append("bestBidQuantity", bestBidQuantity)
-                .append("bestAskPrice", bestAskPrice)
-                .append("bestAskQuantity", bestAskQuantity)
-                .append("openPrice", openPrice)
-                .append("highPrice", highPrice)
-                .append("lowPrice", lowPrice)
-                .append("totalTradedBaseAssetVolume", totalTradedBaseAssetVolume)
-                .append("totalTradedQuoteAssetVolume", totalTradedQuoteAssetVolume)
-                .append("statisticesOpenTime", statisticesOpenTime)
-                .append("statisticesCloseTime", statisticesCloseTime)
-                .append("firstTradeId", firstTradeId)
-                .append("lastTradeId", lastTradeId)
-                .append("totalNumberOfTrades", totalNumberOfTrades)
-                .toString()
-    }
-}
+data class AllMarketTickersEvent(
+        @JsonProperty("e")
+        val eventType: String,
+        @JsonProperty("E")
+        val eventTime: Long,
+        @JsonProperty("s")
+        val symbol: String,
+        @JsonProperty("p")
+        val priceChange: String,
+        @JsonProperty("P")
+        val priceChangePercent: String,
+        @JsonProperty("w")
+        val weightedAveragePrice: String,
+        @JsonProperty("x")
+        val previousDaysClosePrice: String,
+        @JsonProperty("c")
+        val currentDaysClosePrice: String,
+        @JsonProperty("Q")
+        val closeTradesQuantity: String,
+        @JsonProperty("b")
+        val bestBidPrice: String,
+        @JsonProperty("B")
+        val bestBidQuantity: String,
+        @JsonProperty("a")
+        val bestAskPrice: String,
+        @JsonProperty("A")
+        val bestAskQuantity: String,
+        @JsonProperty("o")
+        val openPrice: String,
+        @JsonProperty("h")
+        val highPrice: String,
+        @JsonProperty("l")
+        val lowPrice: String,
+        @JsonProperty("v")
+        val totalTradedBaseAssetVolume: String,
+        @JsonProperty("q")
+        val totalTradedQuoteAssetVolume: String,
+        @JsonProperty("O")
+        val statisticesOpenTime: Long,
+        @JsonProperty("C")
+        val statisticesCloseTime: Long,
+        @JsonProperty("F")
+        val firstTradeId: Long,
+        @JsonProperty("L")
+        val lastTradeId: Long,
+        @JsonProperty("n")
+        val totalNumberOfTrades: Long
+)

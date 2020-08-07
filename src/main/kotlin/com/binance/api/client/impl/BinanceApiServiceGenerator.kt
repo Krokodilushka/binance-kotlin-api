@@ -82,5 +82,4 @@ object BinanceApiServiceGenerator {
         return errorBodyConverter.convert(response.errorBody()!!)
     }
 
-
 }

@@ -109,7 +109,7 @@ class BinanceApiRestClientImpl(apiKey: String?, secret: String?) : BinanceApiRes
     override fun getDepositAddress(asset: String?) = BinanceApiServiceGenerator.executeSync(binanceApiService.getDepositAddress(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()))
 
     // User stream endpoints
-    override fun startUserDataStream() = BinanceApiServiceGenerator.executeSync(binanceApiService.startUserDataStream()).toString()
+    override fun startUserDataStream() = BinanceApiServiceGenerator.executeSync(binanceApiService.startUserDataStream()).listenKey
 
     override fun keepAliveUserDataStream(listenKey: String?) {
         BinanceApiServiceGenerator.executeSync(binanceApiService.keepAliveUserDataStream(listenKey))

@@ -20,7 +20,7 @@ class UserDataUpdateEventDeserializerTest {
             Assert.assertEquals(userDataUpdateEvent.eventType!!.eventTypeId, "outboundAccountInfo")
             Assert.assertEquals(userDataUpdateEvent.eventTime, 1L)
             val accountUpdateEvent = userDataUpdateEvent.accountUpdateEvent
-            for (assetBalance in accountUpdateEvent!!.balances!!) {
+            for (assetBalance in accountUpdateEvent!!.balances) {
                 if ("ETH" == assetBalance.asset) {
                     Assert.assertEquals(assetBalance.free, "0.10000000")
                 } else {
@@ -41,19 +41,19 @@ class UserDataUpdateEventDeserializerTest {
             val userDataUpdateEvent = mapper.readValue(orderUpdateEventJson, UserDataUpdateEvent::class.java)
             Assert.assertEquals(userDataUpdateEvent.eventType!!.eventTypeId, "executionReport")
             Assert.assertEquals(userDataUpdateEvent.eventTime, 1L)
-            val orderTradeUpdateEvent = userDataUpdateEvent.orderTradeUpdateEvent
-            Assert.assertEquals(orderTradeUpdateEvent!!.symbol, "NEOETH")
-            Assert.assertEquals(orderTradeUpdateEvent.newClientOrderId, "XXX")
+            val orderTradeUpdateEvent = userDataUpdateEvent.orderTradeUpdateEvent!!
+            Assert.assertEquals(orderTradeUpdateEvent.symbol, "NEOETH")
+            Assert.assertEquals(orderTradeUpdateEvent.clientOrderID, "XXX")
             Assert.assertEquals(orderTradeUpdateEvent.side, OrderSide.BUY)
-            Assert.assertEquals(orderTradeUpdateEvent.type, OrderType.LIMIT)
+            Assert.assertEquals(orderTradeUpdateEvent.orderType, OrderType.LIMIT)
             Assert.assertEquals(orderTradeUpdateEvent.timeInForce, TimeInForce.GTC)
-            Assert.assertEquals(orderTradeUpdateEvent.originalQuantity, "1000.00000000")
+            Assert.assertEquals(orderTradeUpdateEvent.quantity, "1000.00000000")
             Assert.assertEquals(orderTradeUpdateEvent.price, "0.00010000")
-            Assert.assertEquals(orderTradeUpdateEvent.executionType, ExecutionType.CANCELED)
-            Assert.assertEquals(orderTradeUpdateEvent.orderStatus, OrderStatus.CANCELED)
+            Assert.assertEquals(orderTradeUpdateEvent.currentExecutionType, ExecutionType.CANCELED)
+            Assert.assertEquals(orderTradeUpdateEvent.currentOrderStatus, OrderStatus.CANCELED)
             Assert.assertEquals(orderTradeUpdateEvent.orderRejectReason, OrderRejectReason.NONE)
             Assert.assertEquals(orderTradeUpdateEvent.orderId, java.lang.Long.valueOf(123456))
-            Assert.assertEquals(orderTradeUpdateEvent.orderTradeTime, java.lang.Long.valueOf(1))
+            Assert.assertEquals(orderTradeUpdateEvent.transactionTime, java.lang.Long.valueOf(1))
         } catch (e: IOException) {
             Assert.fail()
         }

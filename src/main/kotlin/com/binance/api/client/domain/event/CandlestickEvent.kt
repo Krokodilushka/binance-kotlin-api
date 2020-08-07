@@ -1,10 +1,10 @@
 package com.binance.api.client.domain.event
 
-import com.binance.api.client.constant.BinanceApiConstants
+import com.binance.api.client.domain.event.deserializer.CandlestickEventDeserializer
+import com.binance.api.client.domain.event.serializer.CandlestickEventSerializer
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
-import org.apache.commons.lang3.builder.ToStringBuilder
 
 /**
  * An interval candlestick for a symbol providing informations on price that can be used to produce candlestick charts.
@@ -12,46 +12,23 @@ import org.apache.commons.lang3.builder.ToStringBuilder
 @JsonDeserialize(using = CandlestickEventDeserializer::class)
 @JsonSerialize(using = CandlestickEventSerializer::class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-class CandlestickEvent {
-    var eventType: String? = null
-    var eventTime: Long = 0
-    var symbol: String? = null
-    var openTime: Long? = null
-    var open: String? = null
-    var high: String? = null
-    var low: String? = null
-    var close: String? = null
-    var volume: String? = null
-    var closeTime: Long? = null
-    var intervalId: String? = null
-    var firstTradeId: Long? = null
-    var lastTradeId: Long? = null
-    var quoteAssetVolume: String? = null
-    var numberOfTrades: Long? = null
-    var takerBuyBaseAssetVolume: String? = null
-    var takerBuyQuoteAssetVolume: String? = null
-    var barFinal: Boolean? = null
-
-    override fun toString(): String {
-        return ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
-                .append("eventType", eventType)
-                .append("eventTime", eventTime)
-                .append("symbol", symbol)
-                .append("openTime", openTime)
-                .append("open", open)
-                .append("high", high)
-                .append("low", low)
-                .append("close", close)
-                .append("volume", volume)
-                .append("closeTime", closeTime)
-                .append("intervalId", intervalId)
-                .append("firstTradeId", firstTradeId)
-                .append("lastTradeId", lastTradeId)
-                .append("quoteAssetVolume", quoteAssetVolume)
-                .append("numberOfTrades", numberOfTrades)
-                .append("takerBuyBaseAssetVolume", takerBuyBaseAssetVolume)
-                .append("takerBuyQuoteAssetVolume", takerBuyQuoteAssetVolume)
-                .append("isBarFinal", barFinal)
-                .toString()
-    }
-}
+data class CandlestickEvent(
+        val eventType: String,
+        val eventTime: Long,
+        val symbol: String,
+        val openTime: Long,
+        val closeTime: Long,
+        val interval: String,
+        val firstTradeId: Long,
+        val lastTradeId: Long,
+        val open: String,
+        val close: String,
+        val high: String,
+        val low: String,
+        val baseAssetVolume: String,
+        val numberOfTrades: Long,
+        val isClosed: Boolean,
+        val quoteAssetVolume: String,
+        val takerBuyBaseAssetVolume: String,
+        val takerBuyQuoteAssetVolume: String
+)

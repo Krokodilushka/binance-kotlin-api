@@ -60,7 +60,7 @@ class BinanceApiMarginRestClientImpl(apiKey: String?, secret: String?) : Binance
 
     // user stream endpoints
     override fun startUserDataStream(): String {
-        return BinanceApiServiceGenerator.executeSync(binanceApiService.startMarginUserDataStream()).toString()
+        return BinanceApiServiceGenerator.executeSync(binanceApiService.startMarginUserDataStream()).listenKey
     }
 
     override fun keepAliveUserDataStream(listenKey: String?) {

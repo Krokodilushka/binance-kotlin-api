@@ -50,7 +50,7 @@ class CandlesticksCacheExample(symbol: String, interval: CandlestickInterval) {
                 updateCandlestick.high = response.high
                 updateCandlestick.close = response.close
                 updateCandlestick.closeTime = response.closeTime
-                updateCandlestick.volume = response.volume
+                updateCandlestick.volume = response.baseAssetVolume
                 updateCandlestick.numberOfTrades = response.numberOfTrades
                 updateCandlestick.quoteAssetVolume = response.quoteAssetVolume
                 updateCandlestick.takerBuyQuoteAssetVolume = response.takerBuyQuoteAssetVolume

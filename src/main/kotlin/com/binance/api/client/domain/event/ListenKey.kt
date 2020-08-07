@@ -1,15 +1,13 @@
 package com.binance.api.client.domain.event
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 
 /**
  * Dummy type to wrap a listen key from a server response.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class ListenKey {
-    var listenKey: String? = null
-
-    override fun toString(): String {
-        return listenKey!!
-    }
-}
+data class ListenKey(
+        @JsonProperty("listenKey")
+        val listenKey: String
+)

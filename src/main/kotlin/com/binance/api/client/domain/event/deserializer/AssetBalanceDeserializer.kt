@@ -1,4 +1,4 @@
-package com.binance.api.client.domain.event
+package com.binance.api.client.domain.event.deserializer
 
 import com.binance.api.client.domain.account.AssetBalance
 import com.fasterxml.jackson.core.JsonParser
