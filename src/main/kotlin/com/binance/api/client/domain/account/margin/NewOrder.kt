@@ -33,9 +33,9 @@ data class NewOrder(
         @JsonProperty("side")
         val side: OrderSide,
         @JsonProperty("marginBuyBorrowAmount")
-        val marginBuyBorrowAmount: Int,
+        val marginBuyBorrowAmount: Int?,
         @JsonProperty("marginBuyBorrowAsset")
-        val marginBuyBorrowAsset: String,
+        val marginBuyBorrowAsset: String?,
         @JsonProperty("isIsolated")
         val isIsolated: Boolean,
         @JsonProperty("fills")

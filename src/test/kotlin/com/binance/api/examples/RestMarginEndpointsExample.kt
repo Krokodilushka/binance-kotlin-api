@@ -12,41 +12,118 @@ class RestMarginEndpointsExample {
             val factory = newInstance(args[0], args[1])
             val client = factory.newMarginRestClient()
 
-//            val marginAccount = client.newCrossTransfer("BTC", "0.00001", 2)
-//            println(marginAccount)
+//            client.newCrossTransfer("BTC", "0.00001", 1).let {
+//                println("newCrossTransfer btc spot to margin: $it")
+//                client.newCrossTransfer("BTC", "0.00001", 2).let {
+//                    println("newCrossTransfer btc margin to spot: $it")
+//                }
+//            }
 
-//            val newLoan = client.newLoan("BTC", null, null, "0.00001")
-//            println(newLoan)
+//            client.newLoan("BTC", null, null, "0.00001").let {
+//                println("newLoan: $it")
+//            }
 
-//            val openOrders = client.openOrders(null, null)
-//            println(openOrders)
+//            client.newRepay("BTC", null, null, "0.00001").let {
+//                println("newRepay: $it")
+//            }
 
-//            val allOrders = client.allOrders("EOSBTC", null, null, null, null, 1)
-//            println(allOrders)
+//            client.asset("BTC").let {
+//                println("asset: $it")
+//            }
 
-//            val myTrades = client.myTrades("EOSBTC", null, null, null, null, 5)
-//            println(myTrades)
+//            client.pair("BTCUSDT").let {
+//                println("pair: $it")
+//            }
 
-//            val maxBorrowable = client.maxBorrowable("BTC", "RENBTC")
-//            println(maxBorrowable)
+//            client.allAssets().let {
+//                println("allAssets: $it")
+//            }
 
-//            val maxTransferable = client.maxTransferable("BTC", "RENBTC")
-//            println(maxTransferable)
+//            client.priceIndex("BTCUSDT").let {
+//                println("priceIndex: $it")
+//            }
 
-//            val newIsolatedTransfer = client.newIsolatedTransfer("BTC", "RENBTC", TransactionTarget.ISOLATED_MARGIN, TransactionTarget.SPOT, "0.00001")
-//            println(newIsolatedTransfer)
+//            client.priceIndex("BTCUSDT").let {
+//                println("priceIndex: $it")
+//            }
 
-//            val isolatedTransfer = client.isolatedTransfer(null, "RENBTC", TransactionTarget.ISOLATED_MARGIN, TransactionTarget.SPOT, null, null, null, null)
-//            println(isolatedTransfer)
+//            client.newOrder("BTCUSDT", false, OrderSide.SELL, OrderType.LIMIT, "0.01", "20000", null, null, null, null, OrderTimeInForce.GTC).let {
+//                println("newOrder: $it")
+//                client.order(it.symbol, null, it.orderId, null).let {
+//                    println("order: $it")
+//                }
+//                client.openOrders(it.symbol, null).let {
+//                    println("openOrders: $it")
+//                }
+//                client.allOrders(it.symbol, null, null, null, null, null).let {
+//                    println("allOrders: $it")
+//                }
+//                client.myTrades(it.symbol, null, null, null, null, null).let {
+//                    println("myTrades: $it")
+//                }
+//                client.cancelOrder("BTCUSDT", null, it.orderId, null, null).let {
+//                    println("cancelOrder: $it")
+//                }
+//            }
 
-//            val isolatedAccount = client.isolatedAccount()
-//            println(isolatedAccount)
+//            client.crossTransfer(null, null, null, null, null, null).let {
+//                println("crossTransfer: $it")
+//            }
 
-//            val isolatedPair = client.isolatedPair("RENBTC")
-//            println(isolatedPair)
+//            client.loan("BTC", null, null, Instant.now().minusSeconds(3600 * 24 * 7).epochSecond, null, null, null).let {
+//                println("loan: $it")
+//            }
 
-            val isolatedAllPairs = client.isolatedAllPairs()
-            println(isolatedAllPairs)
+//            client.repay("BTC", null, null, Instant.now().minusSeconds(3600 * 24 * 7).epochSecond, null, null, null).let {
+//                println("repay: $it")
+//            }
+
+//            client.interestHistory("BTC", null, null, null, null, null).let {
+//                println("interestHistory: $it")
+//            }
+
+//            client.forceLiquidationRec(null, null, null, null, null).let {
+//                println("forceLiquidationRec: $it")
+//            }
+
+//            client.account().let {
+//                println("account: $it")
+//            }
+
+//            client.maxBorrowable("BTC", "RENBTC").let {
+//                println("maxBorrowable: $it")
+//            }
+
+//            client.maxTransferable("BTC", "RENBTC").let {
+//                println("maxTransferable: $it")
+//            }
+
+//            client.isolatedCreate("XRP", "BTC").let {
+//                println("isolatedCreate: $it")
+//            }
+
+//            client.newIsolatedTransfer("BTC", "RENBTC", TransactionTarget.SPOT, TransactionTarget.ISOLATED_MARGIN, "0.00001").let {
+//                println("newIsolatedTransfer spot BTC to isolated margin RENBTC: $it")
+//                client.newIsolatedTransfer("BTC", "RENBTC", TransactionTarget.ISOLATED_MARGIN, TransactionTarget.SPOT, "0.00001").let {
+//                    println("newIsolatedTransfer isolated margin BTC to spot RENBTC: $it")
+//                }
+//            }
+
+//            client.isolatedTransfer(null, "RENBTC", TransactionTarget.ISOLATED_MARGIN, TransactionTarget.SPOT, null, null, null, null).let {
+//                println("isolatedTransfer: $it")
+//            }
+
+//            client.isolatedAccount().let {
+//                println("isolatedAccount: $it")
+//            }
+
+//            client.isolatedPair("RENBTC").let {
+//                println("isolatedPair: $it")
+//            }
+
+//            client.isolatedAllPairs().let {
+//                println("isolatedAllPairs: $it")
+//            }
         }
     }
 }

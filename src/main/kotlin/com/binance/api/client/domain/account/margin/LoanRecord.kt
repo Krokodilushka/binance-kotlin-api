@@ -11,7 +11,7 @@ data class LoanRecord(
 ) {
     data class Row(
             @JsonProperty("isolatedSymbol")
-            val isolatedSymbol: String,
+            val isolatedSymbol: String?,
             @JsonProperty("asset")
             val asset: String,
             @JsonProperty("principal")
@@ -19,6 +19,8 @@ data class LoanRecord(
             @JsonProperty("timestamp")
             val timestamp: Long,
             @JsonProperty("status")
-            val status: String
+            val status: String,
+            @JsonProperty("txId")
+            val txId: Long
     )
 }

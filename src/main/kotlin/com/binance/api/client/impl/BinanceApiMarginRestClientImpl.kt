@@ -40,19 +40,19 @@ class BinanceApiMarginRestClientImpl(apiKey: String?, secret: String?) : Binance
 
     override fun loan(asset: String, isolatedSymbol: String?, txId: Long?, startTime: Long?, endTime: Long?, current: Long?, size: Long?): LoanRecord = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.loan(asset, isolatedSymbol, txId, startTime, endTime, current, size, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
-    override fun repay(asset: String, isolatedSymbol: Boolean?, txId: Long?, startTime: Long?, endTime: Long?, current: Long?, size: Long?): Order = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.repay(asset, isolatedSymbol, txId, startTime, endTime, current, size, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
+    override fun repay(asset: String, isolatedSymbol: Boolean?, txId: Long?, startTime: Long?, endTime: Long?, current: Long?, size: Long?): RepayRecord = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.repay(asset, isolatedSymbol, txId, startTime, endTime, current, size, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
     override fun interestHistory(asset: String?, isolatedSymbol: String?, startTime: Long?, endTime: Long?, current: Long?, size: Long?): InterestHistory = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.interestHistory(asset, isolatedSymbol, startTime, endTime, current, size, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
-    override fun forceLiquidationRec(startTime: Long?, endTime: Long?, isolatedSymbol: Boolean?, current: Long?, size: Long?): Order = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.forceLiquidationRec(startTime, endTime, isolatedSymbol, current, size, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
+    override fun forceLiquidationRec(startTime: Long?, endTime: Long?, isolatedSymbol: Boolean?, current: Long?, size: Long?): ForceLiquidationRecord = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.forceLiquidationRec(startTime, endTime, isolatedSymbol, current, size, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
     override fun account(): Account = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.account(BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
-    override fun order(symbol: String, isIsolated: Boolean?, orderId: String?, origClientOrderId: String?): com.binance.api.client.domain.account.margin.Order = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.order(symbol, isIsolated, orderId, origClientOrderId, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
+    override fun order(symbol: String, isIsolated: Boolean?, orderId: Long?, origClientOrderId: String?): Order = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.order(symbol, isIsolated, orderId, origClientOrderId, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
-    override fun openOrders(symbol: String?, isIsolated: Boolean?): List<com.binance.api.client.domain.account.margin.Order> = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.openOrders(symbol, isIsolated, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
+    override fun openOrders(symbol: String?, isIsolated: Boolean?): List<Order> = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.openOrders(symbol, isIsolated, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
-    override fun allOrders(symbol: String, isIsolated: Boolean?, orderId: Long?, startTime: Long?, endTime: Long?, limit: Int?): List<com.binance.api.client.domain.account.margin.Order> = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.allOrders(symbol, isIsolated, orderId, startTime, endTime, limit, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
+    override fun allOrders(symbol: String, isIsolated: Boolean?, orderId: Long?, startTime: Long?, endTime: Long?, limit: Int?): List<Order> = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.allOrders(symbol, isIsolated, orderId, startTime, endTime, limit, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
     override fun myTrades(symbol: String, isIsolated: Boolean?, startTime: Long?, endTime: Long?, fromId: Long?, limit: Int?): List<Trade> = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.myTrades(symbol, isIsolated, startTime, endTime, fromId, limit, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 

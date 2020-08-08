@@ -9,7 +9,7 @@ data class Trade(
         @JsonProperty("commissionAsset")
         val commissionAsset: String,
         @JsonProperty("id")
-        val id: Int,
+        val id: Long,
         @JsonProperty("isBestMatch")
         val isBestMatch: Boolean,
         @JsonProperty("isBuyer")
@@ -17,7 +17,7 @@ data class Trade(
         @JsonProperty("isMaker")
         val isMaker: Boolean,
         @JsonProperty("orderId")
-        val orderId: Int,
+        val orderId: Long,
         @JsonProperty("price")
         val price: String,
         @JsonProperty("qty")

@@ -89,7 +89,7 @@ interface BinanceApiMarginRestClient {
             endTime: Long?,
             current: Long?,
             size: Long?
-    ): Order
+    ): RepayRecord
 
     fun interestHistory(
             asset: String?,
@@ -106,21 +106,21 @@ interface BinanceApiMarginRestClient {
             isolatedSymbol: Boolean?,
             current: Long?,
             size: Long?
-    ): Order
+    ): ForceLiquidationRecord
 
-    fun account(): com.binance.api.client.domain.account.margin.Account
+    fun account(): Account
 
     fun order(
             symbol: String,
             isIsolated: Boolean?,
-            orderId: String?,
+            orderId: Long?,
             origClientOrderId: String?
-    ): com.binance.api.client.domain.account.margin.Order
+    ): Order
 
     fun openOrders(
             symbol: String?,
             isIsolated: Boolean?
-    ): List<com.binance.api.client.domain.account.margin.Order>
+    ): List<Order>
 
     fun allOrders(
             symbol: String,
@@ -129,7 +129,7 @@ interface BinanceApiMarginRestClient {
             startTime: Long?,
             endTime: Long?,
             limit: Int?
-    ): List<com.binance.api.client.domain.account.margin.Order>
+    ): List<Order>
 
     fun myTrades(
             symbol: String,

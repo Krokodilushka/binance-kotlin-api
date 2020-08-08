@@ -46,23 +46,23 @@ interface BinanceApiServiceMargin {
     ): Call<Transaction>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @POST("/sapi/v1/margin/asset")
+    @GET("/sapi/v1/margin/asset")
     fun asset(@Query("asset") symbol: String): Call<CrossMarginAsset>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @POST("/sapi/v1/margin/pair")
+    @GET("/sapi/v1/margin/pair")
     fun pair(@Query("symbol") symbol: String): Call<MarginPair>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @POST("/sapi/v1/margin/allAssets")
+    @GET("/sapi/v1/margin/allAssets")
     fun allAssets(): Call<List<CrossMarginAsset>>
 
-    @GET("/sapi/v1/margin/allPairs")
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
+    @GET("/sapi/v1/margin/allPairs")
     fun allPairs(): Call<List<MarginPair>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @POST("/sapi/v1/margin/priceIndex")
+    @GET("/sapi/v1/margin/priceIndex")
     fun priceIndex(@Query("symbol") symbol: String): Call<PriceIndex>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
@@ -135,7 +135,7 @@ interface BinanceApiServiceMargin {
             @Query("size") size: Long?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long?
-    ): Call<Order>
+    ): Call<RepayRecord>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/sapi/v1/margin/interestHistory")
@@ -160,7 +160,7 @@ interface BinanceApiServiceMargin {
             @Query("size") size: Long?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long?
-    ): Call<Order>
+    ): Call<ForceLiquidationRecord>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/sapi/v1/margin/account")
@@ -174,7 +174,7 @@ interface BinanceApiServiceMargin {
     fun order(
             @Query("symbol") symbol: String,
             @Query("isIsolated") isIsolated: Boolean?,
-            @Query("orderId") orderId: String?,
+            @Query("orderId") orderId: Long?,
             @Query("origClientOrderId") origClientOrderId: String?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long?

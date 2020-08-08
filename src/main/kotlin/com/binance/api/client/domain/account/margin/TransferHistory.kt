@@ -18,10 +18,12 @@ data class TransferHistory(
             @JsonProperty("status")
             val status: String,
             @JsonProperty("timestamp")
-            val timestamp: Int,
+            val timestamp: Long,
             @JsonProperty("txId")
             val txId: Long,
             @JsonProperty("type")
-            val type: TransferType
+            val type: TransferType,
+            @JsonProperty("transferCounterparty")
+            val transferCounterparty: String
     )
 }

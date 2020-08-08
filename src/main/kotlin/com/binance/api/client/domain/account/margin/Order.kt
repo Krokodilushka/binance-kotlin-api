@@ -1,6 +1,10 @@
 package com.binance.api.client.domain.account.margin
 
 
+import com.binance.api.client.domain.OrderSide
+import com.binance.api.client.domain.OrderStatus
+import com.binance.api.client.domain.OrderTimeInForce
+import com.binance.api.client.domain.OrderType
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Order(
@@ -15,15 +19,15 @@ data class Order(
         @JsonProperty("isWorking")
         val isWorking: Boolean,
         @JsonProperty("orderId")
-        val orderId: Int,
+        val orderId: Long,
         @JsonProperty("origQty")
         val origQty: String,
         @JsonProperty("price")
         val price: String,
         @JsonProperty("side")
-        val side: String,
+        val side: OrderSide,
         @JsonProperty("status")
-        val status: String,
+        val status: OrderStatus,
         @JsonProperty("stopPrice")
         val stopPrice: String,
         @JsonProperty("symbol")
@@ -33,9 +37,11 @@ data class Order(
         @JsonProperty("time")
         val time: Long,
         @JsonProperty("timeInForce")
-        val timeInForce: String,
+        val timeInForce: OrderTimeInForce,
         @JsonProperty("type")
-        val type: String,
+        val type: OrderType,
         @JsonProperty("updateTime")
-        val updateTime: Long
+        val updateTime: Long,
+        @JsonProperty("accountId")
+        val accountId: Long
 )

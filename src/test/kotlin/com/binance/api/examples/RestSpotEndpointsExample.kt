@@ -5,7 +5,7 @@ import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
 /**
  * Examples on how to get account information.
  */
-class RestSpotAccountEndpointsExample {
+class RestSpotEndpointsExample {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {

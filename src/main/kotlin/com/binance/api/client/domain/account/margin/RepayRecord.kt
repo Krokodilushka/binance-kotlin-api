@@ -11,7 +11,7 @@ data class RepayRecord(
 ) {
     data class Row(
             @JsonProperty("isolatedSymbol")
-            val isolatedSymbol: String,
+            val isolatedSymbol: String?,
             @JsonProperty("amount")
             val amount: String,
             @JsonProperty("asset")

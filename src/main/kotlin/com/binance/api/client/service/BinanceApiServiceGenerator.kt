@@ -25,6 +25,8 @@ object BinanceApiServiceGenerator {
      */
     val sharedClient = OkHttpClient.Builder()
             .pingInterval(20, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
             .apply {
                 val dispatcher = Dispatcher().apply {
                     maxRequestsPerHost = 500

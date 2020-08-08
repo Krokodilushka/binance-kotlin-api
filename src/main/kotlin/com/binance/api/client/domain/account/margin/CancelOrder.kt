@@ -13,7 +13,7 @@ data class CancelOrder(
         @JsonProperty("isIsolated")
         val isIsolated: Boolean,
         @JsonProperty("orderId")
-        val orderId: Int,
+        val orderId: Long,
         @JsonProperty("origClientOrderId")
         val origClientOrderId: String,
         @JsonProperty("clientOrderId")
