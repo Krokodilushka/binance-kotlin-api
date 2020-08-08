@@ -1,10 +1,10 @@
 package com.binance.api.client
 
 import com.binance.api.client.domain.*
-import com.binance.api.client.domain.account.Amount
-import com.binance.api.client.domain.account.Empty
-import com.binance.api.client.domain.account.Transaction
-import com.binance.api.client.domain.account.margin.*
+import com.binance.api.client.domain.rest.Amount
+import com.binance.api.client.domain.rest.Empty
+import com.binance.api.client.domain.rest.Transaction
+import com.binance.api.client.domain.rest.margin.*
 
 interface BinanceApiMarginRestClient {
 
@@ -136,7 +136,7 @@ interface BinanceApiMarginRestClient {
             endTime: Long?,
             fromId: Long?,
             limit: Int?
-    ): List<com.binance.api.client.domain.account.margin.Trade>
+    ): List<com.binance.api.client.domain.rest.margin.Trade>
 
     fun maxBorrowable(
             asset: String,

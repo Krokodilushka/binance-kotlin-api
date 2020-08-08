@@ -6,8 +6,8 @@ import com.binance.api.client.domain.NewOrderResponseType
 import com.binance.api.client.domain.OrderSide
 import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
-import com.binance.api.client.domain.account.Empty
-import com.binance.api.client.domain.account.spot.*
+import com.binance.api.client.domain.rest.Empty
+import com.binance.api.client.domain.rest.spot.*
 import com.binance.api.client.service.BinanceApiServiceGenerator
 import com.binance.api.client.service.BinanceApiServiceSpot
 

@@ -5,8 +5,8 @@ import com.binance.api.client.domain.NewOrderResponseType
 import com.binance.api.client.domain.OrderSide
 import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
-import com.binance.api.client.domain.account.Empty
-import com.binance.api.client.domain.event.ListenKey
+import com.binance.api.client.domain.rest.Empty
+import com.binance.api.client.domain.rest.ListenKey
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -46,7 +46,7 @@ interface BinanceApiServiceSpot {
             @Query("newOrderRespType") newOrderRespType: NewOrderResponseType?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<com.binance.api.client.domain.account.spot.NewOrder>
+    ): Call<com.binance.api.client.domain.rest.spot.NewOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @DELETE("/api/v3/order")
@@ -57,7 +57,7 @@ interface BinanceApiServiceSpot {
             @Query("newClientOrderId") newClientOrderId: String?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<com.binance.api.client.domain.account.spot.CancelOrder>
+    ): Call<com.binance.api.client.domain.rest.spot.CancelOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @DELETE("/api/v3/openOrders")
@@ -65,7 +65,7 @@ interface BinanceApiServiceSpot {
             @Query("symbol") symbol: String,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<List<com.binance.api.client.domain.account.spot.CancelOrder>>
+    ): Call<List<com.binance.api.client.domain.rest.spot.CancelOrder>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/order")
@@ -75,7 +75,7 @@ interface BinanceApiServiceSpot {
             @Query("origClientOrderId") origClientOrderId: String?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<com.binance.api.client.domain.account.spot.Order>
+    ): Call<com.binance.api.client.domain.rest.spot.Order>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/openOrders")
@@ -83,7 +83,7 @@ interface BinanceApiServiceSpot {
             @Query("symbol") symbol: String?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<List<com.binance.api.client.domain.account.spot.Order>>
+    ): Call<List<com.binance.api.client.domain.rest.spot.Order>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/allOrders")
@@ -95,7 +95,7 @@ interface BinanceApiServiceSpot {
             @Query("limit") limit: Int?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<List<com.binance.api.client.domain.account.spot.Order>>
+    ): Call<List<com.binance.api.client.domain.rest.spot.Order>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/api/v3/order/oco")
@@ -115,7 +115,7 @@ interface BinanceApiServiceSpot {
             @Query("newOrderRespType") newOrderRespType: NewOrderResponseType?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<com.binance.api.client.domain.account.spot.NewOcoOrder>
+    ): Call<com.binance.api.client.domain.rest.spot.NewOcoOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @DELETE("/api/v3/orderList")
@@ -126,7 +126,7 @@ interface BinanceApiServiceSpot {
             @Query("newClientOrderId") newClientOrderId: String?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<com.binance.api.client.domain.account.spot.CancelOcoOrder>
+    ): Call<com.binance.api.client.domain.rest.spot.CancelOcoOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/orderList")
@@ -135,7 +135,7 @@ interface BinanceApiServiceSpot {
             @Query("origClientOrderId") orderId: Long?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<com.binance.api.client.domain.account.spot.OcoOrder>
+    ): Call<com.binance.api.client.domain.rest.spot.OcoOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/allOrderList")
@@ -146,21 +146,21 @@ interface BinanceApiServiceSpot {
             @Query("limit") limit: Int?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<List<com.binance.api.client.domain.account.spot.OcoOrder>>
+    ): Call<List<com.binance.api.client.domain.rest.spot.OcoOrder>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/openOrderList")
     fun allOpenOcoOrders(
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<List<com.binance.api.client.domain.account.spot.OcoOrder>>
+    ): Call<List<com.binance.api.client.domain.rest.spot.OcoOrder>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/account")
     fun account(
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<com.binance.api.client.domain.account.spot.Account>
+    ): Call<com.binance.api.client.domain.rest.spot.Account>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/myTrades")
@@ -172,7 +172,7 @@ interface BinanceApiServiceSpot {
             @Query("limit") limit: Int?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<List<com.binance.api.client.domain.account.spot.Trade>>
+    ): Call<List<com.binance.api.client.domain.rest.spot.Trade>>
 
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)

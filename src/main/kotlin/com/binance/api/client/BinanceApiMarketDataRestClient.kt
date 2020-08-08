@@ -1,8 +1,8 @@
 package com.binance.api.client
 
 import com.binance.api.client.domain.CandlestickInterval
-import com.binance.api.client.domain.account.Empty
-import com.binance.api.client.domain.account.marketdata.*
+import com.binance.api.client.domain.rest.Empty
+import com.binance.api.client.domain.rest.marketdata.*
 
 interface BinanceApiMarketDataRestClient {
 

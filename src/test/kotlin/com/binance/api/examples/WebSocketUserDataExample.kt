@@ -2,8 +2,8 @@ package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
 import com.binance.api.client.WebSocketCallback
-import com.binance.api.client.domain.event.UserDataUpdateEvent
-import com.binance.api.client.domain.event.UserDataUpdateEvent.UserDataUpdateEventType
+import com.binance.api.client.domain.websocket.event.UserDataUpdateEvent
+import com.binance.api.client.domain.websocket.event.UserDataUpdateEvent.UserDataUpdateEventType
 
 /**
  * User data stream endpoints examples.

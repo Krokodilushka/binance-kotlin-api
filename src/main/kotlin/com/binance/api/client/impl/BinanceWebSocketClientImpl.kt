@@ -4,7 +4,7 @@ import com.binance.api.client.BinanceWebSocketClient
 import com.binance.api.client.WebSocketCallback
 import com.binance.api.client.constant.BinanceApiConstants
 import com.binance.api.client.domain.CandlestickInterval
-import com.binance.api.client.domain.event.*
+import com.binance.api.client.domain.websocket.event.*
 import com.fasterxml.jackson.core.type.TypeReference
 import okhttp3.OkHttpClient
 import okhttp3.Request

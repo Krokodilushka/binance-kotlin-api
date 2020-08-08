@@ -3,10 +3,10 @@ package com.binance.api.client.impl
 import com.binance.api.client.BinanceApiMarginRestClient
 import com.binance.api.client.constant.BinanceApiConstants
 import com.binance.api.client.domain.*
-import com.binance.api.client.domain.account.Amount
-import com.binance.api.client.domain.account.Empty
-import com.binance.api.client.domain.account.Transaction
-import com.binance.api.client.domain.account.margin.*
+import com.binance.api.client.domain.rest.Amount
+import com.binance.api.client.domain.rest.Empty
+import com.binance.api.client.domain.rest.Transaction
+import com.binance.api.client.domain.rest.margin.*
 import com.binance.api.client.service.BinanceApiServiceGenerator
 import com.binance.api.client.service.BinanceApiServiceMargin
 

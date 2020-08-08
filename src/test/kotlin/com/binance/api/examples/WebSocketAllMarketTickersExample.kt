@@ -2,7 +2,7 @@ package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
 import com.binance.api.client.WebSocketCallback
-import com.binance.api.client.domain.event.AllMarketTickersEvent
+import com.binance.api.client.domain.websocket.event.AllMarketTickersEvent
 
 /**
  * All market tickers channel examples.

@@ -5,6 +5,7 @@ import com.binance.api.client.exception.BinanceApiException
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.ObjectReader
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
@@ -48,6 +49,6 @@ class BinanceApiWebSocketListener<T> : WebSocketListener {
     }
 
     companion object {
-        private val mapper = ObjectMapper()
+        private val mapper = ObjectMapper().registerKotlinModule()
     }
 }

@@ -1,7 +1,7 @@
 package com.binance.api.client
 
 import com.binance.api.client.domain.CandlestickInterval
-import com.binance.api.client.domain.event.*
+import com.binance.api.client.domain.websocket.event.*
 import java.io.Closeable
 
 /**

@@ -3,9 +3,9 @@ package com.binance.api.examples
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
 import com.binance.api.client.WebSocketCallback
 import com.binance.api.client.domain.CandlestickInterval
-import com.binance.api.client.domain.event.AggTradeEvent
-import com.binance.api.client.domain.event.CandlestickEvent
-import com.binance.api.client.domain.event.DepthEvent
+import com.binance.api.client.domain.websocket.event.AggTradeEvent
+import com.binance.api.client.domain.websocket.event.CandlestickEvent
+import com.binance.api.client.domain.websocket.event.DepthEvent
 
 /**
  * Market data stream endpoints examples.
