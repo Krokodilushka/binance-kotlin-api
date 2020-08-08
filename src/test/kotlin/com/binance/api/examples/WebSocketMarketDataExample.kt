@@ -23,6 +23,10 @@ class WebSocketMarketDataExample {
                 override fun onResponse(response: AggTradeEvent) {
                     println(response)
                 }
+
+                override fun onFailure(cause: Throwable) {
+                    println(cause)
+                }
             })
 
             // Listen for changes in the order book in ETH/BTC
@@ -30,12 +34,20 @@ class WebSocketMarketDataExample {
                 override fun onResponse(response: DepthEvent) {
                     println(response)
                 }
+
+                override fun onFailure(cause: Throwable) {
+                    println(cause)
+                }
             })
 
             // Obtain 1m candlesticks in real-time for ETH/BTC
             client.onCandlestickEvent("ethbtc", CandlestickInterval.ONE_MINUTE, object : WebSocketCallback<CandlestickEvent> {
                 override fun onResponse(response: CandlestickEvent) {
                     println(response)
+                }
+
+                override fun onFailure(cause: Throwable) {
+                    println(cause)
                 }
             })
         }

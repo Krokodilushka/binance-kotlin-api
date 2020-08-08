@@ -1,7 +1,7 @@
 package com.binance.api.client.domain.event
 
 import com.binance.api.client.constant.BinanceApiConstants
-import com.binance.api.client.domain.market.AggTrade
+import com.binance.api.client.domain.event.market.AggTrade
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.apache.commons.lang3.builder.ToStringBuilder

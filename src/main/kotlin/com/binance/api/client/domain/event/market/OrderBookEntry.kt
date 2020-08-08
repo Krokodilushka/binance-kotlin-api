@@ -1,4 +1,4 @@
-package com.binance.api.client.domain.market
+package com.binance.api.client.domain.event.market
 
 import com.binance.api.client.constant.BinanceApiConstants
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties

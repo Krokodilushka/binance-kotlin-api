@@ -1,6 +1,6 @@
 package com.binance.api.client.domain.event
 
-import com.binance.api.client.domain.market.OrderBookEntry
+import com.binance.api.client.domain.event.market.OrderBookEntry
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 

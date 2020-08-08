@@ -10,13 +10,13 @@ data class Depth(
         @JsonProperty("lastUpdateId")
         val lastUpdateId: Long,
         @JsonProperty("bids")
-        val bids: List<Element>,
+        val bids: List<DepthElement>,
         @JsonProperty("asks")
-        val asks: List<Element>
+        val asks: List<DepthElement>
 ) {
     @JsonFormat(shape = JsonFormat.Shape.ARRAY)
     @JsonPropertyOrder
-    data class Element(
+    data class DepthElement(
             val price: String,
             val qty: String
     )

@@ -1,4 +1,4 @@
-package com.binance.api.client.domain.market
+package com.binance.api.client.domain.event.market
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
