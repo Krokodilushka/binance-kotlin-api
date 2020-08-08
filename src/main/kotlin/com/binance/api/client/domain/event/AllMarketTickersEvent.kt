@@ -44,9 +44,9 @@ data class AllMarketTickersEvent(
         @JsonProperty("q")
         val totalTradedQuoteAssetVolume: String,
         @JsonProperty("O")
-        val statisticesOpenTime: Long,
+        val statisticsOpenTime: Long,
         @JsonProperty("C")
-        val statisticesCloseTime: Long,
+        val statisticsCloseTime: Long,
         @JsonProperty("F")
         val firstTradeId: Long,
         @JsonProperty("L")

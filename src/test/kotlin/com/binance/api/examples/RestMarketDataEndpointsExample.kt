@@ -21,7 +21,7 @@ class RestMarketDataEndpointsExample {
 //            }
 
 //            client.exchangeInfo().let {
-//                println("exchangeInfo: $it")
+//                println("exchangeInfo: ${it}")
 //            }
 
 //            client.depth("BTCUSDT", 5).let {

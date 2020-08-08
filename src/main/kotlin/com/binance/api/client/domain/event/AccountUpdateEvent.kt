@@ -1,8 +1,8 @@
 package com.binance.api.client.domain.event
 
 import com.binance.api.client.domain.Permission
+import com.binance.api.client.domain.account.spot.Account
 import com.binance.api.client.domain.event.deserializer.AssetBalanceDeserializer
-import com.binance.api.client.domain.general.Asset
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
@@ -40,7 +40,7 @@ data class AccountUpdateEvent(
 
         @JsonProperty("B")
         @JsonDeserialize(contentUsing = AssetBalanceDeserializer::class)
-        val balances: List<Asset>,
+        val balances: List<Account.Balance>,
 
         @JsonProperty("P")
         val permissions: List<Permission>? = null

@@ -22,11 +22,11 @@ class WebSocketUserDataExample {
             )
 
             // spot
-//            val restClient = factory.newSpotRestClient()
-//            val listenKey = restClient.startUserDataStream()
+            val restClient = factory.newSpotRestClient()
+            val listenKey = restClient.startUserDataStream()
             // margin
-            val restClient = factory.newMarginRestClient()
-            val listenKey = restClient.startMarginUserDataStream()
+//            val restClient = factory.newMarginRestClient()
+//            val listenKey = restClient.startMarginUserDataStream()
 
             // Then, we open a new web socket client, and provide a callback that is called on every update
             val webSocketClient = factory.newWebSocketClient()

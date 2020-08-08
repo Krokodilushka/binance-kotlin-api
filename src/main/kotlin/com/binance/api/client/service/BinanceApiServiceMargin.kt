@@ -6,7 +6,6 @@ import com.binance.api.client.domain.account.Amount
 import com.binance.api.client.domain.account.Empty
 import com.binance.api.client.domain.account.Transaction
 import com.binance.api.client.domain.account.margin.*
-import com.binance.api.client.domain.account.request.IsolatedMarginPair
 import com.binance.api.client.domain.event.ListenKey
 import retrofit2.Call
 import retrofit2.http.*
@@ -282,7 +281,7 @@ interface BinanceApiServiceMargin {
             @Query("symbol") symbol: String?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<IsolatedMarginPair>
+    ): Call<IsolatedPair>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/sapi/v1/margin/isolated/allPairs")
@@ -291,7 +290,7 @@ interface BinanceApiServiceMargin {
             recvWindow: Long?,
             @Query("timestamp")
             timestamp: Long
-    ): Call<List<IsolatedMarginPair>>
+    ): Call<List<IsolatedPair>>
 
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)

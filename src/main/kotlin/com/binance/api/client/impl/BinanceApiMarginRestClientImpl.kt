@@ -7,7 +7,6 @@ import com.binance.api.client.domain.account.Amount
 import com.binance.api.client.domain.account.Empty
 import com.binance.api.client.domain.account.Transaction
 import com.binance.api.client.domain.account.margin.*
-import com.binance.api.client.domain.account.request.IsolatedMarginPair
 import com.binance.api.client.service.BinanceApiServiceGenerator
 import com.binance.api.client.service.BinanceApiServiceMargin
 
@@ -67,9 +66,9 @@ class BinanceApiMarginRestClientImpl(apiKey: String?, secret: String?) : Binance
 
     override fun isolatedAccount(): IsolatedAccountInfo = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.isolatedAccount(BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
-    override fun isolatedPair(symbol: String): IsolatedMarginPair = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.isolatedPair(symbol, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
+    override fun isolatedPair(symbol: String): IsolatedPair = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.isolatedPair(symbol, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
-    override fun isolatedAllPairs(): List<IsolatedMarginPair> = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.isolatedAllPairs(BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
+    override fun isolatedAllPairs(): List<IsolatedPair> = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.isolatedAllPairs(BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
     override fun startMarginUserDataStream(): String = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startMarginUserDataStream()).listenKey
 

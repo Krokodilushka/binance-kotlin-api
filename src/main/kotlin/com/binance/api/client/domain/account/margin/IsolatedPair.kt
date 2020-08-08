@@ -1,9 +1,9 @@
-package com.binance.api.client.domain.account.request
+package com.binance.api.client.domain.account.margin
 
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class IsolatedMarginPair(
+data class IsolatedPair(
         @JsonProperty("symbol")
         val symbol: String,
         @JsonProperty("base")

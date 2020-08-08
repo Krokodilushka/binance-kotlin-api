@@ -5,7 +5,6 @@ import com.binance.api.client.domain.account.Amount
 import com.binance.api.client.domain.account.Empty
 import com.binance.api.client.domain.account.Transaction
 import com.binance.api.client.domain.account.margin.*
-import com.binance.api.client.domain.account.request.IsolatedMarginPair
 
 interface BinanceApiMarginRestClient {
 
@@ -175,9 +174,9 @@ interface BinanceApiMarginRestClient {
 
     fun isolatedAccount(): IsolatedAccountInfo
 
-    fun isolatedPair(symbol: String): IsolatedMarginPair
+    fun isolatedPair(symbol: String): IsolatedPair
 
-    fun isolatedAllPairs(): List<IsolatedMarginPair>
+    fun isolatedAllPairs(): List<IsolatedPair>
 
     fun startMarginUserDataStream(): String
 

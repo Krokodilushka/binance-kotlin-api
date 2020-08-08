@@ -3,8 +3,7 @@ package com.binance.api.client.domain.account.marketdata
 
 import com.binance.api.client.domain.OrderType
 import com.binance.api.client.domain.Permission
-import com.binance.api.client.domain.general.ExchangeFilter
-import com.binance.api.client.domain.general.RateLimit
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class ExchangeInfo(
@@ -52,8 +51,46 @@ data class ExchangeInfo(
             @JsonProperty("isMarginTradingAllowed")
             val isMarginTradingAllowed: Boolean,
             @JsonProperty("filters")
-            val filters: List<ExchangeFilter>,
+            val filters: List<SymbolFilter>,
             @JsonProperty("permissions")
             val permissions: List<Permission>
+    )
+
+    @JsonIgnoreProperties
+    data class ExchangeFilter(
+            val filterType: String?,
+            val maxPosition: String?,
+            val maxNumOrders: String?,
+            val maxNumAlgoOrders: String?
+    )
+
+    data class SymbolFilter(
+            val filterType: String?,
+            val minPrice: String?,
+            val maxPrice: String?,
+            val tickSize: String?,
+            val multiplierUp: String?,
+            val multiplierDown: String?,
+            val avgPriceMins: String?,
+            val minQty: String?,
+            val maxQty: String?,
+            val stepSize: String?,
+            val minNotional: String?,
+            val applyToMarket: String?,
+            val limit: String?,
+            val maxNumOrders: String?,
+            val maxNumAlgoOrders: String?,
+            val maxNumIcebergOrders: String?
+    )
+
+    data class RateLimit(
+            @JsonProperty("rateLimitType")
+            val rateLimitType: String,
+            @JsonProperty("interval")
+            val interval: String,
+            @JsonProperty("intervalNum")
+            val intervalNum: Int,
+            @JsonProperty("limit")
+            val limit: Int
     )
 }
