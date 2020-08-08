@@ -1,10 +1,9 @@
 package com.binance.api.client
 
-import com.binance.api.client.domain.NewOrderResponseType
 import com.binance.api.client.domain.OrderSide
 import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
-import com.binance.api.client.domain.account.EmptyResponse
+import com.binance.api.client.domain.account.Empty
 import com.binance.api.client.domain.account.spot.CancelOrder
 import com.binance.api.client.domain.account.spot.NewOrder
 
@@ -20,9 +19,8 @@ interface BinanceApiSpotRestClient {
             price: String?,
             newClientOrderId: String?,
             stopPrice: String?,
-            icebergQty: String?,
-            newOrderRespType: NewOrderResponseType?
-    ): EmptyResponse
+            icebergQty: String?
+    ): Empty
 
     fun newOrder(
             symbol: String,
@@ -34,8 +32,7 @@ interface BinanceApiSpotRestClient {
             price: String?,
             newClientOrderId: String?,
             stopPrice: String?,
-            icebergQty: String?,
-            newOrderRespType: NewOrderResponseType?
+            icebergQty: String?
     ): NewOrder
 
     fun cancelOrder(
@@ -51,7 +48,7 @@ interface BinanceApiSpotRestClient {
 
     fun order(
             symbol: String,
-            orderId: Long,
+            orderId: Long?,
             origClientOrderId: String?
     ): com.binance.api.client.domain.account.spot.Order
 
@@ -69,7 +66,7 @@ interface BinanceApiSpotRestClient {
 
     fun newOcoOrder(
             symbol: String,
-            orderId: Long?,
+            listClientOrderId: String?,
             side: OrderSide,
             quantity: String,
             limitClientOrderId: String?,
@@ -79,20 +76,19 @@ interface BinanceApiSpotRestClient {
             stopPrice: String,
             stopLimitPrice: String?,
             stopIcebergQty: String?,
-            stopLimitTimeInForce: OrderTimeInForce?,
-            newOrderRespType: NewOrderResponseType?
+            stopLimitTimeInForce: OrderTimeInForce?
     ): com.binance.api.client.domain.account.spot.NewOcoOrder
 
     fun cancelOcoOrder(
             symbol: String,
-            orderId: Long?,
-            side: String?,
-            quantity: String?
-    ): com.binance.api.client.domain.account.spot.NewOcoOrder
+            orderListId: Long?,
+            listClientOrderId: String?,
+            newClientOrderId: String?
+    ): com.binance.api.client.domain.account.spot.CancelOcoOrder
 
     fun ocoOrder(
-            orderListId: String?,
-            orderId: Long?
+            orderListId: Long?,
+            origClientOrderId: Long?
     ): com.binance.api.client.domain.account.spot.OcoOrder
 
     fun allOcoOrders(

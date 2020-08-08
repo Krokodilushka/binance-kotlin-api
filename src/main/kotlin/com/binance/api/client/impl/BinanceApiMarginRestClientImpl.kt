@@ -4,7 +4,7 @@ import com.binance.api.client.BinanceApiMarginRestClient
 import com.binance.api.client.constant.BinanceApiConstants
 import com.binance.api.client.domain.*
 import com.binance.api.client.domain.account.Amount
-import com.binance.api.client.domain.account.EmptyResponse
+import com.binance.api.client.domain.account.Empty
 import com.binance.api.client.domain.account.Transaction
 import com.binance.api.client.domain.account.margin.*
 import com.binance.api.client.domain.account.request.IsolatedMarginPair
@@ -74,10 +74,10 @@ class BinanceApiMarginRestClientImpl(apiKey: String?, secret: String?) : Binance
 
     override fun startMarginUserDataStream(): ListenKey = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startMarginUserDataStream())
 
-    override fun keepAliveMarginUserDataStream(listenKey: String): EmptyResponse = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.keepAliveMarginUserDataStream(listenKey))
+    override fun keepAliveMarginUserDataStream(listenKey: String): Empty = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.keepAliveMarginUserDataStream(listenKey))
 
     override fun startIsolatedMarginUserDataStream(symbol: String): ListenKey = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startIsolatedMarginUserDataStream(symbol))
 
-    override fun keepAliveIsolatedMarginUserDataStream(listenKey: String): EmptyResponse = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.keepAliveIsolatedMarginUserDataStream(listenKey))
+    override fun keepAliveIsolatedMarginUserDataStream(listenKey: String): Empty = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.keepAliveIsolatedMarginUserDataStream(listenKey))
 
 }

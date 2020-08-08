@@ -4,7 +4,7 @@ package com.binance.api.client.domain.account.spot
 import com.binance.api.client.domain.*
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class NewOcoOrder(
+data class CancelOcoOrder(
         @JsonProperty("orderListId")
         val orderListId: Long,
         @JsonProperty("contingencyType")
@@ -36,14 +36,14 @@ data class NewOcoOrder(
     data class OrderReport(
             @JsonProperty("symbol")
             val symbol: String,
+            @JsonProperty("origClientOrderId")
+            val origClientOrderId: String,
             @JsonProperty("orderId")
             val orderId: Long,
             @JsonProperty("orderListId")
             val orderListId: Long,
             @JsonProperty("clientOrderId")
             val clientOrderId: String,
-            @JsonProperty("transactTime")
-            val transactTime: Long,
             @JsonProperty("price")
             val price: String,
             @JsonProperty("origQty")
@@ -61,19 +61,6 @@ data class NewOcoOrder(
             @JsonProperty("side")
             val side: OrderSide,
             @JsonProperty("stopPrice")
-            val stopPrice: String?,
-            @JsonProperty("fills")
-            val fills: List<Fill>
+            val stopPrice: String?
     )
-
-        data class Fill(
-                @JsonProperty("price")
-                val price: String,
-                @JsonProperty("qty")
-                val qty: String,
-                @JsonProperty("commission")
-                val commission: String,
-                @JsonProperty("commissionAsset")
-                val commissionAsset: String
-        )
 }

@@ -3,7 +3,7 @@ package com.binance.api.client.service
 import com.binance.api.client.constant.BinanceApiConstants
 import com.binance.api.client.domain.*
 import com.binance.api.client.domain.account.Amount
-import com.binance.api.client.domain.account.EmptyResponse
+import com.binance.api.client.domain.account.Empty
 import com.binance.api.client.domain.account.Transaction
 import com.binance.api.client.domain.account.margin.*
 import com.binance.api.client.domain.account.request.IsolatedMarginPair
@@ -300,11 +300,11 @@ interface BinanceApiServiceMargin {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @PUT("/sapi/v3/userDataStream")
-    fun keepAliveMarginUserDataStream(@Query("listenKey") listenKey: String): Call<EmptyResponse>
+    fun keepAliveMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @DELETE("/sapi/v3/userDataStream")
-    fun deleteMarginUserDataStream(@Query("listenKey") listenKey: String): Call<EmptyResponse>
+    fun deleteMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @POST("/sapi/v3/userDataStream/isolated")
@@ -312,9 +312,9 @@ interface BinanceApiServiceMargin {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @PUT("/sapi/v3/userDataStream/isolated")
-    fun keepAliveIsolatedMarginUserDataStream(@Query("listenKey") listenKey: String): Call<EmptyResponse>
+    fun keepAliveIsolatedMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @DELETE("/sapi/v3/userDataStream/isolated")
-    fun deleteIsolatedMarginUserDataStream(@Query("listenKey") listenKey: String): Call<EmptyResponse>
+    fun deleteIsolatedMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
 }

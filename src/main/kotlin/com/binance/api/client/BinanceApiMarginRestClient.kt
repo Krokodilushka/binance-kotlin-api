@@ -2,7 +2,7 @@ package com.binance.api.client
 
 import com.binance.api.client.domain.*
 import com.binance.api.client.domain.account.Amount
-import com.binance.api.client.domain.account.EmptyResponse
+import com.binance.api.client.domain.account.Empty
 import com.binance.api.client.domain.account.Transaction
 import com.binance.api.client.domain.account.margin.*
 import com.binance.api.client.domain.account.request.IsolatedMarginPair
@@ -182,9 +182,9 @@ interface BinanceApiMarginRestClient {
 
     fun startMarginUserDataStream(): ListenKey
 
-    fun keepAliveMarginUserDataStream(listenKey: String): EmptyResponse
+    fun keepAliveMarginUserDataStream(listenKey: String): Empty
 
     fun startIsolatedMarginUserDataStream(symbol: String): ListenKey
 
-    fun keepAliveIsolatedMarginUserDataStream(listenKey: String): EmptyResponse
+    fun keepAliveIsolatedMarginUserDataStream(listenKey: String): Empty
 }

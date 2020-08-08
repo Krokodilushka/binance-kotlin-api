@@ -5,7 +5,7 @@ import com.binance.api.client.domain.NewOrderResponseType
 import com.binance.api.client.domain.OrderSide
 import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
-import com.binance.api.client.domain.account.EmptyResponse
+import com.binance.api.client.domain.account.Empty
 import com.binance.api.client.domain.event.ListenKey
 import retrofit2.Call
 import retrofit2.http.*
@@ -16,7 +16,7 @@ import retrofit2.http.*
 interface BinanceApiServiceSpot {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/api/v3/order/test")
+    @POST("/api/v3/order/test")
     fun newOrderTest(
             @Query("symbol") symbol: String,
             @Query("side") side: OrderSide,
@@ -31,7 +31,7 @@ interface BinanceApiServiceSpot {
             @Query("newOrderRespType") newOrderRespType: NewOrderResponseType?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<EmptyResponse>
+    ): Call<Empty>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/api/v3/order")
@@ -74,7 +74,7 @@ interface BinanceApiServiceSpot {
     @GET("/api/v3/order")
     fun order(
             @Query("symbol") symbol: String,
-            @Query("orderId") orderId: Long,
+            @Query("orderId") orderId: Long?,
             @Query("origClientOrderId") origClientOrderId: String?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
@@ -104,7 +104,7 @@ interface BinanceApiServiceSpot {
     @POST("/api/v3/order/oco")
     fun newOcoOrder(
             @Query("symbol") symbol: String,
-            @Query("listClientOrderId") orderId: Long?,
+            @Query("listClientOrderId") orderId: String?,
             @Query("side") side: OrderSide,
             @Query("quantity") quantity: String,
             @Query("limitClientOrderId") limitClientOrderId: String?,
@@ -121,27 +121,27 @@ interface BinanceApiServiceSpot {
     ): Call<com.binance.api.client.domain.account.spot.NewOcoOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @DELETE("/api/v3/order/orderList")
+    @DELETE("/api/v3/orderList")
     fun cancelOcoOrder(
             @Query("symbol") symbol: String,
-            @Query("orderListId") orderId: Long?,
-            @Query("listClientOrderId") side: String?,
-            @Query("newClientOrderId") quantity: String?,
+            @Query("orderListId") orderListId: Long?,
+            @Query("listClientOrderId") listClientOrderId: String?,
+            @Query("newClientOrderId") newClientOrderId: String?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
-    ): Call<com.binance.api.client.domain.account.spot.NewOcoOrder>
+    ): Call<com.binance.api.client.domain.account.spot.CancelOcoOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/api/v3/order/orderList")
+    @GET("/api/v3/orderList")
     fun ocoOrder(
-            @Query("orderListId") orderListId: String?,
+            @Query("orderListId") orderListId: Long?,
             @Query("origClientOrderId") orderId: Long?,
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
     ): Call<com.binance.api.client.domain.account.spot.OcoOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/api/v3/order/allOrderList")
+    @GET("/api/v3/allOrderList")
     fun allOcoOrders(
             @Query("fromId") fromId: String?,
             @Query("startTime") startTime: Long?,
@@ -152,7 +152,7 @@ interface BinanceApiServiceSpot {
     ): Call<List<com.binance.api.client.domain.account.spot.OcoOrder>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
-    @GET("/api/v3/order/openOrderList")
+    @GET("/api/v3/openOrderList")
     fun allOpenOcoOrders(
             @Query("recvWindow") recvWindow: Long?,
             @Query("timestamp") timestamp: Long
@@ -184,9 +184,9 @@ interface BinanceApiServiceSpot {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @PUT("/api/v3/userDataStream")
-    fun keepAliveUserDataStream(@Query("listenKey") listenKey: String): Call<EmptyResponse>
+    fun keepAliveUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @DELETE("/api/v3/userDataStream")
-    fun closeUserDataStream(@Query("listenKey") listenKey: String): Call<EmptyResponse>
+    fun closeUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
 }
