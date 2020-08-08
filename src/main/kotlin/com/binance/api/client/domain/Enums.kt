@@ -13,7 +13,7 @@ enum class OrderType {
 }
 
 enum class Permission {
-    SPOT, MARGIN
+    SPOT, MARGIN, LEVERAGED
 }
 
 enum class OrderTimeInForce {

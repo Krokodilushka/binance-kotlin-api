@@ -39,7 +39,7 @@ data class OrderTradeUpdateEvent(
         @JsonProperty("F")
         val icebergQuantity: String,
         @JsonProperty("g")
-        val orderListId: Int,
+        val orderListId: Long,
         @JsonProperty("C")
         val originalClientOrderId: String,
         @JsonProperty("x")
@@ -49,7 +49,7 @@ data class OrderTradeUpdateEvent(
         @JsonProperty("r")
         val orderRejectReason: String,
         @JsonProperty("i")
-        val orderId: Int,
+        val orderId: Long,
         @JsonProperty("l")
         val lastExecutedQuantity: String,
         @JsonProperty("z")
@@ -63,9 +63,9 @@ data class OrderTradeUpdateEvent(
         @JsonProperty("T")
         val transactionTime: Long,
         @JsonProperty("t")
-        val tradeId: Int,
+        val tradeId: Long,
         @JsonProperty("I")
-        val i: Int,
+        val i: Long,
         @JsonProperty("w")
         val isTheOrderOnTheBook: Boolean,
         @JsonProperty("m")

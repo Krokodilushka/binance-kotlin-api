@@ -4,6 +4,8 @@ import com.binance.api.client.BinanceApiError
 import com.binance.api.client.constant.BinanceApiConstants
 import com.binance.api.client.exception.BinanceApiException
 import com.binance.api.client.security.AuthenticationInterceptor
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
@@ -23,7 +25,7 @@ object BinanceApiServiceGenerator {
     /**
      * Returns the shared OkHttpClient instance.
      */
-    val sharedClient = OkHttpClient.Builder()
+    val sharedClient: OkHttpClient = OkHttpClient.Builder()
             .pingInterval(20, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -34,14 +36,9 @@ object BinanceApiServiceGenerator {
                 }
                 dispatcher(dispatcher)
             }
-            .build()!!
-    private val converterFactory: Converter.Factory = JacksonConverterFactory.create()
-    private val errorBodyConverter = converterFactory.responseBodyConverter(
-            BinanceApiError::class.java, arrayOfNulls(0), null) as Converter<ResponseBody?, BinanceApiError>
-
-    fun <S> createService(serviceClass: Class<S>): S {
-        return createService(serviceClass, null, null)
-    }
+            .build()
+    private val converterFactory: Converter.Factory = JacksonConverterFactory.create(ObjectMapper().registerKotlinModule())
+    private val errorBodyConverter = converterFactory.responseBodyConverter(BinanceApiError::class.java, arrayOfNulls(0), null) as Converter<ResponseBody, BinanceApiError>
 
     fun <S> createService(serviceClass: Class<S>, apiKey: String?, secret: String?): S {
         val retrofitBuilder = Retrofit.Builder()
@@ -81,7 +78,7 @@ object BinanceApiServiceGenerator {
      */
     @Throws(IOException::class, BinanceApiException::class)
     fun getBinanceApiError(response: Response<*>): BinanceApiError {
-        return errorBodyConverter.convert(response.errorBody()!!)
+        return errorBodyConverter.convert(response.errorBody()!!)!!
     }
 
 }

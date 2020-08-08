@@ -9,7 +9,10 @@ class RestSpotEndpointsExample {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val factory = newInstance(args[0], args[1])
+            val factory = newInstance(
+                    args.getOrElse(0) { "API_KEY" },
+                    args.getOrElse(1) { "API_SECRET" }
+            )
             val client = factory.newSpotRestClient()
 
 //            client.account().let {

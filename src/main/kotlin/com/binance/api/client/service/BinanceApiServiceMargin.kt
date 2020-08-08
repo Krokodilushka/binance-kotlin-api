@@ -295,26 +295,26 @@ interface BinanceApiServiceMargin {
 
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @POST("/sapi/v3/userDataStream")
+    @POST("/sapi/v1/userDataStream")
     fun startMarginUserDataStream(): Call<ListenKey>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @PUT("/sapi/v3/userDataStream")
+    @PUT("/sapi/v1/userDataStream")
     fun keepAliveMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @DELETE("/sapi/v3/userDataStream")
-    fun deleteMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
+    @DELETE("/sapi/v1/userDataStream")
+    fun closeMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @POST("/sapi/v3/userDataStream/isolated")
+    @POST("/sapi/v1/userDataStream/isolated")
     fun startIsolatedMarginUserDataStream(@Query("symbol") symbol: String): Call<ListenKey>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @PUT("/sapi/v3/userDataStream/isolated")
+    @PUT("/sapi/v1/userDataStream/isolated")
     fun keepAliveIsolatedMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
-    @DELETE("/sapi/v3/userDataStream/isolated")
-    fun deleteIsolatedMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
+    @DELETE("/sapi/v1/userDataStream/isolated")
+    fun closeIsolatedMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
 }

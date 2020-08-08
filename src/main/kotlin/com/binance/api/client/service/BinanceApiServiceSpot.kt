@@ -10,9 +10,6 @@ import com.binance.api.client.domain.event.ListenKey
 import retrofit2.Call
 import retrofit2.http.*
 
-/**
- * Binance's REST API URL mappings and endpoint security configuration.
- */
 interface BinanceApiServiceSpot {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)

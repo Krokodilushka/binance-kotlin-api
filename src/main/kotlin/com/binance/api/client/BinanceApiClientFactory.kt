@@ -1,6 +1,7 @@
 package com.binance.api.client
 
 import com.binance.api.client.impl.BinanceApiMarginRestClientImpl
+import com.binance.api.client.impl.BinanceApiMarketDataRestClientImpl
 import com.binance.api.client.impl.BinanceApiSpotRestClientImpl
 import com.binance.api.client.impl.BinanceWebSocketClientImpl
 import com.binance.api.client.service.BinanceApiServiceGenerator
@@ -25,26 +26,14 @@ private constructor(
          */
         private val secret: String?) {
 
-    /**
-     * Creates a new synchronous/blocking REST client.
-     */
-    fun newSpotRestClient(): BinanceApiSpotRestClient {
-        return BinanceApiSpotRestClientImpl(apiKey, secret)
-    }
 
-    /**
-     * Creates a new synchronous/blocking Margin REST client.
-     */
-    fun newMarginRestClient(): BinanceApiMarginRestClient {
-        return BinanceApiMarginRestClientImpl(apiKey, secret)
-    }
+    fun newSpotRestClient() = BinanceApiSpotRestClientImpl(apiKey, secret)
 
-    /**
-     * Creates a new web socket client used for handling data streams.
-     */
-    fun newWebSocketClient(): BinanceWebSocketClient {
-        return BinanceWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient)
-    }
+    fun newMarginRestClient() = BinanceApiMarginRestClientImpl(apiKey, secret)
+
+    fun newMarketDataRestClient() = BinanceApiMarketDataRestClientImpl(apiKey, secret)
+
+    fun newWebSocketClient() = BinanceWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient)
 
     companion object {
         /**

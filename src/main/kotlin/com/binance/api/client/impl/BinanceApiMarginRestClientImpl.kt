@@ -8,7 +8,6 @@ import com.binance.api.client.domain.account.Empty
 import com.binance.api.client.domain.account.Transaction
 import com.binance.api.client.domain.account.margin.*
 import com.binance.api.client.domain.account.request.IsolatedMarginPair
-import com.binance.api.client.domain.event.ListenKey
 import com.binance.api.client.service.BinanceApiServiceGenerator
 import com.binance.api.client.service.BinanceApiServiceMargin
 
@@ -72,12 +71,16 @@ class BinanceApiMarginRestClientImpl(apiKey: String?, secret: String?) : Binance
 
     override fun isolatedAllPairs(): List<IsolatedMarginPair> = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.isolatedAllPairs(BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
-    override fun startMarginUserDataStream(): ListenKey = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startMarginUserDataStream())
+    override fun startMarginUserDataStream(): String = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startMarginUserDataStream()).listenKey
 
     override fun keepAliveMarginUserDataStream(listenKey: String): Empty = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.keepAliveMarginUserDataStream(listenKey))
 
-    override fun startIsolatedMarginUserDataStream(symbol: String): ListenKey = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startIsolatedMarginUserDataStream(symbol))
+    override fun deleteMarginUserDataStream(listenKey: String): Empty = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.closeMarginUserDataStream(listenKey))
+
+    override fun startIsolatedMarginUserDataStream(symbol: String): String = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startIsolatedMarginUserDataStream(symbol)).listenKey
 
     override fun keepAliveIsolatedMarginUserDataStream(listenKey: String): Empty = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.keepAliveIsolatedMarginUserDataStream(listenKey))
+
+    override fun deleteIsolatedMarginUserDataStream(listenKey: String): Empty = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.closeIsolatedMarginUserDataStream(listenKey))
 
 }

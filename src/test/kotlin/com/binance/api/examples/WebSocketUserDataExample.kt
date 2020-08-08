@@ -16,12 +16,17 @@ class WebSocketUserDataExample {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val factory = newInstance(args[0], args[1])
+            val factory = newInstance(
+                    args.getOrElse(0) { "API_KEY" },
+                    args.getOrElse(1) { "API_SECRET" }
+            )
 
-            // regular
-//            val listenKey = factory.newRestClient().startUserDataStream()
+            // spot
+//            val restClient = factory.newSpotRestClient()
+//            val listenKey = restClient.startUserDataStream()
             // margin
-            val listenKey = factory.newMarginRestClient().startMarginUserDataStream().listenKey
+            val restClient = factory.newMarginRestClient()
+            val listenKey = restClient.startMarginUserDataStream()
 
             // Then, we open a new web socket client, and provide a callback that is called on every update
             val webSocketClient = factory.newWebSocketClient()
@@ -45,11 +50,12 @@ class WebSocketUserDataExample {
             })
             println("Waiting for events...")
 
+            Thread.sleep(5000L)
             // We can keep alive the user data stream
-            // client.keepAliveUserDataStream(listenKey);
+//            restClient.keepAliveUserDataStream(listenKey);
 
             // Or we can invalidate it, whenever it is no longer needed
-            // client.closeUserDataStream(listenKey);
+//            restClient.closeUserDataStream(listenKey);
         }
     }
 }
