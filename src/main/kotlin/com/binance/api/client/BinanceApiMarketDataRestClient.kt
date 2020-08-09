@@ -20,7 +20,7 @@ interface BinanceApiMarketDataRestClient {
 
     fun aggTrades(symbol: String, fromId: Long?, startTime: Long?, endTime: Long?, limit: Long?): List<AggregateTrade>
 
-    fun klines(symbol: String, interval: CandlestickInterval, startTime: Long?, endTime: Long?, limit: Long?): List<Candlestick>
+    fun candles(symbol: String, interval: CandlestickInterval, startTime: Long?, endTime: Long?, limit: Long?): List<Candlestick>
 
     fun avgPrice(symbol: String): AvgPrice
 

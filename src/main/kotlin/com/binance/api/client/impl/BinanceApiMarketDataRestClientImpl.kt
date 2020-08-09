@@ -25,7 +25,7 @@ class BinanceApiMarketDataRestClientImpl(apiKey: String?, secret: String?) : Bin
 
     override fun aggTrades(symbol: String, fromId: Long?, startTime: Long?, endTime: Long?, limit: Long?): List<AggregateTrade> = BinanceApiServiceGenerator.executeSync(binanceApiService.aggTrades(symbol, fromId, startTime, endTime, limit))
 
-    override fun klines(symbol: String, interval: CandlestickInterval, startTime: Long?, endTime: Long?, limit: Long?): List<Candlestick> = BinanceApiServiceGenerator.executeSync(binanceApiService.klines(symbol, interval.intervalId, startTime, endTime, limit))
+    override fun candles(symbol: String, interval: CandlestickInterval, startTime: Long?, endTime: Long?, limit: Long?): List<Candlestick> = BinanceApiServiceGenerator.executeSync(binanceApiService.klines(symbol, interval.intervalId, startTime, endTime, limit))
 
     override fun avgPrice(symbol: String): AvgPrice = BinanceApiServiceGenerator.executeSync(binanceApiService.avgPrice(symbol))
 

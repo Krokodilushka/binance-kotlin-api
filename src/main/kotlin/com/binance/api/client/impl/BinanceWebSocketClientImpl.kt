@@ -5,10 +5,14 @@ import com.binance.api.client.BinanceWebSocketClient
 import com.binance.api.client.domain.CandlestickInterval
 import com.binance.api.client.domain.websocket.MarketEvent
 import com.binance.api.client.domain.websocket.UserDataEvent
+import com.binance.api.client.exception.BinanceApiException
 import com.fasterxml.jackson.core.type.TypeReference
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.ObjectReader
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import okhttp3.*
 import java.io.Closeable
+import java.io.IOException
 import java.util.*
 import java.util.stream.Collectors
 
@@ -87,4 +91,40 @@ class BinanceWebSocketClientImpl(private val client: OkHttpClient?) : BinanceWeb
         }
     }
 
+    class BinanceApiWebSocketListener<T> : WebSocketListener {
+        private val mapper = ObjectMapper().registerKotlinModule()
+        private val callback: BinanceWebSocketClient.WebSocketCallback<T>
+        private val objectReader: ObjectReader
+        private var closing = false
+
+        constructor(callback: BinanceWebSocketClient.WebSocketCallback<T>, eventClass: Class<T>) {
+            this.callback = callback
+            objectReader = mapper.readerFor(eventClass)
+        }
+
+        constructor(callback: BinanceWebSocketClient.WebSocketCallback<T>, eventTypeReference: TypeReference<T>) {
+            this.callback = callback
+            objectReader = mapper.readerFor(eventTypeReference)
+        }
+
+        override fun onMessage(webSocket: WebSocket, text: String) {
+            try {
+                val event: T = objectReader.readValue(text)
+                callback.onResponse(event)
+            } catch (e: IOException) {
+                throw BinanceApiException(e)
+            }
+        }
+
+        override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
+            closing = true
+        }
+
+        override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
+            if (!closing) {
+                callback.onFailure(t)
+            }
+        }
+
+    }
 }

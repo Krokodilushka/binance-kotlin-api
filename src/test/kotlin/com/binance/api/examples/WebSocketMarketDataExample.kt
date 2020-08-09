@@ -1,6 +1,8 @@
 package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
+import com.binance.api.client.BinanceWebSocketClient
+import com.binance.api.client.domain.websocket.MarketEvent
 
 /**
  * Market data stream endpoints examples.
@@ -23,15 +25,15 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onTradeEvent("ethbtc", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.TradeEvent> {
-//                override fun onResponse(response: MarketEvent.TradeEvent) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
+            client.onTradeEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.TradeEvent> {
+                override fun onResponse(response: MarketEvent.TradeEvent) {
+                    println(response)
+                }
+
+                override fun onFailure(cause: Throwable) {
+                    println(cause)
+                }
+            })
 
 //            client.onCandlestickEvent("ethbtc", CandlestickInterval.ONE_MINUTE, object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.CandlestickEvent> {
 //                override fun onResponse(response: MarketEvent.CandlestickEvent) {
@@ -53,7 +55,6 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-
 //            client.onAllMarketTickersEvent(object : BinanceWebSocketClient.WebSocketCallback<List<MarketEvent.AllMarketTickersEvent>> {
 //                override fun onResponse(response: List<MarketEvent.AllMarketTickersEvent>) {
 //                    println(response)
@@ -74,7 +75,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onIndividualSymbolTickerEvent("ethbtc", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.IndividualSymbolTickerEvent> {
+//            client.onIndividualSymbolTickerEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.IndividualSymbolTickerEvent> {
 //                override fun onResponse(response: MarketEvent.IndividualSymbolTickerEvent) {
 //                    println(response)
 //                }
@@ -114,7 +115,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onDiffDepthEvent("ethbtc", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.DepthEvent> {
+//            client.onDiffDepthEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.DepthEvent> {
 //                override fun onResponse(response: MarketEvent.DepthEvent) {
 //                    println(response)
 //                }

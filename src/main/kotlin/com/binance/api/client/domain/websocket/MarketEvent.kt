@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
 sealed class MarketEvent {
 
-    //    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class AllMarketTickersEvent(
             @JsonProperty("e")
             val eventType: String,
@@ -57,6 +57,7 @@ sealed class MarketEvent {
             val totalNumberOfTrades: Long
     ) : MarketEvent()
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class TradeEvent(
             @JsonProperty("e")
             val eventType: String,
@@ -83,7 +84,7 @@ sealed class MarketEvent {
     )
 
 
-    //    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class CandlestickEvent(
             @JsonProperty("e")
             val eventType: String,
@@ -95,6 +96,7 @@ sealed class MarketEvent {
             val candle: Candle
 
     ) : MarketEvent() {
+        @JsonIgnoreProperties(ignoreUnknown = true)
         data class Candle(
                 @JsonProperty("t")
                 val openTime: Long,
@@ -133,7 +135,7 @@ sealed class MarketEvent {
         )
     }
 
-    //    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class IndividualSymbolMiniTickerEvent(
             @JsonProperty("e")
             val eventType: String,
@@ -155,7 +157,7 @@ sealed class MarketEvent {
             val totalTradedQuoteAssetVolume: String
     )
 
-    //    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class IndividualSymbolTickerEvent(
             @JsonProperty("e")
             val eventType: String,
@@ -205,7 +207,7 @@ sealed class MarketEvent {
             val totalNumberOfTrades: Long
     )
 
-    //    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class IndividualSymbolBookTickerEvent(
             @JsonProperty("u")
             val updateId: Long,
@@ -221,7 +223,7 @@ sealed class MarketEvent {
             val bestAskQty: String
     )
 
-    //    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class PartialBookDepth(
             @JsonProperty("lastUpdateId")
             val lastUpdateId: Long,
@@ -231,7 +233,7 @@ sealed class MarketEvent {
             val asks: List<DepthEvent.OrderBookEntry>
     )
 
-    //    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class DepthEvent(
             @JsonProperty("e")
             val eventType: String,
@@ -256,7 +258,7 @@ sealed class MarketEvent {
         )
     }
 
-    //    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class AggTradeEvent(
             @JsonProperty("e")
             val eventType: String,
