@@ -12,12 +12,12 @@ class UserDataUpdateEventDeserializer : JsonDeserializer<UserDataEvent>() {
     override fun deserialize(jp: JsonParser, ctx: DeserializationContext): UserDataEvent {
         val node = jp.codec.readTree<JsonNode>(jp)
         val json = node.toString()
-        val eventTypeId = node["e"].asText()
-        val event = when (eventTypeId) {
+        val eventType = node["e"].asText()
+        val event = when (eventType) {
             "outboundAccountInfo", "outboundAccountPosition" -> JsonToObject.convert(json, UserDataEvent.Event.AccountUpdateEvent::class.java)
             "balanceUpdate" -> JsonToObject.convert(json, UserDataEvent.Event.BalanceUpdateEvent::class.java)
             "executionReport" -> JsonToObject.convert(json, UserDataEvent.Event.OrderTradeUpdateEvent::class.java)
-            else -> throw IllegalArgumentException("event $eventTypeId not found")
+            else -> throw IllegalArgumentException("event $eventType not found")
         }
         return UserDataEvent(event)
     }

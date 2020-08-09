@@ -2,8 +2,10 @@ package com.binance.api.client.domain.rest.spot
 
 
 import com.binance.api.client.domain.Permission
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Account(
         @JsonProperty("makerCommission")
         val makerCommission: Int,
@@ -28,12 +30,13 @@ data class Account(
         @JsonProperty("permissions")
         val permissions: List<Permission>
 ) {
-    data class Balance(
-            @JsonProperty("asset")
-            val asset: String,
-            @JsonProperty("free")
-            val free: String,
-            @JsonProperty("locked")
-            val locked: String
-    )
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        data class Balance(
+                @JsonProperty("asset")
+                val asset: String,
+                @JsonProperty("free")
+                val free: String,
+                @JsonProperty("locked")
+                val locked: String
+        )
 }

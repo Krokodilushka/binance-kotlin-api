@@ -2,8 +2,10 @@ package com.binance.api.client.domain.rest.spot
 
 
 import com.binance.api.client.domain.*
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class NewOcoOrder(
         @JsonProperty("orderListId")
         val orderListId: Long,
@@ -24,6 +26,7 @@ data class NewOcoOrder(
         @JsonProperty("orderReports")
         val orderReports: List<OrderReport>
 ) {
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class Order(
             @JsonProperty("symbol")
             val symbol: String,
@@ -33,6 +36,7 @@ data class NewOcoOrder(
             val clientOrderId: String
     )
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class OrderReport(
             @JsonProperty("symbol")
             val symbol: String,
@@ -66,14 +70,15 @@ data class NewOcoOrder(
             val fills: List<Fill>
     )
 
-        data class Fill(
-                @JsonProperty("price")
-                val price: String,
-                @JsonProperty("qty")
-                val qty: String,
-                @JsonProperty("commission")
-                val commission: String,
-                @JsonProperty("commissionAsset")
-                val commissionAsset: String
-        )
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    data class Fill(
+            @JsonProperty("price")
+            val price: String,
+            @JsonProperty("qty")
+            val qty: String,
+            @JsonProperty("commission")
+            val commission: String,
+            @JsonProperty("commissionAsset")
+            val commissionAsset: String
+    )
 }

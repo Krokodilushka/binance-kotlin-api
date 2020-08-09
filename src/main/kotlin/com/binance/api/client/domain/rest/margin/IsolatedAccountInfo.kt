@@ -1,7 +1,10 @@
 package com.binance.api.client.domain.rest.margin
 
+import com.binance.api.client.domain.MarginLevelStatus
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class IsolatedAccountInfo(
         @JsonProperty("assets")
         val assets: List<Asset>,
@@ -12,6 +15,7 @@ data class IsolatedAccountInfo(
         @JsonProperty("totalNetAssetOfBtc")
         val totalNetAssetOfBtc: String
 ) {
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class Asset(
             @JsonProperty("baseAsset")
             val baseAsset: Asset,
@@ -36,6 +40,7 @@ data class IsolatedAccountInfo(
             @JsonProperty("tradeEnabled")
             val tradeEnabled: Boolean
     ) {
+        @JsonIgnoreProperties(ignoreUnknown = true)
         data class Asset(
                 @JsonProperty("asset")
                 val asset: String,
@@ -58,9 +63,5 @@ data class IsolatedAccountInfo(
                 @JsonProperty("totalAsset")
                 val totalAsset: String
         )
-
-        enum class MarginLevelStatus {
-            EXCESSIVE, NORMAL, MARGIN_CALL, PRE_LIQUIDATION, FORCE_LIQUIDATION
-        }
     }
 }

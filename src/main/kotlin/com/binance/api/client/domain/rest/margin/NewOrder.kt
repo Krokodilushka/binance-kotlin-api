@@ -5,8 +5,10 @@ import com.binance.api.client.domain.OrderSide
 import com.binance.api.client.domain.OrderStatus
 import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class NewOrder(
         @JsonProperty("symbol")
         val symbol: String,
@@ -41,14 +43,15 @@ data class NewOrder(
         @JsonProperty("fills")
         val fills: List<Fill>
 ) {
-    data class Fill(
-            @JsonProperty("price")
-            val price: String,
-            @JsonProperty("qty")
-            val qty: String,
-            @JsonProperty("commission")
-            val commission: String,
-            @JsonProperty("commissionAsset")
-            val commissionAsset: String
-    )
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        data class Fill(
+                @JsonProperty("price")
+                val price: String,
+                @JsonProperty("qty")
+                val qty: String,
+                @JsonProperty("commission")
+                val commission: String,
+                @JsonProperty("commissionAsset")
+                val commissionAsset: String
+        )
 }

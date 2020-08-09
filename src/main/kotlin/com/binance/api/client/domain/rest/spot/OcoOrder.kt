@@ -3,8 +3,10 @@ package com.binance.api.client.domain.rest.spot
 
 import com.binance.api.client.domain.OcoOrderStatus
 import com.binance.api.client.domain.OcoStatus
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class OcoOrder(
         @JsonProperty("orderListId")
         val orderListId: Long,
@@ -23,12 +25,13 @@ data class OcoOrder(
         @JsonProperty("orders")
         val orders: List<Order>
 ) {
-    data class Order(
-            @JsonProperty("symbol")
-            val symbol: String,
-            @JsonProperty("orderId")
-            val orderId: Long,
-            @JsonProperty("clientOrderId")
-            val clientOrderId: String
-    )
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        data class Order(
+                @JsonProperty("symbol")
+                val symbol: String,
+                @JsonProperty("orderId")
+                val orderId: Long,
+                @JsonProperty("clientOrderId")
+                val clientOrderId: String
+        )
 }

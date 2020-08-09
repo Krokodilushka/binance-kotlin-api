@@ -5,8 +5,10 @@ import com.binance.api.client.domain.OrderSide
 import com.binance.api.client.domain.OrderStatus
 import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class CancelOrder(
         @JsonProperty("symbol")
         val symbol: String,

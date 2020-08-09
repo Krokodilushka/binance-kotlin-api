@@ -1,9 +1,11 @@
 package com.binance.api.client.domain.rest
 
 import com.binance.api.client.domain.SymbolFilterType
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 sealed class SymbolFilter {
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class PriceFilter(
             @JsonProperty("filterType")
             val filterType: SymbolFilterType,
@@ -15,6 +17,7 @@ sealed class SymbolFilter {
             val tickSize: String
     ) : SymbolFilter()
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class PercentPrice(
             @JsonProperty("filterType")
             val filterType: SymbolFilterType,
@@ -26,6 +29,7 @@ sealed class SymbolFilter {
             val avgPriceMins: Int
     ) : SymbolFilter()
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class LotSize(
             @JsonProperty("filterType")
             val filterType: SymbolFilterType,
@@ -37,6 +41,7 @@ sealed class SymbolFilter {
             val stepSize: String
     ) : SymbolFilter()
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class MinNotional(
             @JsonProperty("filterType")
             val filterType: SymbolFilterType,
@@ -48,6 +53,7 @@ sealed class SymbolFilter {
             val avgPriceMins: Int
     ) : SymbolFilter()
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class IcebergParts(
             @JsonProperty("filterType")
             val filterType: SymbolFilterType,
@@ -55,6 +61,7 @@ sealed class SymbolFilter {
             val limit: Int
     ) : SymbolFilter()
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class MarketLotSize(
             @JsonProperty("filterType")
             val filterType: SymbolFilterType,
@@ -66,6 +73,7 @@ sealed class SymbolFilter {
             val stepSize: String
     ) : SymbolFilter()
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class MaxNumOrders(
             @JsonProperty("filterType")
             val filterType: String,
@@ -73,6 +81,7 @@ sealed class SymbolFilter {
             val maxNumOrders: Int
     ) : SymbolFilter()
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class MaxNumAlgoOrders(
             @JsonProperty("filterType")
             val filterType: SymbolFilterType,
@@ -80,6 +89,7 @@ sealed class SymbolFilter {
             val maxNumAlgoOrders: Int
     ) : SymbolFilter()
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class MaxNumIcebergOrders(
             @JsonProperty("filterType")
             val filterType: SymbolFilterType,
@@ -87,6 +97,7 @@ sealed class SymbolFilter {
             val maxNumIcebergOrders: Int
     ) : SymbolFilter()
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class MaxPosition(
             @JsonProperty("filterType")
             val filterType: SymbolFilterType,

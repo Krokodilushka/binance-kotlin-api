@@ -3,7 +3,7 @@ package com.binance.api.client.domain
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class BinanceApiError(
         @JsonProperty("code")
         val code: Int,

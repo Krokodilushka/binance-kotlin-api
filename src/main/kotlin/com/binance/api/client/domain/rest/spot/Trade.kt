@@ -1,8 +1,10 @@
 package com.binance.api.client.domain.rest.spot
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Trade(
         @JsonProperty("symbol")
         val symbol: String,
