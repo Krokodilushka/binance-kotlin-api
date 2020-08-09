@@ -12,7 +12,7 @@ class BinanceApiException : RuntimeException {
     /**
      * Error response object returned by Binance API.
      */
-    var error: BinanceApiError? = null
+    var apiError: BinanceApiError? = null
         private set
 
     /**
@@ -21,7 +21,7 @@ class BinanceApiException : RuntimeException {
      * @param error an error response object
      */
     constructor(error: BinanceApiError) {
-        this.error = error
+        this.apiError = error
     }
 
     /**
@@ -34,14 +34,14 @@ class BinanceApiException : RuntimeException {
      *
      * @param message the message
      */
-    constructor(message: String?) : super(message)
+    constructor(message: String) : super(message)
 
     /**
      * Instantiates a new binance api exception.
      *
      * @param cause the cause
      */
-    constructor(cause: Throwable?) : super(cause)
+    constructor(cause: Throwable) : super(cause)
 
     /**
      * Instantiates a new binance api exception.
@@ -51,12 +51,6 @@ class BinanceApiException : RuntimeException {
      */
     constructor(message: String?, cause: Throwable?) : super(message, cause)
 
-    override val message: String
-        get() = if (error != null) {
-            error!!.msg!!
-        } else super.message!!
-
-    companion object {
-        private const val serialVersionUID = 3788669840036201041L
-    }
+    override val message: String?
+        get() = apiError?.msg ?: super.message
 }

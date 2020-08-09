@@ -1,6 +1,7 @@
 package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
+import com.binance.api.client.exception.BinanceApiException
 
 class RestMarketDataEndpointsExample {
     companion object {
@@ -20,12 +21,12 @@ class RestMarketDataEndpointsExample {
 //                println("time: $it")
 //            }
 
-            client.exchangeInfo().let {
-                println("exchangeInfo: ${it}")
-//                it.symbols.filter { it.filters.any { it is SymbolFilter.PriceFilter } }.forEach {
-//                    println("PriceFilter for ${it.symbol}: ${it.filters.find { it is SymbolFilter.PriceFilter }}")
-//                }
-            }
+//            client.exchangeInfo().let {
+//                println("exchangeInfo: ${it}")
+////                it.symbols.filter { it.filters.any { it is SymbolFilter.PriceFilter } }.forEach {
+////                    println("PriceFilter for ${it.symbol}: ${it.filters.find { it is SymbolFilter.PriceFilter }}")
+////                }
+//            }
 
 //            client.depth("BTCUSDT", 5).let {
 //                println("depth: $it")
@@ -51,9 +52,14 @@ class RestMarketDataEndpointsExample {
 //                println("avgPrice: $it")
 //            }
 
-//            client.ticker24hr("BTCUSDT").let {
-//                println("ticker24hr: $it")
-//            }
+            try {
+                client.ticker24hr("UNKNOWN").let {
+                    println("ticker24hr: $it")
+                }
+            } catch (e: BinanceApiException) {
+                println("BinanceApiException: ${e.apiError?.code} ${e.apiError?.msg}")
+            }
+
 //
 //            client.tickers24hr().let {
 //                println("tickers24hr: $it")
