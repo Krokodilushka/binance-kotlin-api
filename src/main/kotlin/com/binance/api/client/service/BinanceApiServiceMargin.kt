@@ -1,6 +1,6 @@
 package com.binance.api.client.service
 
-import com.binance.api.client.constant.BinanceApiConstants
+import com.binance.api.client.BinanceApiConstants
 import com.binance.api.client.domain.*
 import com.binance.api.client.domain.rest.Amount
 import com.binance.api.client.domain.rest.Empty

@@ -1,6 +1,6 @@
 package com.binance.api.client.impl
 
-import com.binance.api.client.WebSocketCallback
+import com.binance.api.client.BinanceWebSocketClient
 import com.binance.api.client.exception.BinanceApiException
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -15,16 +15,17 @@ import java.io.IOException
  * Binance API WebSocket listener.
  */
 class BinanceApiWebSocketListener<T> : WebSocketListener {
-    private var callback: WebSocketCallback<T>
+    private val mapper = ObjectMapper().registerKotlinModule()
+    private val callback: BinanceWebSocketClient.WebSocketCallback<T>
     private val objectReader: ObjectReader
     private var closing = false
 
-    constructor(callback: WebSocketCallback<T>, eventClass: Class<T>?) {
+    constructor(callback: BinanceWebSocketClient.WebSocketCallback<T>, eventClass: Class<T>) {
         this.callback = callback
         objectReader = mapper.readerFor(eventClass)
     }
 
-    constructor(callback: WebSocketCallback<T>, eventTypeReference: TypeReference<T>?) {
+    constructor(callback: BinanceWebSocketClient.WebSocketCallback<T>, eventTypeReference: TypeReference<T>) {
         this.callback = callback
         objectReader = mapper.readerFor(eventTypeReference)
     }
@@ -48,7 +49,4 @@ class BinanceApiWebSocketListener<T> : WebSocketListener {
         }
     }
 
-    companion object {
-        private val mapper = ObjectMapper().registerKotlinModule()
-    }
 }

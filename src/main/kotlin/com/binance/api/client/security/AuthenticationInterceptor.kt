@@ -1,6 +1,6 @@
 package com.binance.api.client.security
 
-import com.binance.api.client.constant.BinanceApiConstants
+import com.binance.api.client.BinanceApiConstants
 import okhttp3.Interceptor
 import okhttp3.RequestBody
 import okhttp3.Response

@@ -1,6 +1,6 @@
 package com.binance.api.client.service
 
-import com.binance.api.client.constant.BinanceApiConstants
+import com.binance.api.client.BinanceApiConstants
 import com.binance.api.client.domain.rest.Empty
 import com.binance.api.client.domain.rest.marketdata.*
 import retrofit2.Call

@@ -13,7 +13,7 @@ class WebSocketMarketDataExample {
         fun main(args: Array<String>) {
             val client = newInstance().newWebSocketClient()
 
-//            client.onAggTradeEvent("ethbtc", object : WebSocketCallback<MarketEvent.AggTradeEvent> {
+//            client.onAggTradeEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.AggTradeEvent> {
 //                override fun onResponse(response: MarketEvent.AggTradeEvent) {
 //                    println(response)
 //                }
@@ -23,7 +23,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onTradeEvent("ethbtc", object : WebSocketCallback<MarketEvent.TradeEvent> {
+//            client.onTradeEvent("ethbtc", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.TradeEvent> {
 //                override fun onResponse(response: MarketEvent.TradeEvent) {
 //                    println(response)
 //                }
@@ -33,7 +33,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onCandlestickEvent("ethbtc", CandlestickInterval.ONE_MINUTE, object : WebSocketCallback<MarketEvent.CandlestickEvent> {
+//            client.onCandlestickEvent("ethbtc", CandlestickInterval.ONE_MINUTE, object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.CandlestickEvent> {
 //                override fun onResponse(response: MarketEvent.CandlestickEvent) {
 //                    println(response)
 //                }
@@ -43,7 +43,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onIndividualSymbolMiniTickerEvent("ethbtc", object : WebSocketCallback<MarketEvent.IndividualSymbolMiniTickerEvent> {
+//            client.onIndividualSymbolMiniTickerEvent("ethbtc", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.IndividualSymbolMiniTickerEvent> {
 //                override fun onResponse(response: MarketEvent.IndividualSymbolMiniTickerEvent) {
 //                    println(response)
 //                }
@@ -54,7 +54,7 @@ class WebSocketMarketDataExample {
 //            })
 
 
-//            client.onAllMarketTickersEvent(object : WebSocketCallback<List<MarketEvent.AllMarketTickersEvent>> {
+//            client.onAllMarketTickersEvent(object : BinanceWebSocketClient.WebSocketCallback<List<MarketEvent.AllMarketTickersEvent>> {
 //                override fun onResponse(response: List<MarketEvent.AllMarketTickersEvent>) {
 //                    println(response)
 //                }
@@ -64,7 +64,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onAllMarketMiniTickersEvent(object : WebSocketCallback<List<MarketEvent.IndividualSymbolMiniTickerEvent>> {
+//            client.onAllMarketMiniTickersEvent(object : BinanceWebSocketClient.WebSocketCallback<List<MarketEvent.IndividualSymbolMiniTickerEvent>> {
 //                override fun onResponse(response: List<MarketEvent.IndividualSymbolMiniTickerEvent>) {
 //                    println(response)
 //                }
@@ -74,7 +74,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onIndividualSymbolTickerEvent("ethbtc", object : WebSocketCallback<MarketEvent.IndividualSymbolTickerEvent> {
+//            client.onIndividualSymbolTickerEvent("ethbtc", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.IndividualSymbolTickerEvent> {
 //                override fun onResponse(response: MarketEvent.IndividualSymbolTickerEvent) {
 //                    println(response)
 //                }
@@ -84,7 +84,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onIndividualSymbolBookTickerEvent("btcusdt", object : WebSocketCallback<MarketEvent.IndividualSymbolBookTickerEvent> {
+//            client.onIndividualSymbolBookTickerEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.IndividualSymbolBookTickerEvent> {
 //                override fun onResponse(response: MarketEvent.IndividualSymbolBookTickerEvent) {
 //                    println(response)
 //                }
@@ -94,7 +94,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onAllBookTickersEvent(object : WebSocketCallback<MarketEvent.IndividualSymbolBookTickerEvent> {
+//            client.onAllBookTickersEvent(object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.IndividualSymbolBookTickerEvent> {
 //                override fun onResponse(response: MarketEvent.IndividualSymbolBookTickerEvent) {
 //                    println(response)
 //                }
@@ -104,7 +104,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onPartialBookDepthEvent("btcusdt", 5, object : WebSocketCallback<MarketEvent.PartialBookDepth> {
+//            client.onPartialBookDepthEvent("btcusdt", 5, object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.PartialBookDepth> {
 //                override fun onResponse(response: MarketEvent.PartialBookDepth) {
 //                    println(response)
 //                }
@@ -114,7 +114,7 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-//            client.onDiffDepthEvent("ethbtc", object : WebSocketCallback<MarketEvent.DepthEvent> {
+//            client.onDiffDepthEvent("ethbtc", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.DepthEvent> {
 //                override fun onResponse(response: MarketEvent.DepthEvent) {
 //                    println(response)
 //                }

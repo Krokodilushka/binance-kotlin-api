@@ -1,7 +1,7 @@
 package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
-import com.binance.api.client.WebSocketCallback
+import com.binance.api.client.BinanceWebSocketClient
 import com.binance.api.client.domain.websocket.UserDataEvent
 
 /**
@@ -31,13 +31,13 @@ class WebSocketUserDataExample {
             val webSocketClient = factory.newWebSocketClient()
 
             // Listen for changes in the account
-            webSocketClient.onUserDataUpdateEvent(listenKey, object : WebSocketCallback<UserDataEvent> {
+            webSocketClient.onUserDataUpdateEvent(listenKey, object : BinanceWebSocketClient.WebSocketCallback<UserDataEvent> {
                 override fun onResponse(response: UserDataEvent) {
-                    println("Event: ${response}:")
-                    when (response) {
-                        is UserDataEvent.AccountUpdateEvent -> println(response)
-                        is UserDataEvent.OrderTradeUpdateEvent -> println(response)
-                        is UserDataEvent.BalanceUpdateEvent -> println(response)
+                    println("Event: ${response.event}:")
+                    when (response.event) {
+                        is UserDataEvent.Event.AccountUpdateEvent -> println(response.event)
+                        is UserDataEvent.Event.OrderTradeUpdateEvent -> println(response.event)
+                        is UserDataEvent.Event.BalanceUpdateEvent -> println(response.event)
                     }
                     println("")
                 }

@@ -34,4 +34,9 @@ interface BinanceWebSocketClient {
 
     fun onUserDataUpdateEvent(listenKey: String, callback: WebSocketCallback<UserDataEvent>): Closeable
 
+    @FunctionalInterface
+    interface WebSocketCallback<T> {
+        fun onResponse(response: T)
+        fun onFailure(cause: Throwable) {}
+    }
 }

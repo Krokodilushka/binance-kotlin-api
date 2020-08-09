@@ -1,6 +1,4 @@
-package com.binance.api.client.constant
-
-import org.apache.commons.lang3.builder.ToStringStyle
+package com.binance.api.client
 
 /**
  * Constants used throughout Binance's API.
@@ -48,11 +46,4 @@ object BinanceApiConstants {
      */
     const val MARGIN_RECEIVING_WINDOW = 60000L
 
-
-    /**
-     * Default ToStringStyle used by toString methods.
-     * Override this to change the output format of the overridden toString methods.
-     * - Example ToStringStyle.JSON_STYLE
-     */
-    var TO_STRING_BUILDER_STYLE: ToStringStyle = ToStringStyle.SHORT_PREFIX_STYLE
 }

@@ -12,37 +12,15 @@ interface BinanceApiMarketDataRestClient {
 
     fun exchangeInfo(): ExchangeInfo
 
-    fun depth(
-            symbol: String,
-            limit: Int?
-    ): Depth
+    fun depth(symbol: String, limit: Int?): Depth
 
-    fun trades(
-            symbol: String,
-            limit: Int?
-    ): List<RecentTrade>
+    fun trades(symbol: String, limit: Int?): List<RecentTrade>
 
-    fun historicalTrades(
-            symbol: String,
-            limit: Int?,
-            fromId: Long?
-    ): List<HistoricalTrade>
+    fun historicalTrades(symbol: String, limit: Int?, fromId: Long?): List<HistoricalTrade>
 
-    fun aggTrades(
-            symbol: String,
-            fromId: Long?,
-            startTime: Long?,
-            endTime: Long?,
-            limit: Long?
-    ): List<AggregateTrade>
+    fun aggTrades(symbol: String, fromId: Long?, startTime: Long?, endTime: Long?, limit: Long?): List<AggregateTrade>
 
-    fun klines(
-            symbol: String,
-            interval: CandlestickInterval,
-            startTime: Long?,
-            endTime: Long?,
-            limit: Long?
-    ): List<Candlestick>
+    fun klines(symbol: String, interval: CandlestickInterval, startTime: Long?, endTime: Long?, limit: Long?): List<Candlestick>
 
     fun avgPrice(symbol: String): AvgPrice
 

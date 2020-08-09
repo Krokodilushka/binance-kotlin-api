@@ -1,6 +1,6 @@
 package com.binance.api.client.service
 
-import com.binance.api.client.constant.BinanceApiConstants
+import com.binance.api.client.BinanceApiConstants
 import com.binance.api.client.domain.NewOrderResponseType
 import com.binance.api.client.domain.OrderSide
 import com.binance.api.client.domain.OrderTimeInForce
