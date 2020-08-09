@@ -1,14 +1,8 @@
 package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
-import com.binance.api.client.BinanceWebSocketClient
-import com.binance.api.client.domain.websocket.MarketEvent
 
-/**
- * Market data stream endpoints examples.
- *
- * It illustrates how to create a stream to obtain updates on market data such as executed trades.
- */
+
 class WebSocketMarketDataExample {
     companion object {
         @JvmStatic
@@ -25,15 +19,17 @@ class WebSocketMarketDataExample {
 //                }
 //            })
 
-            client.onTradeEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.TradeEvent> {
-                override fun onResponse(response: MarketEvent.TradeEvent) {
-                    println(response)
-                }
-
-                override fun onFailure(cause: Throwable) {
-                    println(cause)
-                }
-            })
+//            client.onTradeEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.TradeEvent> {
+//                override fun onResponse(response: MarketEvent.TradeEvent) {
+//                    if (response.quantity.toBigDecimal().compareTo("0.1".toBigDecimal()) == 1) {
+//                        println(response)
+//                    }
+//                }
+//
+//                override fun onFailure(cause: Throwable) {
+//                    println(cause)
+//                }
+//            })
 
 //            client.onCandlestickEvent("ethbtc", CandlestickInterval.ONE_MINUTE, object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.CandlestickEvent> {
 //                override fun onResponse(response: MarketEvent.CandlestickEvent) {

@@ -2,9 +2,6 @@ package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
 
-/**
- * Examples on how to get account information.
- */
 class RestSpotEndpointsExample {
     companion object {
         @JvmStatic

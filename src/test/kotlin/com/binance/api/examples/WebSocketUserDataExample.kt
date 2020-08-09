@@ -4,13 +4,6 @@ import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
 import com.binance.api.client.BinanceWebSocketClient
 import com.binance.api.client.domain.websocket.UserDataEvent
 
-/**
- * User data stream endpoints examples.
- *
- *
- * It illustrates how to create a stream to obtain updates on a user account,
- * as well as update on trades/orders on a user account.
- */
 class WebSocketUserDataExample {
     companion object {
         @JvmStatic

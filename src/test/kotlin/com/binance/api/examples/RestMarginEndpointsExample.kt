@@ -2,9 +2,6 @@ package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
 
-/**
- * Examples on how to get margin account information.
- */
 class RestMarginEndpointsExample {
     companion object {
         @JvmStatic
