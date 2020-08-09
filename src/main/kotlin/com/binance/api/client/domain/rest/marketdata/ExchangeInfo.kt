@@ -2,8 +2,12 @@ package com.binance.api.client.domain.rest.marketdata
 
 
 import com.binance.api.client.domain.*
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.binance.api.client.domain.rest.ExchangeFilter
+import com.binance.api.client.domain.rest.SymbolFilter
+import com.binance.api.client.domain.websocket.deserializer.ExchangeFilterDeserializer
+import com.binance.api.client.domain.websocket.deserializer.SymbolFilterDeserializer
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
 data class ExchangeInfo(
         @JsonProperty("timezone")
@@ -12,6 +16,7 @@ data class ExchangeInfo(
         val serverTime: Long,
         @JsonProperty("rateLimits")
         val rateLimits: List<RateLimit>,
+        @JsonDeserialize(contentUsing = ExchangeFilterDeserializer::class)
         @JsonProperty("exchangeFilters")
         val exchangeFilters: List<ExchangeFilter>,
         @JsonProperty("symbols")
@@ -50,36 +55,10 @@ data class ExchangeInfo(
             @JsonProperty("isMarginTradingAllowed")
             val isMarginTradingAllowed: Boolean,
             @JsonProperty("filters")
+            @JsonDeserialize(contentUsing = SymbolFilterDeserializer::class)
             val filters: List<SymbolFilter>,
             @JsonProperty("permissions")
             val permissions: List<Permission>
-    )
-
-    @JsonIgnoreProperties
-    data class ExchangeFilter(
-            val filterType: String?,
-            val maxPosition: String?,
-            val maxNumOrders: String?,
-            val maxNumAlgoOrders: String?
-    )
-
-    data class SymbolFilter(
-            val filterType: FilterType,
-            val minPrice: String?,
-            val maxPrice: String?,
-            val tickSize: String?,
-            val multiplierUp: String?,
-            val multiplierDown: String?,
-            val avgPriceMins: String?,
-            val minQty: String?,
-            val maxQty: String?,
-            val stepSize: String?,
-            val minNotional: String?,
-            val applyToMarket: String?,
-            val limit: String?,
-            val maxNumOrders: String?,
-            val maxNumAlgoOrders: String?,
-            val maxNumIcebergOrders: String?
     )
 
     data class RateLimit(

@@ -20,9 +20,12 @@ class RestMarketDataEndpointsExample {
 //                println("time: $it")
 //            }
 
-//            client.exchangeInfo().let {
-//                println("exchangeInfo: ${it}")
-//            }
+            client.exchangeInfo().let {
+                println("exchangeInfo: ${it}")
+//                it.symbols.filter { it.filters.any { it is SymbolFilter.PriceFilter } }.forEach {
+//                    println("PriceFilter for ${it.symbol}: ${it.filters.find { it is SymbolFilter.PriceFilter }}")
+//                }
+            }
 
 //            client.depth("BTCUSDT", 5).let {
 //                println("depth: $it")
@@ -32,9 +35,9 @@ class RestMarketDataEndpointsExample {
 //                println("trades: $it")
 //            }
 
-            client.historicalTrades("BTCUSDT", 5, null).let {
-                println("historicalTrades: $it")
-            }
+//            client.historicalTrades("BTCUSDT", 5, null).let {
+//                println("historicalTrades: $it")
+//            }
 
 //            client.aggTrades("BTCUSDT", null, null, null, null).let {
 //                println("aggTrades: $it")

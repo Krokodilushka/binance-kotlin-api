@@ -1,55 +1,37 @@
 package com.binance.api.client
 
 import com.binance.api.client.domain.CandlestickInterval
-import com.binance.api.client.domain.websocket.event.*
+import com.binance.api.client.domain.websocket.MarketEvent
+import com.binance.api.client.domain.websocket.UserDataEvent
 import java.io.Closeable
 
 /**
  * Binance API data streaming façade, supporting streaming of events through web sockets.
  */
 interface BinanceWebSocketClient {
-    /**
-     * Open a new web socket to receive [depthEvents][DepthEvent] on a callback.
-     *
-     * @param symbols   market (one or coma-separated) symbol(s) to subscribe to
-     * @param callback  the callback to call on new events
-     * @return a [Closeable] that allows the underlying web socket to be closed.
-     */
-    fun onDepthEvent(symbols: String, callback: WebSocketCallback<DepthEvent>): Closeable
 
-    /**
-     * Open a new web socket to receive [candlestickEvents][CandlestickEvent] on a callback.
-     *
-     * @param symbols   market (one or coma-separated) symbol(s) to subscribe to
-     * @param interval  the interval of the candles tick events required
-     * @param callback  the callback to call on new events
-     * @return a [Closeable] that allows the underlying web socket to be closed.
-     */
-    fun onCandlestickEvent(symbols: String, interval: CandlestickInterval, callback: WebSocketCallback<CandlestickEvent>): Closeable
+    fun onAggTradeEvent(symbols: String, callback: WebSocketCallback<MarketEvent.AggTradeEvent>): Closeable
 
-    /**
-     * Open a new web socket to receive [aggTradeEvents][AggTradeEvent] on a callback.
-     *
-     * @param symbols   market (one or coma-separated) symbol(s) to subscribe to
-     * @param callback  the callback to call on new events
-     * @return a [Closeable] that allows the underlying web socket to be closed.
-     */
-    fun onAggTradeEvent(symbols: String, callback: WebSocketCallback<AggTradeEvent>): Closeable
+    fun onTradeEvent(symbol: String, callback: WebSocketCallback<MarketEvent.TradeEvent>): Closeable
 
-    /**
-     * Open a new web socket to receive [userDataUpdateEvents][UserDataUpdateEvent] on a callback.
-     *
-     * @param listenKey the listen key to subscribe to.
-     * @param callback  the callback to call on new events
-     * @return a [Closeable] that allows the underlying web socket to be closed.
-     */
-    fun onUserDataUpdateEvent(listenKey: String, callback: WebSocketCallback<UserDataUpdateEvent>): Closeable
+    fun onCandlestickEvent(symbols: String, interval: CandlestickInterval, callback: WebSocketCallback<MarketEvent.CandlestickEvent>): Closeable
 
-    /**
-     * Open a new web socket to receive [allMarketTickersEvents][AllMarketTickersEvent] on a callback.
-     *
-     * @param callback the callback to call on new events
-     * @return a [Closeable] that allows the underlying web socket to be closed.
-     */
-    fun onAllMarketTickersEvent(callback: WebSocketCallback<List<AllMarketTickersEvent>>): Closeable
+    fun onIndividualSymbolMiniTickerEvent(symbol: String, callback: WebSocketCallback<MarketEvent.IndividualSymbolMiniTickerEvent>): Closeable
+
+    fun onAllMarketMiniTickersEvent(callback: WebSocketCallback<List<MarketEvent.IndividualSymbolMiniTickerEvent>>): Closeable
+
+    fun onIndividualSymbolTickerEvent(symbol: String, callback: WebSocketCallback<MarketEvent.IndividualSymbolTickerEvent>): Closeable
+
+    fun onAllMarketTickersEvent(callback: WebSocketCallback<List<MarketEvent.AllMarketTickersEvent>>): Closeable
+
+    fun onIndividualSymbolBookTickerEvent(symbol: String, callback: WebSocketCallback<MarketEvent.IndividualSymbolBookTickerEvent>): Closeable
+
+    fun onAllBookTickersEvent(callback: WebSocketCallback<MarketEvent.IndividualSymbolBookTickerEvent>): Closeable
+
+    fun onPartialBookDepthEvent(symbol: String, levels: Int, callback: WebSocketCallback<MarketEvent.PartialBookDepth>): Closeable
+
+    fun onDiffDepthEvent(symbols: String, callback: WebSocketCallback<MarketEvent.DepthEvent>): Closeable
+
+    fun onUserDataUpdateEvent(listenKey: String, callback: WebSocketCallback<UserDataEvent>): Closeable
+
 }
