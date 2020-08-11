@@ -19,7 +19,7 @@ class WebSocketUserDataExample {
             // margin
             val restClient = factory.newMarginRestClient()
 //            val listenKey = restClient.startMarginUserDataStream()
-            val listenKey = restClient.startIsolatedMarginUserDataStream("ETHBTC")
+            val listenKey = restClient.startIsolatedMarginUserDataStream("BNBBTC")
 
             // Then, we open a new web socket client, and provide a callback that is called on every update
             val webSocketClient = factory.newWebSocketClient()
@@ -29,9 +29,9 @@ class WebSocketUserDataExample {
                 override fun onResponse(response: UserDataEvent) {
 //                    println("Event: ${response.event}:")
                     when (response.event) {
-//                        is UserDataEvent.Event.AccountInfo -> println(response.event)
-//                        is UserDataEvent.Event.AccountPosition -> println(response.event)
-//                        is UserDataEvent.Event.BalanceUpdateEvent -> println(response.event)
+                        is UserDataEvent.Event.AccountInfo -> println(response.event)
+                        is UserDataEvent.Event.AccountPosition -> println(response.event)
+                        is UserDataEvent.Event.BalanceUpdateEvent -> println(response.event)
                         is UserDataEvent.Event.OrderTradeUpdateEvent -> println(response.event)
                         is UserDataEvent.Event.OcoOrderTradeUpdateEvent -> println(response.event)
                     }

@@ -85,9 +85,9 @@ class BinanceWebSocketClientImpl(private val client: OkHttpClient?) : BinanceWeb
         val webSocket = client!!.newWebSocket(request, listener)
         return Closeable {
             val code = 1000
-            listener.onClosing(webSocket, code, "createNewWebSocket")
+            listener.onClosing(webSocket, code, "")
             webSocket.close(code, null)
-            listener.onClosed(webSocket, code, "createNewWebSocket")
+            listener.onClosed(webSocket, code, "")
         }
     }
 

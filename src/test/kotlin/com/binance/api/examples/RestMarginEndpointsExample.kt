@@ -94,9 +94,9 @@ class RestMarginEndpointsExample {
 //                println("maxBorrowable: $it")
 //            }
 
-//            client.maxTransferable("BTC", "RENBTC").let {
-//                println("maxTransferable: $it")
-//            }
+            client.maxTransferable("BTC", "BNBBTC").let {
+                println("maxTransferable: $it")
+            }
 
 //            client.isolatedCreate("XRP", "BTC").let {
 //                println("isolatedCreate: $it")
