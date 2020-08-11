@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Order(
+        @JsonProperty("symbol")
+        val symbol: String,
         @JsonProperty("clientOrderId")
         val clientOrderId: String,
         @JsonProperty("cummulativeQuoteQty")
@@ -32,8 +34,6 @@ data class Order(
         val status: OrderStatus,
         @JsonProperty("stopPrice")
         val stopPrice: String,
-        @JsonProperty("symbol")
-        val symbol: String,
         @JsonProperty("isIsolated")
         val isIsolated: Boolean,
         @JsonProperty("time")

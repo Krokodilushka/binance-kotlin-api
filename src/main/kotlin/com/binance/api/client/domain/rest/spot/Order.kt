@@ -15,7 +15,7 @@ data class Order(
         @JsonProperty("orderId")
         val orderId: Long,
         @JsonProperty("orderListId")
-        val orderListId: Int,
+        val orderListId: Long,
         @JsonProperty("clientOrderId")
         val clientOrderId: String,
         @JsonProperty("price")

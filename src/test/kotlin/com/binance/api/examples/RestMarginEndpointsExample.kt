@@ -52,7 +52,7 @@ class RestMarginEndpointsExample {
 //                client.order(it.symbol, null, it.orderId, null).let {
 //                    println("order: $it")
 //                }
-//                client.openOrders(it.symbol, null).let {
+//                client.openOrders(null, null).let {
 //                    println("openOrders: $it")
 //                }
 //                client.allOrders(it.symbol, null, null, null, null, null).let {
@@ -114,7 +114,10 @@ class RestMarginEndpointsExample {
 //            }
 
 //            client.isolatedAccount().let {
-//                println("isolatedAccount: $it")
+//                println("totalAssetOfBtc:\n${it.totalAssetOfBtc}")
+//                println("totalLiabilityOfBtc:\n${it.totalLiabilityOfBtc}")
+//                println("totalNetAssetOfBtc:\n${it.totalNetAssetOfBtc}")
+//                println("isolatedAccount:\n${it.assets.joinToString(separator = "\n") { it.toString() }}")
 //            }
 
 //            client.isolatedPair("RENBTC").let {
@@ -122,7 +125,7 @@ class RestMarginEndpointsExample {
 //            }
 
 //            client.isolatedAllPairs().let {
-//                println("isolatedAllPairs: $it")
+//                println("isolatedAllPairs: ${it.joinToString(separator = "\n") { it.toString() }}")
 //            }
         }
     }

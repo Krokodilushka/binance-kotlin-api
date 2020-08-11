@@ -11,7 +11,7 @@ data class UserDataEvent(val event: Event) {
 
     sealed class Event {
         @JsonIgnoreProperties(ignoreUnknown = true)
-        data class AccountUpdateEvent(
+        data class AccountInfo(
                 @JsonProperty("e")
                 val eventType: String,
                 @JsonProperty("E")
@@ -49,6 +49,28 @@ data class UserDataEvent(val event: Event) {
         }
 
         @JsonIgnoreProperties(ignoreUnknown = true)
+        data class AccountPosition(
+                @JsonProperty("e")
+                val eventType: String,
+                @JsonProperty("E")
+                val eventTime: Long,
+                @JsonProperty("u")
+                val timeOfLastAccountUpdate: Long,
+                @JsonProperty("B")
+                val balances: List<Balance>
+        ) : Event() {
+            @JsonIgnoreProperties(ignoreUnknown = true)
+            data class Balance(
+                    @JsonProperty("a")
+                    val asset: String,
+                    @JsonProperty("f")
+                    val free: String,
+                    @JsonProperty("l")
+                    val locked: String
+            )
+        }
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
         data class BalanceUpdateEvent(
                 @JsonProperty("e")
                 val eventType: String,
@@ -71,7 +93,7 @@ data class UserDataEvent(val event: Event) {
                 @JsonProperty("s")
                 val symbol: String,
                 @JsonProperty("c")
-                val clientOrderID: String,
+                val clientOrderId: String,
                 @JsonProperty("S")
                 val side: OrderSide,
                 @JsonProperty("o")
@@ -129,5 +151,41 @@ data class UserDataEvent(val event: Event) {
                 @JsonProperty("Q")
                 val quoteOrderQty: String
         ) : Event()
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        data class OcoOrderTradeUpdateEvent(
+                @JsonProperty("e")
+                val eventType: String,
+                @JsonProperty("E")
+                val eventTime: Long,
+                @JsonProperty("s")
+                val symbol: String,
+                @JsonProperty("g")
+                val orderListId: Long,
+                @JsonProperty("c")
+                val contingencyType: String,
+                @JsonProperty("l")
+                val listStatusType: String,
+                @JsonProperty("L")
+                val listOrderStatus: String,
+                @JsonProperty("r")
+                val listRejectReason: String,
+                @JsonProperty("C")
+                val listClientOrder: String,
+                @JsonProperty("T")
+                val transactionTime: Long,
+                @JsonProperty("O")
+                val orders: List<Order>
+        ) : Event() {
+            @JsonIgnoreProperties(ignoreUnknown = true)
+            data class Order(
+                    @JsonProperty("s")
+                    val symbol: String,
+                    @JsonProperty("i")
+                    val orderId: Long,
+                    @JsonProperty("c")
+                    val clientOrderId: String
+            )
+        }
     }
 }
