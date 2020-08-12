@@ -8,11 +8,6 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 
 
-/**
- * Custom deserializer for a User Data stream event, since the API can return two different responses in this stream.
- *
- * @see UserDataUpdateEvent
- */
 class ExchangeFilterDeserializer : JsonDeserializer<ExchangeFilter>() {
 
     override fun deserialize(jp: JsonParser, ctx: DeserializationContext): ExchangeFilter {

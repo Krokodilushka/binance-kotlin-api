@@ -1,42 +1,21 @@
 package com.binance.api.client
 
-import com.binance.api.client.domain.CandlestickInterval
-import com.binance.api.client.domain.websocket.MarketEvent
-import com.binance.api.client.domain.websocket.UserDataEvent
-import java.io.Closeable
+import com.binance.api.client.domain.websocket.WebSocketEvent
+import com.binance.api.client.domain.websocket.WebSocketMessage
+import com.binance.api.client.domain.websocket.WebSocketStream
 
-/**
- * Binance API data streaming façade, supporting streaming of events through web sockets.
- */
 interface BinanceWebSocketClient {
 
-    fun onAggTradeEvent(symbols: String, callback: WebSocketCallback<MarketEvent.AggTradeEvent>): Closeable
+    fun connect(channels: List<WebSocketStream>)
 
-    fun onTradeEvent(symbol: String, callback: WebSocketCallback<MarketEvent.TradeEvent>): Closeable
+    fun close()
 
-    fun onCandlestickEvent(symbols: String, interval: CandlestickInterval, callback: WebSocketCallback<MarketEvent.CandlestickEvent>): Closeable
+    fun message(message: WebSocketMessage)
 
-    fun onIndividualSymbolMiniTickerEvent(symbol: String, callback: WebSocketCallback<MarketEvent.IndividualSymbolMiniTickerEvent>): Closeable
-
-    fun onAllMarketMiniTickersEvent(callback: WebSocketCallback<List<MarketEvent.IndividualSymbolMiniTickerEvent>>): Closeable
-
-    fun onIndividualSymbolTickerEvent(symbol: String, callback: WebSocketCallback<MarketEvent.IndividualSymbolTickerEvent>): Closeable
-
-    fun onAllMarketTickersEvent(callback: WebSocketCallback<List<MarketEvent.AllMarketTickersEvent>>): Closeable
-
-    fun onIndividualSymbolBookTickerEvent(symbol: String, callback: WebSocketCallback<MarketEvent.IndividualSymbolBookTickerEvent>): Closeable
-
-    fun onAllBookTickersEvent(callback: WebSocketCallback<MarketEvent.IndividualSymbolBookTickerEvent>): Closeable
-
-    fun onPartialBookDepthEvent(symbol: String, levels: Int, callback: WebSocketCallback<MarketEvent.PartialBookDepth>): Closeable
-
-    fun onDiffDepthEvent(symbols: String, callback: WebSocketCallback<MarketEvent.DepthEvent>): Closeable
-
-    fun onUserDataUpdateEvent(listenKey: String, callback: WebSocketCallback<UserDataEvent>): Closeable
-
-    @FunctionalInterface
-    interface WebSocketCallback<T> {
-        fun onResponse(response: T)
-        fun onFailure(cause: Throwable) {}
+    interface WebSocketCallback {
+        fun onEvent(eventWrapper: WebSocketEvent.Wrapper<WebSocketEvent>)
+        fun onMessage(message: WebSocketMessage.Wrapper<WebSocketMessage.Wrapper.Response>) {}
+        fun onFailure(cause: Throwable)
+        fun onClosing(code: Int, reason: String) {}
     }
 }

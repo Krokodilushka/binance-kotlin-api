@@ -5,6 +5,7 @@ import com.binance.api.client.impl.BinanceApiMarketDataRestClientImpl
 import com.binance.api.client.impl.BinanceApiSpotRestClientImpl
 import com.binance.api.client.impl.BinanceWebSocketClientImpl
 import com.binance.api.client.service.BinanceApiServiceGenerator
+import okhttp3.WebSocketListener
 
 /**
  * A factory for creating BinanceApi client objects.
@@ -33,7 +34,7 @@ private constructor(
 
     fun newMarketDataRestClient() = BinanceApiMarketDataRestClientImpl(apiKey, secret)
 
-    fun newWebSocketClient() = BinanceWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient)
+    fun newWebSocketClient(listener: WebSocketListener) = BinanceWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient, listener)
 
     companion object {
         /**

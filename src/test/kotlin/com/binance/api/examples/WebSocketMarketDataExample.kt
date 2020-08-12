@@ -1,125 +1,55 @@
 package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
+import com.binance.api.client.BinanceWebSocketClient
+import com.binance.api.client.domain.CandlestickInterval
+import com.binance.api.client.domain.websocket.WebSocketEvent
+import com.binance.api.client.domain.websocket.WebSocketStream
+import com.binance.api.client.impl.BinanceApiWebSocketListener
 
 
 class WebSocketMarketDataExample {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val client = newInstance().newWebSocketClient()
+            val callback = object : BinanceWebSocketClient.WebSocketCallback {
+                override fun onEvent(eventWrapper: WebSocketEvent.Wrapper<WebSocketEvent>) {
+                    println("onEvent: $eventWrapper")
+                    when (eventWrapper.event) {
+                        is WebSocketEvent.MarketEvent.TradeEvent -> println("^ TradeEvent")
+                        is WebSocketEvent.MarketEvent.CandlestickEvent -> println("^ CandlestickEvent")
+                        is WebSocketEvent.MarketEvent -> println("^ MarketEvent")
+                    }
+                }
 
-//            client.onAggTradeEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.AggTradeEvent> {
-//                override fun onResponse(response: MarketEvent.AggTradeEvent) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
+                override fun onFailure(cause: Throwable) {
+                    println("onFailure: $cause")
+                    throw cause
+                }
 
-//            client.onTradeEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.TradeEvent> {
-//                override fun onResponse(response: MarketEvent.TradeEvent) {
-//                    if (response.quantity.toBigDecimal().compareTo("0.1".toBigDecimal()) == 1) {
-//                        println(response)
-//                    }
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
+                override fun onClosing(code: Int, reason: String) {
+                    println("onClosing code: $code, reason: $reason")
+                }
+            }
+            val webSocketListener = BinanceApiWebSocketListener(callback)
 
-//            client.onCandlestickEvent("ethbtc", CandlestickInterval.ONE_MINUTE, object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.CandlestickEvent> {
-//                override fun onResponse(response: MarketEvent.CandlestickEvent) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
-
-//            client.onIndividualSymbolMiniTickerEvent("ethbtc", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.IndividualSymbolMiniTickerEvent> {
-//                override fun onResponse(response: MarketEvent.IndividualSymbolMiniTickerEvent) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
-
-//            client.onAllMarketTickersEvent(object : BinanceWebSocketClient.WebSocketCallback<List<MarketEvent.AllMarketTickersEvent>> {
-//                override fun onResponse(response: List<MarketEvent.AllMarketTickersEvent>) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
-
-//            client.onAllMarketMiniTickersEvent(object : BinanceWebSocketClient.WebSocketCallback<List<MarketEvent.IndividualSymbolMiniTickerEvent>> {
-//                override fun onResponse(response: List<MarketEvent.IndividualSymbolMiniTickerEvent>) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
-
-//            client.onIndividualSymbolTickerEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.IndividualSymbolTickerEvent> {
-//                override fun onResponse(response: MarketEvent.IndividualSymbolTickerEvent) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
-
-//            client.onIndividualSymbolBookTickerEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.IndividualSymbolBookTickerEvent> {
-//                override fun onResponse(response: MarketEvent.IndividualSymbolBookTickerEvent) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
-
-//            client.onAllBookTickersEvent(object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.IndividualSymbolBookTickerEvent> {
-//                override fun onResponse(response: MarketEvent.IndividualSymbolBookTickerEvent) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
-
-//            client.onPartialBookDepthEvent("btcusdt", 5, object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.PartialBookDepth> {
-//                override fun onResponse(response: MarketEvent.PartialBookDepth) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
-
-//            client.onDiffDepthEvent("btcusdt", object : BinanceWebSocketClient.WebSocketCallback<MarketEvent.DepthEvent> {
-//                override fun onResponse(response: MarketEvent.DepthEvent) {
-//                    println(response)
-//                }
-//
-//                override fun onFailure(cause: Throwable) {
-//                    println(cause)
-//                }
-//            })
+            val binanceApiClientFactory = newInstance()
+            val webSocketClient = binanceApiClientFactory.newWebSocketClient(webSocketListener)
+            val channels = listOf<WebSocketStream>(
+//                    WebSocketStream.AggTradeEvent("btcusdt")
+//                    WebSocketStream.Trade("wavesusdt"),
+                    WebSocketStream.Candlestick("btcusdt", CandlestickInterval.ONE_MINUTE),
+//                    WebSocketStream.IndividualSymbolMiniTicker("btcusdt"),
+//                    WebSocketStream.AllMarketMiniTickers(),
+                    WebSocketStream.IndividualSymbolTickerTicker("btcusdt")
+//                    WebSocketStream.AllMarketTickers()
+//                    WebSocketStream.IndividualSymbolBookTicker("btcusdt")
+//                    WebSocketStream.AllBookTickers()
+//                    WebSocketStream.PartialBookDepth("btcusdt", WebSocketStream.PartialBookDepth.Levels.L5, WebSocketStream.PartialBookDepth.UpdateSpeed.MS1000)
+//                    WebSocketStream.DiffDepth("btcusdt", WebSocketStream.DiffDepth.UpdateSpeed.MS100)
+            )
+            webSocketClient.connect(channels)
+            println("Wait events...")
         }
     }
 }
