@@ -45,7 +45,7 @@ sealed class WebSocketMessage {
             @JsonProperty("params")
             val params: List<String>,
             @JsonProperty("id")
-            val id: Int? = null
+            val id: Int
     ) : WebSocketMessage()
 
 

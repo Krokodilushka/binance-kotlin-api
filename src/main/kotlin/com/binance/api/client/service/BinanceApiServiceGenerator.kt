@@ -25,7 +25,7 @@ object BinanceApiServiceGenerator {
      * Returns the shared OkHttpClient instance.
      */
     val sharedClient: OkHttpClient = OkHttpClient.Builder()
-            .pingInterval(20, TimeUnit.SECONDS)
+            .pingInterval(0, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()

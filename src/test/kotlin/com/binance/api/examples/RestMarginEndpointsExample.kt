@@ -94,9 +94,9 @@ class RestMarginEndpointsExample {
 //                println("maxBorrowable: $it")
 //            }
 
-            client.maxTransferable("BTC", "BNBBTC").let {
-                println("maxTransferable: $it")
-            }
+//            client.maxTransferable("BTC", "BNBBTC").let {
+//                println("maxTransferable: $it")
+//            }
 
 //            client.isolatedCreate("XRP", "BTC").let {
 //                println("isolatedCreate: $it")
@@ -113,12 +113,12 @@ class RestMarginEndpointsExample {
 //                println("isolatedTransfer: $it")
 //            }
 
-//            client.isolatedAccount().let {
-//                println("totalAssetOfBtc:\n${it.totalAssetOfBtc}")
-//                println("totalLiabilityOfBtc:\n${it.totalLiabilityOfBtc}")
-//                println("totalNetAssetOfBtc:\n${it.totalNetAssetOfBtc}")
-//                println("isolatedAccount:\n${it.assets.joinToString(separator = "\n") { it.toString() }}")
-//            }
+            client.isolatedAccount().let {
+                println("totalAssetOfBtc:\n${it.totalAssetOfBtc}")
+                println("totalLiabilityOfBtc:\n${it.totalLiabilityOfBtc}")
+                println("totalNetAssetOfBtc:\n${it.totalNetAssetOfBtc}")
+                println("isolatedAccount:\n${it.assets.joinToString(separator = "\n") { it.toString() }}")
+            }
 
 //            client.isolatedPair("RENBTC").let {
 //                println("isolatedPair: $it")

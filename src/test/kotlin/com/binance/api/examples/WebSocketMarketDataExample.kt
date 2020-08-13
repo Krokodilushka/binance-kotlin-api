@@ -38,10 +38,10 @@ class WebSocketMarketDataExample {
             val channels = listOf<WebSocketStream>(
 //                    WebSocketStream.AggTradeEvent("btcusdt")
 //                    WebSocketStream.Trade("wavesusdt"),
-                    WebSocketStream.Candlestick("btcusdt", CandlestickInterval.ONE_MINUTE),
+                    WebSocketStream.Candlestick("btcusdt", CandlestickInterval.ONE_MINUTE)
 //                    WebSocketStream.IndividualSymbolMiniTicker("btcusdt"),
 //                    WebSocketStream.AllMarketMiniTickers(),
-                    WebSocketStream.IndividualSymbolTickerTicker("btcusdt")
+//                    WebSocketStream.IndividualSymbolTicker("btcusdt")
 //                    WebSocketStream.AllMarketTickers()
 //                    WebSocketStream.IndividualSymbolBookTicker("btcusdt")
 //                    WebSocketStream.AllBookTickers()

@@ -33,7 +33,7 @@ abstract class WebSocketStream {
         }
     }
 
-    data class IndividualSymbolTickerTicker(val symbol: String) : WebSocketStream() {
+    data class IndividualSymbolTicker(val symbol: String) : WebSocketStream() {
         override fun toString(): String {
             return "$symbol@ticker"
         }
