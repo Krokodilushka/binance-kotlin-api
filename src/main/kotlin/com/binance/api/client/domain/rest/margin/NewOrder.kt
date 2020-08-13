@@ -35,7 +35,7 @@ data class NewOrder(
         @JsonProperty("side")
         val side: OrderSide,
         @JsonProperty("marginBuyBorrowAmount")
-        val marginBuyBorrowAmount: Int?,
+        val marginBuyBorrowAmount: String?,
         @JsonProperty("marginBuyBorrowAsset")
         val marginBuyBorrowAsset: String?,
         @JsonProperty("isIsolated")

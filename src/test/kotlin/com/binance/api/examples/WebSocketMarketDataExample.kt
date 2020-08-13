@@ -2,7 +2,6 @@ package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
 import com.binance.api.client.BinanceWebSocketClient
-import com.binance.api.client.domain.CandlestickInterval
 import com.binance.api.client.domain.websocket.WebSocketEvent
 import com.binance.api.client.domain.websocket.WebSocketStream
 import com.binance.api.client.impl.BinanceApiWebSocketListener
@@ -38,11 +37,11 @@ class WebSocketMarketDataExample {
             val channels = listOf<WebSocketStream>(
 //                    WebSocketStream.AggTradeEvent("btcusdt")
 //                    WebSocketStream.Trade("wavesusdt"),
-                    WebSocketStream.Candlestick("btcusdt", CandlestickInterval.ONE_MINUTE)
+//                    WebSocketStream.Candlestick("btcusdt", CandlestickInterval.ONE_MINUTE)
 //                    WebSocketStream.IndividualSymbolMiniTicker("btcusdt"),
 //                    WebSocketStream.AllMarketMiniTickers(),
 //                    WebSocketStream.IndividualSymbolTicker("btcusdt")
-//                    WebSocketStream.AllMarketTickers()
+                    WebSocketStream.AllMarketTickers()
 //                    WebSocketStream.IndividualSymbolBookTicker("btcusdt")
 //                    WebSocketStream.AllBookTickers()
 //                    WebSocketStream.PartialBookDepth("btcusdt", WebSocketStream.PartialBookDepth.Levels.L5, WebSocketStream.PartialBookDepth.UpdateSpeed.MS1000)
