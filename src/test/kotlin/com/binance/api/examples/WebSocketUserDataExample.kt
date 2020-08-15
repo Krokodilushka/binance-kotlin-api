@@ -40,15 +40,16 @@ class WebSocketUserDataExample {
             val marginClient = binanceApiClientFactory.newMarginRestClient()
             val webSocketClient = binanceApiClientFactory.newWebSocketClient(webSocketListener)
             val spotListenKey = binanceApiClientFactory.newSpotRestClient().startUserDataStream()
-//            val marginListenKey = marginClient.startMarginUserDataStream()
+            val marginListenKey = marginClient.startMarginUserDataStream()
             val isolatedMarginBtcUsdtListenKey = marginClient.startIsolatedMarginUserDataStream("renbtc")
 //            Thread.sleep(500L)
 //            val isolatedMarginBtcEthListenKey = marginClient.startIsolatedMarginUserDataStream("ethbtc")
             val channels = listOf<WebSocketStream>(
-//                    WebSocketStream.AllMarketTickers(),
-//                    WebSocketStream.UserData(spotListenKey)
-//                    WebSocketStream.UserData(marginListenKey)
-                    WebSocketStream.UserData(isolatedMarginBtcUsdtListenKey)
+                    WebSocketStream.AllMarketTickers(),
+//                    WebSocketStream.Trade("btcusdt")
+                    WebSocketStream.UserData(spotListenKey),
+                    WebSocketStream.UserData(marginListenKey)
+//                    WebSocketStream.UserData(isolatedMarginBtcUsdtListenKey)
 //                    WebSocketStream.UserData(isolatedMarginBtcEthListenKey)
             )
             println(channels)
