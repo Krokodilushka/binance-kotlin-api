@@ -17,9 +17,6 @@ class BinanceWebSocketClientImpl(private val client: OkHttpClient, private val l
     private val objectMapper = ObjectMapper().registerKotlinModule()
 
     override fun connect(channels: List<WebSocketStream>) {
-        webSocket.let {
-            this.close()
-        }
         val streamingUrl = BinanceApiConstants.WS_API_BASE_URL + channels.joinToString(separator = "/") { it.toString() }
         val request = Request.Builder().url(streamingUrl).build()
         webSocket = client.newWebSocket(request, listener)

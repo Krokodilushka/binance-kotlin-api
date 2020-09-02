@@ -15,11 +15,29 @@ class WebSocketUserDataExample {
                     args.getOrElse(0) { "API_KEY" },
                     args.getOrElse(1) { "API_SECRET" }
             )
+
+            val marginClient = binanceApiClientFactory.newMarginRestClient()
+            val spotListenKey = binanceApiClientFactory.newSpotRestClient().startUserDataStream()
+//            val marginListenKey = marginClient.startMarginUserDataStream()
+            val isolatedMarginBtcUsdtListenKey = marginClient.startIsolatedMarginUserDataStream("neobtc")
+//            Thread.sleep(500L)
+//            val isolatedMarginBtcEthListenKey = marginClient.startIsolatedMarginUserDataStream("ethbtc")
+            val channels = listOf(
+                    WebSocketStream.AllMarketTickers(),
+//                    WebSocketStream.Trade("btcusdt")
+                    WebSocketStream.UserData(spotListenKey),
+//                    WebSocketStream.UserData(marginListenKey)
+                    WebSocketStream.UserData(isolatedMarginBtcUsdtListenKey)
+//                    WebSocketStream.UserData(isolatedMarginBtcEthListenKey)
+            )
+
+            var webSocketClient: BinanceWebSocketClient? = null
             val callback = object : BinanceWebSocketClient.WebSocketCallback {
                 override fun onEvent(eventWrapper: WebSocketEvent.Wrapper<WebSocketEvent>) {
                     if (eventWrapper.stream != "!ticker@arr") {
                         println("onEvent: $eventWrapper")
                     }
+                    print(".")
                 }
 
                 override fun onMessage(message: WebSocketMessage.Wrapper<WebSocketMessage.Wrapper.Response>) {
@@ -28,7 +46,11 @@ class WebSocketUserDataExample {
 
                 override fun onFailure(cause: Throwable) {
                     println("onFailure $cause")
-                    throw cause
+                    if (cause is java.io.EOFException) {
+                        println("reconnect")
+                        webSocketClient?.connect(channels)
+                    }
+//                    throw cause
                 }
 
                 override fun onClosing(code: Int, reason: String) {
@@ -36,22 +58,8 @@ class WebSocketUserDataExample {
                 }
             }
             val webSocketListener = BinanceApiWebSocketListener(callback)
+            webSocketClient = binanceApiClientFactory.newWebSocketClient(webSocketListener)
 
-            val marginClient = binanceApiClientFactory.newMarginRestClient()
-            val webSocketClient = binanceApiClientFactory.newWebSocketClient(webSocketListener)
-            val spotListenKey = binanceApiClientFactory.newSpotRestClient().startUserDataStream()
-            val marginListenKey = marginClient.startMarginUserDataStream()
-            val isolatedMarginBtcUsdtListenKey = marginClient.startIsolatedMarginUserDataStream("renbtc")
-//            Thread.sleep(500L)
-//            val isolatedMarginBtcEthListenKey = marginClient.startIsolatedMarginUserDataStream("ethbtc")
-            val channels = listOf<WebSocketStream>(
-                    WebSocketStream.AllMarketTickers(),
-//                    WebSocketStream.Trade("btcusdt")
-                    WebSocketStream.UserData(spotListenKey),
-                    WebSocketStream.UserData(marginListenKey)
-//                    WebSocketStream.UserData(isolatedMarginBtcUsdtListenKey)
-//                    WebSocketStream.UserData(isolatedMarginBtcEthListenKey)
-            )
             println(channels)
 //            exitProcess(0)
             webSocketClient.connect(channels)
