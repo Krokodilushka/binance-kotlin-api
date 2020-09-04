@@ -258,43 +258,6 @@ abstract class WebSocketEvent {
     @JsonDeserialize(using = UserDataUpdateEventDeserializer::class)
     data class UserDataEvent(val event: Event) : WebSocketEvent() {
         abstract class Event : WebSocketEvent() {
-            @JsonIgnoreProperties(ignoreUnknown = true)
-            data class AccountInfo(
-                    @JsonProperty("e")
-                    val eventType: String,
-                    @JsonProperty("E")
-                    val eventTime: Long,
-                    @JsonProperty("m")
-                    val makerCommissionRate: Long,
-                    @JsonProperty("t")
-                    val takerCommissionRate: Long,
-                    @JsonProperty("b")
-                    val buyerCommissionRate: Long,
-                    @JsonProperty("s")
-                    val sellerCommissionRate: Long,
-                    @JsonProperty("T")
-                    val canTrade: Boolean,
-                    @JsonProperty("W")
-                    val canWithdraw: Boolean,
-                    @JsonProperty("D")
-                    val canDeposit: Boolean,
-                    @JsonProperty("u")
-                    val timeOfLastAccountUpdate: Long,
-                    @JsonProperty("B")
-                    val balances: List<Balance>,
-                    @JsonProperty("P")
-                    val permissions: List<Permission>?
-            ) : Event() {
-                @JsonIgnoreProperties(ignoreUnknown = true)
-                data class Balance(
-                        @JsonProperty("a")
-                        val asset: String,
-                        @JsonProperty("f")
-                        val free: String,
-                        @JsonProperty("l")
-                        val locked: String
-                )
-            }
 
             @JsonIgnoreProperties(ignoreUnknown = true)
             data class AccountPosition(

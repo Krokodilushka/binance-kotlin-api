@@ -30,7 +30,6 @@ class WebSocketEventWraperDeserializer : JsonDeserializer<WebSocketEvent.Wrapper
                 stream.contains("@depth") -> JsonToObject.convert(json, WebSocketEvent.MarketEvent.DepthEvent::class.java)
                 // user events
                 else -> when (eventType) {
-                    "outboundAccountInfo" -> JsonToObject.convert(json, WebSocketEvent.UserDataEvent.Event.AccountInfo::class.java)
                     "outboundAccountPosition" -> JsonToObject.convert(json, WebSocketEvent.UserDataEvent.Event.AccountPosition::class.java)
                     "balanceUpdate" -> JsonToObject.convert(json, WebSocketEvent.UserDataEvent.Event.BalanceUpdateEvent::class.java)
                     "executionReport" -> JsonToObject.convert(json, WebSocketEvent.UserDataEvent.Event.OrderTradeUpdateEvent::class.java)
