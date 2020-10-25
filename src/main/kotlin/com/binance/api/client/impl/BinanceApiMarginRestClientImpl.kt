@@ -66,6 +66,8 @@ class BinanceApiMarginRestClientImpl(apiKey: String?, secret: String?) : Binance
 
     override fun isolatedAccount(): IsolatedAccountInfo = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.isolatedAccount(BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
+    override fun isolatedAccount(symbols: List<String>): IsolatedAccountInfo.IsolatedAccountInfoSymbols = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.isolatedAccount("BTCUSDT,BNBUSDT,ADAUSDT", BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
+
     override fun isolatedPair(symbol: String): IsolatedPair = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.isolatedPair(symbol, BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))
 
     override fun isolatedAllPairs(): List<IsolatedPair> = BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.isolatedAllPairs(BinanceApiConstants.MARGIN_RECEIVING_WINDOW, System.currentTimeMillis()))

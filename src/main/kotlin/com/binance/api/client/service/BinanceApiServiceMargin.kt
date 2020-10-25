@@ -276,6 +276,14 @@ interface BinanceApiServiceMargin {
     ): Call<IsolatedAccountInfo>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/sapi/v1/margin/isolated/account")
+    fun isolatedAccount(
+            @Query("symbols") string: String,
+            @Query("recvWindow") recvWindow: Long?,
+            @Query("timestamp") timestamp: Long
+    ): Call<IsolatedAccountInfo.IsolatedAccountInfoSymbols>
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/sapi/v1/margin/isolated/pair")
     fun isolatedPair(
             @Query("symbol") symbol: String?,

@@ -15,11 +15,6 @@ object BinanceApiConstants {
     const val WS_API_BASE_URL = "wss://stream.binance.com:9443/stream?streams="
 
     /**
-     * Asset info base URL.
-     */
-    const val ASSET_INFO_API_BASE_URL = "https://www.binance.com/"
-
-    /**
      * HTTP Header to be used for API-KEY authentication.
      */
     const val API_KEY_HEADER = "X-MBX-APIKEY"

@@ -16,6 +16,12 @@ data class IsolatedAccountInfo(
         val totalNetAssetOfBtc: String
 ) {
     @JsonIgnoreProperties(ignoreUnknown = true)
+    data class IsolatedAccountInfoSymbols(
+            @JsonProperty("assets")
+            val assets: List<Asset>
+    )
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class Asset(
             @JsonProperty("baseAsset")
             val baseAsset: Asset,

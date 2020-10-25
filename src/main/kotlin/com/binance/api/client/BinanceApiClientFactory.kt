@@ -28,13 +28,13 @@ private constructor(
         private val secret: String?) {
 
 
-    fun newSpotRestClient() = BinanceApiSpotRestClientImpl(apiKey, secret)
+    fun newSpotRestClient(): BinanceApiSpotRestClient = BinanceApiSpotRestClientImpl(apiKey, secret)
 
-    fun newMarginRestClient() = BinanceApiMarginRestClientImpl(apiKey, secret)
+    fun newMarginRestClient(): BinanceApiMarginRestClient = BinanceApiMarginRestClientImpl(apiKey, secret)
 
-    fun newMarketDataRestClient() = BinanceApiMarketDataRestClientImpl(apiKey, secret)
+    fun newMarketDataRestClient(): BinanceApiMarketDataRestClient = BinanceApiMarketDataRestClientImpl(apiKey, secret)
 
-    fun newWebSocketClient(listener: WebSocketListener) = BinanceWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient, listener)
+    fun newWebSocketClient(listener: WebSocketListener): BinanceWebSocketClient = BinanceWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient, listener)
 
     companion object {
         /**
