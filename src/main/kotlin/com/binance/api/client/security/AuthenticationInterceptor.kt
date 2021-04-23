@@ -13,6 +13,7 @@ import java.util.*
  * A request interceptor that injects the API Key Header into requests, and signs messages, whenever required.
  */
 class AuthenticationInterceptor(private val apiKey: String?, private val secret: String?) : Interceptor {
+
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
@@ -20,7 +21,7 @@ class AuthenticationInterceptor(private val apiKey: String?, private val secret:
         val isApiKeyRequired = original.header(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY) != null
         val isSignatureRequired = original.header(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED) != null
         newRequestBuilder.removeHeader(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY)
-                .removeHeader(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED)
+            .removeHeader(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED)
 
         // Endpoint requires sending a valid API-KEY
         if (isApiKeyRequired || isSignatureRequired) {
@@ -34,8 +35,8 @@ class AuthenticationInterceptor(private val apiKey: String?, private val secret:
         if (isSignatureRequired) {
             val payload = original.url().query()
             if (!StringUtils.isEmpty(payload)) {
-                val signature = HmacSHA256Signer.sign(payload, secret)
-                val signedUrl = original.url().newBuilder().addQueryParameter("signature", signature).build()
+                val sig = Signature().getSignature(payload, secret)
+                val signedUrl = original.url().newBuilder().addQueryParameter("signature", sig).build()
                 newRequestBuilder.url(signedUrl)
             }
         }

@@ -22,12 +22,12 @@ class RestSpotEndpointsExample {
 
             client.newOrderTest(
                 "BTCUSDT",
-                OrderSide.SELL,
+                OrderSide.BUY,
                 OrderType.LIMIT,
                 OrderTimeInForce.GTC,
                 "0.01",
                 null,
-                "6000",
+                "30000",
                 null,
                 null,
                 null
