@@ -14,14 +14,17 @@ class BinanceApiException : RuntimeException {
      */
     var apiError: BinanceApiError? = null
         private set
+    var request: okhttp3.Request? = null
+        private set
 
     /**
      * Instantiates a new binance api exception.
      *
      * @param error an error response object
      */
-    constructor(error: BinanceApiError) {
+    constructor(error: BinanceApiError, request: okhttp3.Request? = null) {
         this.apiError = error
+        this.request = request
     }
 
     /**

@@ -26,14 +26,20 @@ object BinanceApiServiceGenerator {
      */
     val sharedClient: OkHttpClient = OkHttpClient.Builder()
 //            .pingInterval(20, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .build()
-    private val converterFactory: Converter.Factory = JacksonConverterFactory.create(ObjectMapper().registerKotlinModule())
-    private val errorBodyConverter = converterFactory.responseBodyConverter(BinanceApiError::class.java, arrayOfNulls(0), null) as Converter<ResponseBody, BinanceApiError>
+        .readTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .build()
+    private val converterFactory: Converter.Factory =
+        JacksonConverterFactory.create(ObjectMapper().registerKotlinModule())
+    private val errorBodyConverter = converterFactory.responseBodyConverter(
+        BinanceApiError::class.java,
+        arrayOfNulls(0),
+        null
+    ) as Converter<ResponseBody, BinanceApiError>
 
     fun <S> createService(serviceClass: Class<S>, apiKey: String?, secret: String?): S {
-        val retrofitBuilder = Retrofit.Builder().baseUrl(BinanceApiConstants.API_BASE_URL).addConverterFactory(converterFactory)
+        val retrofitBuilder =
+            Retrofit.Builder().baseUrl(BinanceApiConstants.API_BASE_URL).addConverterFactory(converterFactory)
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(secret)) {
             retrofitBuilder.client(sharedClient)
         } else {
@@ -56,7 +62,7 @@ object BinanceApiServiceGenerator {
                 response.body()!!
             } else {
                 val apiError = getBinanceApiError(response)
-                throw BinanceApiException(apiError)
+                throw BinanceApiException(apiError, call.request())
             }
         } catch (e: IOException) {
             throw BinanceApiException(e)

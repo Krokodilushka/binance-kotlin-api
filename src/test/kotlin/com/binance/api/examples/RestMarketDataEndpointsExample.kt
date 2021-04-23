@@ -36,7 +36,6 @@ class RestMarketDataEndpointsExample {
             client.depth("BTCUSDT", 5).let {
                 println("depth: $it")
             }
-
             client.trades("BTCUSDT", 5).let {
                 println("trades: $it")
             }
