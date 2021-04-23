@@ -1,33 +1,36 @@
-package com.binance.api.client.security;
+package com.binance.api.client.security
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
+import javax.crypto.Mac
+import javax.crypto.spec.SecretKeySpec
 
-public class Signature {
-    final String HMAC_SHA256 = "HmacSHA256";
+class Signature {
+    val HMAC_SHA256 = "HmacSHA256"
 
     //convert byte array to hex string
-    private String bytesToHex(byte[] bytes) {
-        final char[] hexArray = "0123456789abcdef".toCharArray();
-        char[] hexChars = new char[bytes.length * 2];
-        for (int j = 0, v; j < bytes.length; j++) {
-            v = bytes[j] & 0xFF;
-            hexChars[j * 2] = hexArray[v >>> 4];
-            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+    private fun bytesToHex(bytes: ByteArray?): String {
+        val hexArray = "0123456789abcdef".toCharArray()
+        val hexChars = CharArray(bytes!!.size * 2)
+        var j = 0
+        var v: Int
+        while (j < bytes.size) {
+            v = bytes[j].toInt() and 0xFF
+            hexChars[j * 2] = hexArray[v ushr 4]
+            hexChars[j * 2 + 1] = hexArray[v and 0x0F]
+            j++
         }
-        return new String(hexChars);
+        return String(hexChars)
     }
 
-    public String getSignature(String data, String key) {
-        byte[] hmacSha256 = null;
-        try {
-            SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), HMAC_SHA256);
-            Mac mac = Mac.getInstance(HMAC_SHA256);
-            mac.init(secretKeySpec);
-            hmacSha256 = mac.doFinal(data.getBytes());
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to calculate hmac-sha256", e);
+    fun getSignature(data: String, key: String): String {
+        var hmacSha256: ByteArray? = null
+        hmacSha256 = try {
+            val secretKeySpec = SecretKeySpec(key.toByteArray(), HMAC_SHA256)
+            val mac = Mac.getInstance(HMAC_SHA256)
+            mac.init(secretKeySpec)
+            mac.doFinal(data.toByteArray())
+        } catch (e: Exception) {
+            throw RuntimeException("Failed to calculate hmac-sha256", e)
         }
-        return bytesToHex(hmacSha256);
+        return bytesToHex(hmacSha256)
     }
 }
