@@ -1,6 +1,5 @@
 package com.binance.api.client.service
 
-import com.binance.api.client.BinanceApiConstants
 import com.binance.api.client.domain.BinanceApiError
 import com.binance.api.client.exception.BinanceApiException
 import com.binance.api.client.security.AuthenticationInterceptor
@@ -37,9 +36,9 @@ object BinanceApiServiceGenerator {
         null
     ) as Converter<ResponseBody, BinanceApiError>
 
-    fun <S> createService(serviceClass: Class<S>, apiKey: String?, secret: String?): S {
+    fun <S> createService(serviceClass: Class<S>, apiKey: String?, secret: String?, baseUrl: String): S {
         val retrofitBuilder =
-            Retrofit.Builder().baseUrl(BinanceApiConstants.API_BASE_URL).addConverterFactory(converterFactory)
+            Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(converterFactory)
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(secret)) {
             retrofitBuilder.client(sharedClient)
         } else {

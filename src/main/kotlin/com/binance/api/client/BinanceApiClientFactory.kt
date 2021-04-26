@@ -18,23 +18,21 @@ class BinanceApiClientFactory
  * @param secret the Secret
  */
 private constructor(
-        /**
-         * API Key
-         */
-        private val apiKey: String?,
-        /**
-         * Secret.
-         */
-        private val secret: String?) {
+    private val apiKey: String?,
+    private val secret: String?,
+    private val baseUrl: String
+) {
 
 
-    fun newSpotRestClient(): BinanceApiSpotRestClient = BinanceApiSpotRestClientImpl(apiKey, secret)
+    fun newSpotRestClient(): BinanceApiSpotRestClient = BinanceApiSpotRestClientImpl(apiKey, secret, baseUrl)
 
-    fun newMarginRestClient(): BinanceApiMarginRestClient = BinanceApiMarginRestClientImpl(apiKey, secret)
+    fun newMarginRestClient(): BinanceApiMarginRestClient = BinanceApiMarginRestClientImpl(apiKey, secret, baseUrl)
 
-    fun newMarketDataRestClient(): BinanceApiMarketDataRestClient = BinanceApiMarketDataRestClientImpl(apiKey, secret)
+    fun newMarketDataRestClient(): BinanceApiMarketDataRestClient =
+        BinanceApiMarketDataRestClientImpl(apiKey, secret, baseUrl)
 
-    fun newWebSocketClient(listener: WebSocketListener): BinanceWebSocketClient = BinanceWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient, listener)
+    fun newWebSocketClient(listener: WebSocketListener): BinanceWebSocketClient =
+        BinanceWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient, listener)
 
     companion object {
         /**
@@ -44,8 +42,12 @@ private constructor(
          * @param secret the Secret
          * @return the binance api client factory
          */
-        fun newInstance(apiKey: String, secret: String): BinanceApiClientFactory {
-            return BinanceApiClientFactory(apiKey, secret)
+        fun newInstance(
+            apiKey: String,
+            secret: String,
+            baseUrl: String = BinanceApiConstants.DEFAULT_API_BASE_URL
+        ): BinanceApiClientFactory {
+            return BinanceApiClientFactory(apiKey, secret, baseUrl)
         }
 
         /**
@@ -53,8 +55,8 @@ private constructor(
          *
          * @return the binance api client factory
          */
-        fun newInstance(): BinanceApiClientFactory {
-            return BinanceApiClientFactory(null, null)
+        fun newInstance(baseUrl: String = BinanceApiConstants.DEFAULT_API_BASE_URL): BinanceApiClientFactory {
+            return BinanceApiClientFactory(null, null, baseUrl)
         }
     }
 
