@@ -8,6 +8,9 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
+/**
+ * Included changes at 2021-04-26
+ */
 interface BinanceApiServiceMarketData {
 
     @GET("/api/v3/ping")
@@ -21,40 +24,40 @@ interface BinanceApiServiceMarketData {
 
     @GET("/api/v3/depth")
     fun depth(
-            @Query("symbol") symbol: String,
-            @Query("limit") limit: Int?
+        @Query("symbol") symbol: String,
+        @Query("limit") limit: Int?
     ): Call<Depth>
 
     @GET("/api/v3/trades")
     fun trades(
-            @Query("symbol") symbol: String,
-            @Query("limit") limit: Int?
+        @Query("symbol") symbol: String,
+        @Query("limit") limit: Int?
     ): Call<List<RecentTrade>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @GET("/api/v3/historicalTrades")
     fun historicalTrades(
-            @Query("symbol") symbol: String,
-            @Query("limit") limit: Int?,
-            @Query("fromId") fromId: Long?
+        @Query("symbol") symbol: String,
+        @Query("limit") limit: Int?,
+        @Query("fromId") fromId: Long?
     ): Call<List<HistoricalTrade>>
 
     @GET("/api/v3/aggTrades")
     fun aggTrades(
-            @Query("symbol") symbol: String,
-            @Query("fromId") fromId: Long?,
-            @Query("startTime") startTime: Long?,
-            @Query("endTime") endTime: Long?,
-            @Query("limit") limit: Long?
+        @Query("symbol") symbol: String,
+        @Query("fromId") fromId: Long?,
+        @Query("startTime") startTime: Long?,
+        @Query("endTime") endTime: Long?,
+        @Query("limit") limit: Long?
     ): Call<List<AggregateTrade>>
 
     @GET("/api/v3/klines")
     fun klines(
-            @Query("symbol") symbol: String,
-            @Query("interval") interval: String,
-            @Query("startTime") startTime: Long?,
-            @Query("endTime") endTime: Long?,
-            @Query("limit") limit: Long?
+        @Query("symbol") symbol: String,
+        @Query("interval") interval: String,
+        @Query("startTime") startTime: Long?,
+        @Query("endTime") endTime: Long?,
+        @Query("limit") limit: Long?
     ): Call<List<Candlestick>>
 
     @GET("/api/v3/avgPrice")

@@ -1,59 +1,15 @@
 package com.binance.api.client.exception
 
-import com.binance.api.client.domain.BinanceApiError
+import com.binance.api.client.domain.rest.BinanceApiError
+import okhttp3.Request
+import retrofit2.Response
 
-/**
- * An exception which can occur while invoking methods of the Binance API.
- */
-class BinanceApiException : RuntimeException {
-    /**
-     * @return the response error object from Binance API, or null if no response object was returned (e.g. server returned 500).
-     */
-    /**
-     * Error response object returned by Binance API.
-     */
-    var apiError: BinanceApiError? = null
-        private set
-    var request: okhttp3.Request? = null
-        private set
+class BinanceApiException(
+    val request: Request,
+    val response: Response<*>,
+    val apiError: BinanceApiError
+) : RuntimeException() {
 
-    /**
-     * Instantiates a new binance api exception.
-     *
-     * @param error an error response object
-     */
-    constructor(error: BinanceApiError, request: okhttp3.Request? = null) {
-        this.apiError = error
-        this.request = request
-    }
-
-    /**
-     * Instantiates a new binance api exception.
-     */
-    constructor() : super()
-
-    /**
-     * Instantiates a new binance api exception.
-     *
-     * @param message the message
-     */
-    constructor(message: String) : super(message)
-
-    /**
-     * Instantiates a new binance api exception.
-     *
-     * @param cause the cause
-     */
-    constructor(cause: Throwable) : super(cause)
-
-    /**
-     * Instantiates a new binance api exception.
-     *
-     * @param message the message
-     * @param cause the cause
-     */
-    constructor(message: String?, cause: Throwable?) : super(message, cause)
-
-    override val message: String?
-        get() = apiError?.msg ?: super.message
+    override val message: String
+        get() = "Http code: ${response.code()}. Api error code: ${apiError.code}. Api error message: \"${apiError.msg}\""
 }

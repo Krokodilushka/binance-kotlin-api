@@ -114,6 +114,7 @@ class BinanceApiMarginRestClient(
             side,
             type,
             quantity,
+            null,
             price,
             stopPrice,
             icebergQty,
@@ -149,11 +150,28 @@ class BinanceApiMarginRestClient(
     )
 
     /**
+     * Cancels all active orders on a symbol for margin account.
+     * This includes OCO orders.
+     * @link https://binance-docs.github.io/apidocs/spot/en/#margin-account-cancel-all-open-orders-on-a-symbol-trade
+     */
+    fun cancelOpenOrders(
+        symbol: String,
+        isIsolated: Boolean?
+    ) = BinanceApiServiceGenerator.executeSync(
+        binanceApiServiceMargin.cancelOpenOrders(
+            symbol,
+            isIsolated,
+            BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
+
+    /**
      * @link https://binance-docs.github.io/apidocs/spot/en/#get-cross-margin-transfer-history-user_data
      */
     fun crossTransfer(
         asset: String?,
-        type: TransferType?,
+        type: CrossMarginTransferType?,
         startTime: String?,
         endTime: String?,
         current: String?,
@@ -191,6 +209,7 @@ class BinanceApiMarginRestClient(
             endTime,
             current,
             size,
+            null,
             BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
             System.currentTimeMillis()
         )
@@ -216,6 +235,7 @@ class BinanceApiMarginRestClient(
             endTime,
             current,
             size,
+            null,
             BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
             System.currentTimeMillis()
         )
@@ -239,6 +259,7 @@ class BinanceApiMarginRestClient(
             endTime,
             current,
             size,
+            null,
             BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
             System.currentTimeMillis()
         )
@@ -451,7 +472,7 @@ class BinanceApiMarginRestClient(
     fun isolatedAccount(symbols: List<String>) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiServiceMargin.isolatedAccount(
-                "BTCUSDT,BNBUSDT,ADAUSDT",
+                symbols.joinToString(",") { it },
                 BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
                 System.currentTimeMillis()
             )
@@ -473,6 +494,49 @@ class BinanceApiMarginRestClient(
      */
     fun isolatedAllPairs() = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.isolatedAllPairs(
+            BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
+
+    /**
+     * @link https://binance-docs.github.io/apidocs/spot/en/#toggle-bnb-burn-on-spot-trade-and-margin-interest-user_data
+     */
+    fun bnbBurn(spotBNBBurn: Boolean, interestBNBBurn: Boolean) = BinanceApiServiceGenerator.executeSync(
+        binanceApiServiceMargin.bnbBurn(
+            spotBNBBurn,
+            interestBNBBurn,
+            BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
+
+    /**
+     * @link https://binance-docs.github.io/apidocs/spot/en/#get-bnb-burn-status-user_data
+     */
+    fun bnbBurn() = BinanceApiServiceGenerator.executeSync(
+        binanceApiServiceMargin.bnbBurn(
+            BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
+
+    /**
+     * @link https://binance-docs.github.io/apidocs/spot/en/#query-margin-interest-rate-history-user_data
+     */
+    fun interestRateHistory(
+        asset: String,
+        vipLevel: String?,
+        startTime: String?,
+        endTime: String?,
+        limit: Int?
+    ) = BinanceApiServiceGenerator.executeSync(
+        binanceApiServiceMargin.interestRateHistory(
+            asset,
+            vipLevel,
+            startTime,
+            endTime,
+            limit,
             BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
             System.currentTimeMillis()
         )

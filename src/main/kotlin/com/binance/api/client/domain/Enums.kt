@@ -2,6 +2,10 @@ package com.binance.api.client.domain
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
+/**
+ * Included changes at 2020-03-24
+ */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 enum class OrderSide {
     BUY, SELL
@@ -43,7 +47,7 @@ enum class ExecutionType {
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-enum class TransferType {
+enum class CrossMarginTransferType {
     ROLL_IN, ROLL_OUT
 }
 
@@ -115,4 +119,19 @@ enum class OrderSideEffectType {
 @JsonIgnoreProperties(ignoreUnknown = true)
 enum class MarginLevelStatus {
     EXCESSIVE, NORMAL, MARGIN_CALL, PRE_LIQUIDATION, FORCE_LIQUIDATION
+}
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+enum class ContingencyType {
+    OCO
+}
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+enum class ListStatusType {
+    RESPONSE, EXEC_STARTED, ALL_DONE
+}
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+enum class ListOrderStatus {
+    EXECUTING, ALL_DONE, REJECT
 }

@@ -3,22 +3,11 @@ package com.binance.api.client
 import com.binance.api.client.service.BinanceApiServiceGenerator
 import okhttp3.WebSocketListener
 
-/**
- * A factory for creating BinanceApi client objects.
- */
-class BinanceApiClientFactory
-/**
- * Instantiates a new binance api client factory.
- *
- * @param apiKey the API key
- * @param secret the Secret
- */
-private constructor(
+class BinanceApiClientFactory private constructor(
     private val apiKey: String?,
     private val secret: String?,
     private val baseUrl: String
 ) {
-
 
     fun newSpotRestClient(): BinanceApiSpotRestClient = BinanceApiSpotRestClient(apiKey, secret, baseUrl)
 
@@ -31,12 +20,9 @@ private constructor(
         BinanceWebSocketClient(BinanceApiServiceGenerator.sharedClient, listener)
 
     companion object {
+
         /**
-         * New instance.
-         *
-         * @param apiKey the API key
-         * @param secret the Secret
-         * @return the binance api client factory
+         * New instance with authentication.
          */
         fun newInstance(
             apiKey: String,
@@ -48,8 +34,6 @@ private constructor(
 
         /**
          * New instance without authentication.
-         *
-         * @return the binance api client factory
          */
         fun newInstance(baseUrl: String = BinanceApiConstants.DEFAULT_API_BASE_URL): BinanceApiClientFactory {
             return BinanceApiClientFactory(null, null, baseUrl)

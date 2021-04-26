@@ -1,6 +1,6 @@
 package com.binance.api.client.service
 
-import com.binance.api.client.domain.BinanceApiError
+import com.binance.api.client.domain.rest.BinanceApiError
 import com.binance.api.client.exception.BinanceApiException
 import com.binance.api.client.security.AuthenticationInterceptor
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -13,7 +13,6 @@ import retrofit2.Converter
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -55,15 +54,12 @@ object BinanceApiServiceGenerator {
      * Execute a REST call and block until the response is received.
      */
     fun <T> executeSync(call: Call<T>): Response<T> {
-        try {
-            val response = call.execute()
-            if (response.isSuccessful) {
-                return response
-            } else {
-                throw BinanceApiException(errorBodyConverter.convert(response.errorBody()!!)!!, call.request())
-            }
-        } catch (e: IOException) {
-            throw BinanceApiException(e)
+        val response = call.execute()
+        if (response.isSuccessful) {
+            return response
+        } else {
+            val apiError = errorBodyConverter.convert(response.errorBody()!!)
+            throw BinanceApiException(call.request(), response, apiError)
         }
     }
 

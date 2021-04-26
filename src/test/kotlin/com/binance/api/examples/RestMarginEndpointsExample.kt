@@ -86,6 +86,10 @@ class RestMarginEndpointsExample {
                 }
             }
 
+            client.cancelOpenOrders("BTCUSDT", null).let {
+                println("cancelOpenOrders: ${it.body()}")
+            }
+
             client.crossTransfer(null, null, null, null, null, null).let {
                 println("crossTransfer: $it")
             }
@@ -121,8 +125,8 @@ class RestMarginEndpointsExample {
                 println("account: ${it.userAssets.joinToString("\n") { it.toString() }}")
             }
 
-            client.maxBorrowable("BTC", "RENBTC").let {
-                println("maxBorrowable: $it")
+            client.maxBorrowable("BTC", "XRPBTC").let {
+                println("maxBorrowable: ${it.body()}")
             }
 
             client.maxTransferable("BTC", "BNBBTC").let {
@@ -130,7 +134,7 @@ class RestMarginEndpointsExample {
             }
 
             client.isolatedCreate("XRP", "BTC").let {
-                println("isolatedCreate: $it")
+                println("isolatedCreate: ${it.body()}")
             }
 
             client.newIsolatedTransfer(
@@ -165,18 +169,34 @@ class RestMarginEndpointsExample {
                 println("isolatedTransfer: $it")
             }
 
-            client.isolatedAccount(listOf("BTCUSDT", "BNBUSDT", "ADAUSDT")).let {
-                println("isolatedAccount:\n${it}")
+            client.isolatedAccount().let {
+                println("isolatedAccount:${it.body()}")
+            }
+
+            client.isolatedAccount(listOf("XRPBTC", "BTCUSD")).let {
+                println("isolatedAccount:${it.body()}")
             }
 
             client.isolatedPair("RENBTC").let {
-                println("isolatedPair: $it")
+                println("isolatedPair: ${it.body()}")
             }
 
             client.isolatedAllPairs().let {
                 return@let it.body()!!
             }.let {
                 println("isolatedAllPairs: ${it.joinToString(separator = "\n") { it.toString() }}")
+            }
+
+            client.bnbBurn(true, false).let {
+                println("bnbBurn: ${it.body()}")
+            }
+
+            client.bnbBurn().let {
+                println("bnbBurn: ${it.body()}")
+            }
+
+            client.interestRateHistory("BTC", null, null, null, null).let {
+                println("interestRateHistory: ${it.body()}")
             }
         }
     }

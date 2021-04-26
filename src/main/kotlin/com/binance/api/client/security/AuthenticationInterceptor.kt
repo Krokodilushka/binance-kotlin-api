@@ -33,9 +33,9 @@ class AuthenticationInterceptor(private val apiKey: String?, private val secret:
 
         // Endpoint requires signing the payload
         if (isSignatureRequired) {
-            val payload = original.url().query()
+            val payload = original.url().encodedQuery()
             if (!StringUtils.isEmpty(payload)) {
-                val sig = Signature().getSignature(payload!!, secret!!)
+                val sig = Signature.sign(payload!!, secret!!)
                 val signedUrl = original.url().newBuilder().addQueryParameter("signature", sig).build()
                 newRequestBuilder.url(signedUrl)
             }

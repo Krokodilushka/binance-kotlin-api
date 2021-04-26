@@ -21,7 +21,7 @@ class RestMarketDataEndpointsExample {
             }
 
             client.time().let {
-                println("time: $it")
+                println("time: ${it.body()}")
             }
 
             client.exchangeInfo().let {
@@ -37,55 +37,54 @@ class RestMarketDataEndpointsExample {
             }
 
             client.depth("BTCUSDT", 5).let {
-                println("depth: $it")
+                println("depth: ${it.body()}")
             }
             client.trades("BTCUSDT", 5).let {
-                println("trades: $it")
+                println("trades: ${it.body()}")
             }
 
             client.historicalTrades("BTCUSDT", 5, null).let {
-                println("historicalTrades: $it")
+                println("historicalTrades: ${it.body()}")
             }
 
             client.aggTrades("BTCUSDT", null, null, null, null).let {
-                println("aggTrades: $it")
+                println("aggTrades: ${it.body()}")
             }
 
             client.candles("BTCUSDT", CandlestickInterval.HOURLY, null, null, 5).let {
-                println("klines: $it")
+                println("klines: ${it.body()}")
             }
 
             client.avgPrice("BTCUSDT").let {
-                println("avgPrice: $it")
+                println("avgPrice: ${it.body()}")
             }
 
             try {
                 client.ticker24hr("UNKNOWN").let {
-                    println("ticker24hr: $it")
+                    println("ticker24hr: ${it.body()}")
                 }
             } catch (e: BinanceApiException) {
-                println("BinanceApiException: ${e.apiError?.code} ${e.apiError?.msg}")
+                println("BinanceApiException: ${e.apiError.code} ${e.apiError.msg}")
             }
 
-
             client.tickers24hr().let {
-                println("tickers24hr: $it")
+                println("tickers24hr: ${it.body()}")
             }
 
             client.tickerPrice("BTCUSDT").let {
-                println("tickerPrice: $it")
+                println("tickerPrice: ${it.body()}")
             }
 
             client.tickersPrice().let {
-                println("tickersPrice: $it")
+                println("tickersPrice: ${it.body()}")
             }
 
             client.tickerBookTicker("BTCUSDT").let {
-                println("tickerPrice: $it")
+                println("tickerPrice: ${it.body()}")
             }
 
             client.tickersBookTicker().let {
-                println("tickersBookTicker: $it")
+                println("tickersBookTicker: ${it.body()}")
             }
         }
 

@@ -1,7 +1,7 @@
 package com.binance.api.client.domain.rest.margin
 
 
-import com.binance.api.client.domain.TransferType
+import com.binance.api.client.domain.CrossMarginTransferType
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
@@ -14,19 +14,19 @@ data class TransferHistory(
 ) {
         @JsonIgnoreProperties(ignoreUnknown = true)
         data class Row(
-                @JsonProperty("amount")
-                val amount: String,
-                @JsonProperty("asset")
-                val asset: String,
-                @JsonProperty("status")
-                val status: String,
-                @JsonProperty("timestamp")
-                val timestamp: Long,
-                @JsonProperty("txId")
-                val txId: Long,
-                @JsonProperty("type")
-                val type: TransferType,
-                @JsonProperty("transferCounterparty")
-                val transferCounterparty: String
+            @JsonProperty("amount")
+            val amount: String,
+            @JsonProperty("asset")
+            val asset: String,
+            @JsonProperty("status")
+            val status: String,
+            @JsonProperty("timestamp")
+            val timestamp: Long,
+            @JsonProperty("txId")
+            val txId: Long,
+            @JsonProperty("type")
+            val type: CrossMarginTransferType,
+            @JsonProperty("transferCounterparty")
+            val transferCounterparty: String
         )
 }

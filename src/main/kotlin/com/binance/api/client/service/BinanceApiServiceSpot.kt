@@ -10,6 +10,9 @@ import com.binance.api.client.domain.rest.ListenKey
 import retrofit2.Call
 import retrofit2.http.*
 
+/**
+ * Included changes at 2021-04-26
+ */
 interface BinanceApiServiceSpot {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)

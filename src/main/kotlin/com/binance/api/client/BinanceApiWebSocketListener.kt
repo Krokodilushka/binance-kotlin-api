@@ -2,15 +2,14 @@ package com.binance.api.client
 
 import com.binance.api.client.domain.websocket.WebSocketEvent
 import com.binance.api.client.domain.websocket.WebSocketMessage
-import com.binance.api.client.exception.BinanceApiException
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
-import java.io.IOException
 
-class BinanceApiWebSocketListener(private val callback: BinanceWebSocketClient.WebSocketCallback) : WebSocketListener() {
+class BinanceApiWebSocketListener(private val callback: BinanceWebSocketClient.WebSocketCallback) :
+    WebSocketListener() {
 
     private val mapper = ObjectMapper().registerKotlinModule()
     private val eventWrapperReader = mapper.readerFor(WebSocketEvent.Wrapper::class.java)
@@ -18,14 +17,10 @@ class BinanceApiWebSocketListener(private val callback: BinanceWebSocketClient.W
     private var isClosed = false
 
     override fun onMessage(webSocket: WebSocket, text: String) {
-        try {
-            textToEventWrapper(text)?.let {
-                callback.onEvent(it)
-            } ?: textToMessageResponse(text)?.let {
-                callback.onMessage(it)
-            }
-        } catch (e: IOException) {
-            throw BinanceApiException(e)
+        textToEventWrapper(text)?.let {
+            callback.onEvent(it)
+        } ?: textToMessageResponse(text)?.let {
+            callback.onMessage(it)
         }
     }
 
