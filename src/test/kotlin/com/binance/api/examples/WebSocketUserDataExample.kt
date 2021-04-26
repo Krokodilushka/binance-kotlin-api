@@ -1,11 +1,11 @@
 package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
+import com.binance.api.client.BinanceApiWebSocketListener
 import com.binance.api.client.BinanceWebSocketClient
 import com.binance.api.client.domain.websocket.WebSocketEvent
 import com.binance.api.client.domain.websocket.WebSocketMessage
 import com.binance.api.client.domain.websocket.WebSocketStream
-import com.binance.api.client.impl.BinanceApiWebSocketListener
 
 class WebSocketUserDataExample {
     companion object {
@@ -16,18 +16,18 @@ class WebSocketUserDataExample {
                 args.getOrElse(1) { "API_SECRET" }
             )
 
-            val marginClient = binanceApiClientFactory.newMarginRestClient()
+//            val marginClient = binanceApiClientFactory.newMarginRestClient()
             val spotListenKey = binanceApiClientFactory.newSpotRestClient().startUserDataStream()
 //            val marginListenKey = marginClient.startMarginUserDataStream()
-            val isolatedMarginBtcUsdtListenKey = marginClient.startIsolatedMarginUserDataStream("neobtc")
+//            val isolatedMarginBtcUsdtListenKey = marginClient.startIsolatedMarginUserDataStream("neobtc")
 //            Thread.sleep(500L)
 //            val isolatedMarginBtcEthListenKey = marginClient.startIsolatedMarginUserDataStream("ethbtc")
             val channels = listOf(
                 WebSocketStream.AllMarketTickers(),
 //                    WebSocketStream.Trade("btcusdt")
-                WebSocketStream.UserData(spotListenKey.body()!!.listenKey),
+                WebSocketStream.UserData(spotListenKey.body()!!.listenKey)
 //                    WebSocketStream.UserData(marginListenKey)
-                WebSocketStream.UserData(isolatedMarginBtcUsdtListenKey.body()!!.listenKey)
+//                WebSocketStream.UserData(isolatedMarginBtcUsdtListenKey.body()!!.listenKey)
 //                    WebSocketStream.UserData(isolatedMarginBtcEthListenKey)
             )
 
@@ -50,7 +50,6 @@ class WebSocketUserDataExample {
                         println("reconnect")
                         webSocketClient?.connect(channels)
                     }
-//                    throw cause
                 }
 
                 override fun onClosing(code: Int, reason: String) {
@@ -60,8 +59,7 @@ class WebSocketUserDataExample {
             val webSocketListener = BinanceApiWebSocketListener(callback)
             webSocketClient = binanceApiClientFactory.newWebSocketClient(webSocketListener)
 
-            println(channels)
-//            exitProcess(0)
+            println("channels: " + channels)
             webSocketClient.connect(channels)
             println("Wait events...")
 

@@ -18,7 +18,8 @@ class RestMarginEndpointsExample {
             val client = factory.newMarginRestClient()
 
             client.newCrossTransfer("BTC", "0.00001", 1).let {
-                println("newCrossTransfer btc spot to margin: $it")
+                println("newCrossTransfer btc spot to margin: ${it.body()}")
+                println("binance headers: " + it.headers().toMultimap().filter { it.key.startsWith("x-mbx") })
                 client.newCrossTransfer("BTC", "0.00001", 2).let {
                     println("newCrossTransfer btc margin to spot: $it")
                 }

@@ -1,47 +1,55 @@
 package com.binance.api.client
 
 import com.binance.api.client.domain.CandlestickInterval
-import com.binance.api.client.domain.rest.Empty
-import com.binance.api.client.domain.rest.marketdata.*
-import retrofit2.Response
+import com.binance.api.client.service.BinanceApiServiceGenerator
+import com.binance.api.client.service.BinanceApiServiceMarketData
 
-interface BinanceApiMarketDataRestClient {
+class BinanceApiMarketDataRestClient(
+    apiKey: String?,
+    secret: String?,
+    baseUrl: String
+) {
+
+    private val binanceApiService =
+        BinanceApiServiceGenerator.createService(BinanceApiServiceMarketData::class.java, apiKey, secret, baseUrl)
 
     /**
      * Test connectivity to the Rest API.
      * @link https://binance-docs.github.io/apidocs/spot/en/#test-connectivity
      */
-    fun ping(): Response<Empty>
+    fun ping() = BinanceApiServiceGenerator.executeSync(binanceApiService.ping())
 
     /**
      * Test connectivity to the Rest API and get the current server time.
      * @link https://binance-docs.github.io/apidocs/spot/en/#check-server-time
      */
-    fun time(): Response<ServerTime>
+    fun time() = BinanceApiServiceGenerator.executeSync(binanceApiService.time())
 
     /**
      * Current exchange trading rules and symbol information
      * @link https://binance-docs.github.io/apidocs/spot/en/#exchange-information
      */
-    fun exchangeInfo(): Response<ExchangeInfo>
+    fun exchangeInfo() = BinanceApiServiceGenerator.executeSync(binanceApiService.exchangeInfo())
 
     /**
-     *
      * @link https://binance-docs.github.io/apidocs/spot/en/#order-book
      */
-    fun depth(symbol: String, limit: Int?): Response<Depth>
+    fun depth(symbol: String, limit: Int?) =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.depth(symbol, limit))
 
     /**
      * Get recent trades (up to last 500).
      * @link https://binance-docs.github.io/apidocs/spot/en/#recent-trades-list
      */
-    fun trades(symbol: String, limit: Int?): Response<List<RecentTrade>>
+    fun trades(symbol: String, limit: Int?) =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.trades(symbol, limit))
 
     /**
      * Get older market trades.
      * @link https://binance-docs.github.io/apidocs/spot/en/#old-trade-lookup
      */
-    fun historicalTrades(symbol: String, limit: Int?, fromId: Long?): Response<List<HistoricalTrade>>
+    fun historicalTrades(symbol: String, limit: Int?, fromId: Long?) =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.historicalTrades(symbol, limit, fromId))
 
     /**
      * Get compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
@@ -53,7 +61,8 @@ interface BinanceApiMarketDataRestClient {
         startTime: Long?,
         endTime: Long?,
         limit: Long?
-    ): Response<List<AggregateTrade>>
+    ) =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.aggTrades(symbol, fromId, startTime, endTime, limit))
 
     /**
      * Kline/candlestick bars for a symbol.
@@ -66,47 +75,63 @@ interface BinanceApiMarketDataRestClient {
         startTime: Long?,
         endTime: Long?,
         limit: Long?
-    ): Response<List<Candlestick>>
+    ) = BinanceApiServiceGenerator.executeSync(
+        binanceApiService.klines(
+            symbol,
+            interval.intervalId,
+            startTime,
+            endTime,
+            limit
+        )
+    )
 
     /**
      * Current average price for a symbol.
      * @link https://binance-docs.github.io/apidocs/spot/en/#current-average-price
      */
-    fun avgPrice(symbol: String): Response<AvgPrice>
+    fun avgPrice(symbol: String) =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.avgPrice(symbol))
 
     /**
      * 24 hour rolling window price change statistics.
      * @link https://binance-docs.github.io/apidocs/spot/en/#24hr-ticker-price-change-statistics
      */
-    fun ticker24hr(symbol: String): Response<Ticker24hr>
+    fun ticker24hr(symbol: String) =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.ticker24hr(symbol))
 
     /**
      * 24 hour rolling window price change statistics. Careful when accessing this with no symbol.
      * @link https://binance-docs.github.io/apidocs/spot/en/#24hr-ticker-price-change-statistics
      */
-    fun tickers24hr(): Response<List<Ticker24hr>>
+    fun tickers24hr() =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.tickers24hr())
 
     /**
      * Latest price for a symbol.
      * @link https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker
      */
-    fun tickerPrice(symbol: String): Response<SymbolPriceTicker>
+    fun tickerPrice(symbol: String) =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.tickerPrice(symbol))
 
     /**
      * Latest price for a symbols.
      * @link https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker
      */
-    fun tickersPrice(): Response<List<SymbolPriceTicker>>
+    fun tickersPrice() =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.tickersPrice())
 
     /**
      * Best price/qty on the order book for a symbol.
      * @link https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker
      */
-    fun tickerBookTicker(symbol: String): Response<SymbolOrderBookTicker>
+    fun tickerBookTicker(symbol: String) =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.tickerBookTicker(symbol))
 
     /**
      * Best price/qty on the order book for a symbols.
      * @link https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker
      */
-    fun tickersBookTicker(): Response<List<SymbolOrderBookTicker>>
+    fun tickersBookTicker() =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.tickersBookTicker())
+
 }

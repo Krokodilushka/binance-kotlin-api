@@ -16,7 +16,8 @@ class RestMarketDataEndpointsExample {
             val client = factory.newMarketDataRestClient()
 
             client.ping().let {
-                println("ping: $it")
+                println("binance headers: " + it.headers().toMultimap().filter { it.key.startsWith("x-mbx") })
+                println("body: " + it.body()!!)
             }
 
             client.time().let {

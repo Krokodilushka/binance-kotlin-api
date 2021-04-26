@@ -17,7 +17,8 @@ class RestSpotEndpointsExample {
             val client: BinanceApiSpotRestClient = factory.newSpotRestClient()
 
             client.account().let {
-                println(it)
+                println("binance headers: " + it.headers().toMultimap().filter { it.key.startsWith("x-mbx") })
+                println("body: " + it.body()!!)
             }
 
             client.newOrderTest(
@@ -32,9 +33,8 @@ class RestSpotEndpointsExample {
                 null,
                 null
             ).let {
-                println("newOrderTest: $it")
+                println("newOrderTest: ${it.body()}")
             }
-
 
             client.newOrder(
                 "BTCUSDT",
@@ -95,12 +95,13 @@ class RestSpotEndpointsExample {
                 return@let it.body()!!
             }.let {
                 println("newOcoOrder: $it")
+                Thread.sleep(1000L)
                 client.ocoOrder(it.orderListId, null).let {
                     println("ocoOrder: $it")
                 }
-//                client.allOcoOrders(null, null, null, null).let {
-//                    println("allOcoOrders: $it")
-//                }
+                client.allOcoOrders(null, null, null, null).let {
+                    println("allOcoOrders: $it")
+                }
                 client.allOpenOcoOrders().let {
                     println("allOpenOcoOrders: $it")
                 }

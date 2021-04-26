@@ -1,9 +1,5 @@
 package com.binance.api.client
 
-import com.binance.api.client.impl.BinanceApiMarginRestClientImpl
-import com.binance.api.client.impl.BinanceApiMarketDataRestClientImpl
-import com.binance.api.client.impl.BinanceApiSpotRestClientImpl
-import com.binance.api.client.impl.BinanceWebSocketClientImpl
 import com.binance.api.client.service.BinanceApiServiceGenerator
 import okhttp3.WebSocketListener
 
@@ -24,15 +20,15 @@ private constructor(
 ) {
 
 
-    fun newSpotRestClient(): BinanceApiSpotRestClient = BinanceApiSpotRestClientImpl(apiKey, secret, baseUrl)
+    fun newSpotRestClient(): BinanceApiSpotRestClient = BinanceApiSpotRestClient(apiKey, secret, baseUrl)
 
-    fun newMarginRestClient(): BinanceApiMarginRestClient = BinanceApiMarginRestClientImpl(apiKey, secret, baseUrl)
+    fun newMarginRestClient(): BinanceApiMarginRestClient = BinanceApiMarginRestClient(apiKey, secret, baseUrl)
 
     fun newMarketDataRestClient(): BinanceApiMarketDataRestClient =
-        BinanceApiMarketDataRestClientImpl(apiKey, secret, baseUrl)
+        BinanceApiMarketDataRestClient(apiKey, secret, baseUrl)
 
     fun newWebSocketClient(listener: WebSocketListener): BinanceWebSocketClient =
-        BinanceWebSocketClientImpl(BinanceApiServiceGenerator.sharedClient, listener)
+        BinanceWebSocketClient(BinanceApiServiceGenerator.sharedClient, listener)
 
     companion object {
         /**

@@ -1,6 +1,5 @@
-package com.binance.api.client.impl
+package com.binance.api.client
 
-import com.binance.api.client.BinanceWebSocketClient
 import com.binance.api.client.domain.websocket.WebSocketEvent
 import com.binance.api.client.domain.websocket.WebSocketMessage
 import com.binance.api.client.exception.BinanceApiException
