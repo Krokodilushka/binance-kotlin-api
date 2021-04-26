@@ -21,7 +21,7 @@ repositories {
 }
 dependencies {
     ...
-    compile 'com.github.Krokodilushka:binance-kotlin-api:xxx' // See the `JitPack` badge
+    implementation 'com.github.Krokodilushka:binance-kotlin-api:xxx' // See the `JitPack` badge
     ...
 }
 ```
