@@ -15,163 +15,163 @@ interface BinanceApiServiceSpot {
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/api/v3/order/test")
     fun newOrderTest(
-            @Query("symbol") symbol: String,
-            @Query("side") side: OrderSide,
-            @Query("type") type: OrderType,
-            @Query("timeInForce") timeInForce: OrderTimeInForce?,
-            @Query("quantity") quantity: String?,
-            @Query("quoteOrderQty") quoteOrderQty: String?,
-            @Query("price") price: String?,
-            @Query("newClientOrderId") newClientOrderId: String?,
-            @Query("stopPrice") stopPrice: String?,
-            @Query("icebergQty") icebergQty: String?,
-            @Query("newOrderRespType") newOrderRespType: NewOrderResponseType?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("symbol") symbol: String,
+        @Query("side") side: OrderSide,
+        @Query("type") type: OrderType,
+        @Query("timeInForce") timeInForce: OrderTimeInForce?,
+        @Query("quantity") quantity: String?,
+        @Query("quoteOrderQty") quoteOrderQty: String?,
+        @Query("price") price: String?,
+        @Query("newClientOrderId") newClientOrderId: String?,
+        @Query("stopPrice") stopPrice: String?,
+        @Query("icebergQty") icebergQty: String?,
+        @Query("newOrderRespType") newOrderRespType: NewOrderResponseType?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<Empty>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/api/v3/order")
     fun newOrder(
-            @Query("symbol") symbol: String,
-            @Query("side") side: OrderSide,
-            @Query("type") type: OrderType,
-            @Query("timeInForce") timeInForce: OrderTimeInForce?,
-            @Query("quantity") quantity: String?,
-            @Query("quoteOrderQty") quoteOrderQty: String?,
-            @Query("price") price: String?,
-            @Query("newClientOrderId") newClientOrderId: String?,
-            @Query("stopPrice") stopPrice: String?,
-            @Query("icebergQty") icebergQty: String?,
-            @Query("newOrderRespType") newOrderRespType: NewOrderResponseType?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("symbol") symbol: String,
+        @Query("side") side: OrderSide,
+        @Query("type") type: OrderType,
+        @Query("timeInForce") timeInForce: OrderTimeInForce?,
+        @Query("quantity") quantity: String?,
+        @Query("quoteOrderQty") quoteOrderQty: String?,
+        @Query("price") price: String?,
+        @Query("newClientOrderId") newClientOrderId: String?,
+        @Query("stopPrice") stopPrice: String?,
+        @Query("icebergQty") icebergQty: String?,
+        @Query("newOrderRespType") newOrderRespType: NewOrderResponseType?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<com.binance.api.client.domain.rest.spot.NewOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @DELETE("/api/v3/order")
     fun cancelOrder(
-            @Query("symbol") symbol: String,
-            @Query("orderId") orderId: Long?,
-            @Query("origClientOrderId") origClientOrderId: String?,
-            @Query("newClientOrderId") newClientOrderId: String?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("symbol") symbol: String,
+        @Query("orderId") orderId: Long?,
+        @Query("origClientOrderId") origClientOrderId: String?,
+        @Query("newClientOrderId") newClientOrderId: String?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<com.binance.api.client.domain.rest.spot.CancelOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @DELETE("/api/v3/openOrders")
     fun cancelOpenOrders(
-            @Query("symbol") symbol: String,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("symbol") symbol: String,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<List<com.binance.api.client.domain.rest.spot.CancelOrder>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/order")
     fun order(
-            @Query("symbol") symbol: String,
-            @Query("orderId") orderId: Long?,
-            @Query("origClientOrderId") origClientOrderId: String?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("symbol") symbol: String,
+        @Query("orderId") orderId: Long?,
+        @Query("origClientOrderId") origClientOrderId: String?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<com.binance.api.client.domain.rest.spot.Order>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/openOrders")
     fun openOrders(
-            @Query("symbol") symbol: String?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("symbol") symbol: String?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<List<com.binance.api.client.domain.rest.spot.Order>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/allOrders")
     fun allOrders(
-            @Query("symbol") symbol: String,
-            @Query("orderId") orderId: Long?,
-            @Query("startTime") startTime: Long?,
-            @Query("endTime") endTime: Long?,
-            @Query("limit") limit: Int?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("symbol") symbol: String,
+        @Query("orderId") orderId: Long?,
+        @Query("startTime") startTime: Long?,
+        @Query("endTime") endTime: Long?,
+        @Query("limit") limit: Int?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<List<com.binance.api.client.domain.rest.spot.Order>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/api/v3/order/oco")
     fun newOcoOrder(
-            @Query("symbol") symbol: String,
-            @Query("listClientOrderId") orderId: String?,
-            @Query("side") side: OrderSide,
-            @Query("quantity") quantity: String,
-            @Query("limitClientOrderId") limitClientOrderId: String?,
-            @Query("price") price: String,
-            @Query("limitIcebergQty") limitIcebergQty: String?,
-            @Query("stopClientOrderId") stopClientOrderId: String?,
-            @Query("stopPrice") stopPrice: String,
-            @Query("stopLimitPrice") stopLimitPrice: String?,
-            @Query("stopIcebergQty") stopIcebergQty: String?,
-            @Query("stopLimitTimeInForce") stopLimitTimeInForce: OrderTimeInForce?,
-            @Query("newOrderRespType") newOrderRespType: NewOrderResponseType?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("symbol") symbol: String,
+        @Query("listClientOrderId") orderId: String?,
+        @Query("side") side: OrderSide,
+        @Query("quantity") quantity: String,
+        @Query("limitClientOrderId") limitClientOrderId: String?,
+        @Query("price") price: String,
+        @Query("limitIcebergQty") limitIcebergQty: String?,
+        @Query("stopClientOrderId") stopClientOrderId: String?,
+        @Query("stopPrice") stopPrice: String,
+        @Query("stopLimitPrice") stopLimitPrice: String?,
+        @Query("stopIcebergQty") stopIcebergQty: String?,
+        @Query("stopLimitTimeInForce") stopLimitTimeInForce: OrderTimeInForce?,
+        @Query("newOrderRespType") newOrderRespType: NewOrderResponseType?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<com.binance.api.client.domain.rest.spot.NewOcoOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @DELETE("/api/v3/orderList")
     fun cancelOcoOrder(
-            @Query("symbol") symbol: String,
-            @Query("orderListId") orderListId: Long?,
-            @Query("listClientOrderId") listClientOrderId: String?,
-            @Query("newClientOrderId") newClientOrderId: String?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("symbol") symbol: String,
+        @Query("orderListId") orderListId: Long?,
+        @Query("listClientOrderId") listClientOrderId: String?,
+        @Query("newClientOrderId") newClientOrderId: String?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<com.binance.api.client.domain.rest.spot.CancelOcoOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/orderList")
     fun ocoOrder(
-            @Query("orderListId") orderListId: Long?,
-            @Query("origClientOrderId") orderId: Long?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("orderListId") orderListId: Long?,
+        @Query("origClientOrderId") orderId: Long?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<com.binance.api.client.domain.rest.spot.OcoOrder>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/allOrderList")
     fun allOcoOrders(
-            @Query("fromId") fromId: String?,
-            @Query("startTime") startTime: Long?,
-            @Query("endTime") endTime: Long?,
-            @Query("limit") limit: Int?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("fromId") fromId: String?,
+        @Query("startTime") startTime: Long?,
+        @Query("endTime") endTime: Long?,
+        @Query("limit") limit: Int?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<List<com.binance.api.client.domain.rest.spot.OcoOrder>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/openOrderList")
     fun allOpenOcoOrders(
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<List<com.binance.api.client.domain.rest.spot.OcoOrder>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/account")
     fun account(
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<com.binance.api.client.domain.rest.spot.Account>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/myTrades")
     fun myTrades(
-            @Query("symbol") symbol: String,
-            @Query("startTime") startTime: Long?,
-            @Query("endTime") endTime: Long?,
-            @Query("fromId") fromId: Long?,
-            @Query("limit") limit: Int?,
-            @Query("recvWindow") recvWindow: Long?,
-            @Query("timestamp") timestamp: Long
+        @Query("symbol") symbol: String,
+        @Query("startTime") startTime: Long?,
+        @Query("endTime") endTime: Long?,
+        @Query("fromId") fromId: Long?,
+        @Query("limit") limit: Int?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
     ): Call<List<com.binance.api.client.domain.rest.spot.Trade>>
 
 

@@ -6,8 +6,6 @@ import com.binance.api.client.domain.NewOrderResponseType
 import com.binance.api.client.domain.OrderSide
 import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
-import com.binance.api.client.domain.rest.Empty
-import com.binance.api.client.domain.rest.spot.*
 import com.binance.api.client.service.BinanceApiServiceGenerator
 import com.binance.api.client.service.BinanceApiServiceSpot
 
@@ -34,7 +32,7 @@ class BinanceApiSpotRestClientImpl(
         newClientOrderId: String?,
         stopPrice: String?,
         icebergQty: String?
-    ): Empty = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiService.newOrderTest(
             symbol,
             side,
@@ -63,7 +61,7 @@ class BinanceApiSpotRestClientImpl(
         newClientOrderId: String?,
         stopPrice: String?,
         icebergQty: String?
-    ): NewOrder = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiService.newOrder(
             symbol,
             side,
@@ -86,7 +84,7 @@ class BinanceApiSpotRestClientImpl(
         orderId: Long?,
         origClientOrderId: String?,
         newClientOrderId: String?
-    ): CancelOrder = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiService.cancelOrder(
             symbol,
             orderId,
@@ -97,7 +95,7 @@ class BinanceApiSpotRestClientImpl(
         )
     )
 
-    override fun cancelOpenOrders(symbol: String): List<CancelOrder> = BinanceApiServiceGenerator.executeSync(
+    override fun cancelOpenOrders(symbol: String) = BinanceApiServiceGenerator.executeSync(
         binanceApiService.cancelOpenOrders(
             symbol,
             BinanceApiConstants.SPOT_RECEIVING_WINDOW,
@@ -105,7 +103,7 @@ class BinanceApiSpotRestClientImpl(
         )
     )
 
-    override fun order(symbol: String, orderId: Long?, origClientOrderId: String?): Order =
+    override fun order(symbol: String, orderId: Long?, origClientOrderId: String?) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiService.order(
                 symbol,
@@ -116,7 +114,7 @@ class BinanceApiSpotRestClientImpl(
             )
         )
 
-    override fun openOrders(symbol: String?): List<Order> = BinanceApiServiceGenerator.executeSync(
+    override fun openOrders(symbol: String?) = BinanceApiServiceGenerator.executeSync(
         binanceApiService.openOrders(
             symbol,
             BinanceApiConstants.SPOT_RECEIVING_WINDOW,
@@ -124,7 +122,7 @@ class BinanceApiSpotRestClientImpl(
         )
     )
 
-    override fun allOrders(symbol: String, orderId: Long?, startTime: Long?, endTime: Long?, limit: Int?): List<Order> =
+    override fun allOrders(symbol: String, orderId: Long?, startTime: Long?, endTime: Long?, limit: Int?) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiService.allOrders(
                 symbol,
@@ -150,7 +148,7 @@ class BinanceApiSpotRestClientImpl(
         stopLimitPrice: String?,
         stopIcebergQty: String?,
         stopLimitTimeInForce: OrderTimeInForce?
-    ): NewOcoOrder = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiService.newOcoOrder(
             symbol,
             listClientOrderId,
@@ -175,7 +173,7 @@ class BinanceApiSpotRestClientImpl(
         orderListId: Long?,
         listClientOrderId: String?,
         newClientOrderId: String?
-    ): CancelOcoOrder = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiService.cancelOcoOrder(
             symbol,
             orderListId,
@@ -186,7 +184,7 @@ class BinanceApiSpotRestClientImpl(
         )
     )
 
-    override fun ocoOrder(orderListId: Long?, origClientOrderId: Long?): OcoOrder =
+    override fun ocoOrder(orderListId: Long?, origClientOrderId: Long?) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiService.ocoOrder(
                 orderListId,
@@ -196,7 +194,7 @@ class BinanceApiSpotRestClientImpl(
             )
         )
 
-    override fun allOcoOrders(fromId: String?, startTime: Long?, endTime: Long?, limit: Int?): List<OcoOrder> =
+    override fun allOcoOrders(fromId: String?, startTime: Long?, endTime: Long?, limit: Int?) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiService.allOcoOrders(
                 fromId,
@@ -208,21 +206,21 @@ class BinanceApiSpotRestClientImpl(
             )
         )
 
-    override fun allOpenOcoOrders(): List<OcoOrder> = BinanceApiServiceGenerator.executeSync(
+    override fun allOpenOcoOrders() = BinanceApiServiceGenerator.executeSync(
         binanceApiService.allOpenOcoOrders(
             BinanceApiConstants.SPOT_RECEIVING_WINDOW,
             System.currentTimeMillis()
         )
     )
 
-    override fun account(): Account = BinanceApiServiceGenerator.executeSync(
+    override fun account() = BinanceApiServiceGenerator.executeSync(
         binanceApiService.account(
             BinanceApiConstants.SPOT_RECEIVING_WINDOW,
             System.currentTimeMillis()
         )
     )
 
-    override fun myTrades(symbol: String, startTime: Long?, endTime: Long?, fromId: Long?, limit: Int?): List<Trade> =
+    override fun myTrades(symbol: String, startTime: Long?, endTime: Long?, fromId: Long?, limit: Int?) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiService.myTrades(
                 symbol,
@@ -235,8 +233,8 @@ class BinanceApiSpotRestClientImpl(
             )
         )
 
-    override fun startUserDataStream(): String =
-        BinanceApiServiceGenerator.executeSync(binanceApiService.startUserDataStream()).listenKey
+    override fun startUserDataStream() =
+        BinanceApiServiceGenerator.executeSync(binanceApiService.startUserDataStream())
 
     override fun keepAliveUserDataStream(listenKey: String) {
         BinanceApiServiceGenerator.executeSync(binanceApiService.keepAliveUserDataStream(listenKey))

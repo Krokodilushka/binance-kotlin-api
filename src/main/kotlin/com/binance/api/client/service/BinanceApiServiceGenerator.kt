@@ -54,26 +54,17 @@ object BinanceApiServiceGenerator {
     /**
      * Execute a REST call and block until the response is received.
      */
-    fun <T> executeSync(call: Call<T>): T {
-        return try {
+    fun <T> executeSync(call: Call<T>): Response<T> {
+        try {
             val response = call.execute()
             if (response.isSuccessful) {
-                response.body()!!
+                return response
             } else {
-                val apiError = getBinanceApiError(response)
-                throw BinanceApiException(apiError, call.request())
+                throw BinanceApiException(errorBodyConverter.convert(response.errorBody()!!)!!, call.request())
             }
         } catch (e: IOException) {
             throw BinanceApiException(e)
         }
-    }
-
-    /**
-     * Extracts and converts the response error body into an object.
-     */
-    @Throws(IOException::class, BinanceApiException::class)
-    fun getBinanceApiError(response: Response<*>): BinanceApiError {
-        return errorBodyConverter.convert(response.errorBody()!!)!!
     }
 
 }

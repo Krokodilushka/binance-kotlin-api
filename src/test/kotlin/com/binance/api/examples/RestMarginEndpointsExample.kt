@@ -65,6 +65,8 @@ class RestMarginEndpointsExample {
                 null,
                 OrderTimeInForce.GTC
             ).let {
+                return@let it.body()!!
+            }.let {
                 println("newOrder: $it")
                 client.order(it.symbol, null, it.orderId, null).let {
                     println("order: $it")
@@ -106,6 +108,8 @@ class RestMarginEndpointsExample {
             }
 
             client.account().let {
+                return@let it.body()!!
+            }.let {
                 println("borrowEnabled: " + it.borrowEnabled)
                 println("marginLevel: " + it.marginLevel)
                 println("totalAssetOfBtc: " + it.totalAssetOfBtc)
@@ -169,8 +173,11 @@ class RestMarginEndpointsExample {
             }
 
             client.isolatedAllPairs().let {
+                return@let it.body()!!
+            }.let {
                 println("isolatedAllPairs: ${it.joinToString(separator = "\n") { it.toString() }}")
             }
         }
     }
+
 }

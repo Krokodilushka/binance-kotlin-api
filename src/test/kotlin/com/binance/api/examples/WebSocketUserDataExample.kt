@@ -12,8 +12,8 @@ class WebSocketUserDataExample {
         @JvmStatic
         fun main(args: Array<String>) {
             val binanceApiClientFactory = newInstance(
-                    args.getOrElse(0) { "API_KEY" },
-                    args.getOrElse(1) { "API_SECRET" }
+                args.getOrElse(0) { "API_KEY" },
+                args.getOrElse(1) { "API_SECRET" }
             )
 
             val marginClient = binanceApiClientFactory.newMarginRestClient()
@@ -23,11 +23,11 @@ class WebSocketUserDataExample {
 //            Thread.sleep(500L)
 //            val isolatedMarginBtcEthListenKey = marginClient.startIsolatedMarginUserDataStream("ethbtc")
             val channels = listOf(
-                    WebSocketStream.AllMarketTickers(),
+                WebSocketStream.AllMarketTickers(),
 //                    WebSocketStream.Trade("btcusdt")
-                    WebSocketStream.UserData(spotListenKey),
+                WebSocketStream.UserData(spotListenKey.body()!!.listenKey),
 //                    WebSocketStream.UserData(marginListenKey)
-                    WebSocketStream.UserData(isolatedMarginBtcUsdtListenKey)
+                WebSocketStream.UserData(isolatedMarginBtcUsdtListenKey.body()!!.listenKey)
 //                    WebSocketStream.UserData(isolatedMarginBtcEthListenKey)
             )
 

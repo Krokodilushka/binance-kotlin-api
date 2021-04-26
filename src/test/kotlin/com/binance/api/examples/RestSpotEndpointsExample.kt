@@ -35,6 +35,7 @@ class RestSpotEndpointsExample {
                 println("newOrderTest: $it")
             }
 
+
             client.newOrder(
                 "BTCUSDT",
                 OrderSide.SELL,
@@ -42,29 +43,38 @@ class RestSpotEndpointsExample {
                 OrderTimeInForce.GTC,
                 "0.001",
                 null,
-                "20000",
+                "100000",
                 null,
                 null,
                 null
             ).let {
+                return@let it.body()!!
+            }.let {
                 println("newOrder: $it")
+                Thread.sleep(1000L)
                 client.order(it.symbol, it.orderId, null).let {
-                    println("order: $it")
+                    println("order: ${it.body()!!}")
+                    println("headers: ${it.headers().toMultimap().filter { it.key.startsWith("x-mbx") }}")
                 }
                 client.openOrders(it.symbol).let {
-                    println("openOrders: $it")
+                    println("openOrders: ${it.body()!!}")
+                    println("headers: ${it.headers().toMultimap().filter { it.key.startsWith("x-mbx") }}")
                 }
-//                client.allOrders(it.symbol, null, null, null, 5).let {
-//                    println("allOrders: $it")
-//                }
+                client.allOrders(it.symbol, null, null, null, 5).let {
+                    println("allOrders: ${it.body()!!}")
+                    println("headers: ${it.headers().toMultimap().filter { it.key.startsWith("x-mbx") }}")
+                }
                 client.cancelOrder(it.symbol, it.orderId, null, null).let {
-                    println("cancelOrder: $it")
+                    println("cancelOrder: ${it.body()!!}")
+                    println("headers: ${it.headers().toMultimap().filter { it.key.startsWith("x-mbx") }}")
                 }
                 client.cancelOpenOrders(it.symbol).let {
-                    println("cancelOpenOrders: $it")
+                    println("cancelOpenOrders: ${it.body()!!}")
+                    println("headers: ${it.headers().toMultimap().filter { it.key.startsWith("x-mbx") }}")
                 }
                 client.myTrades(it.symbol, null, null, null, null).let {
-                    println("myTrades: $it")
+                    println("myTrades: ${it.body()!!}")
+                    println("headers: ${it.headers().toMultimap().filter { it.key.startsWith("x-mbx") }}")
                 }
             }
 
@@ -82,6 +92,8 @@ class RestSpotEndpointsExample {
                 null,
                 OrderTimeInForce.GTC
             ).let {
+                return@let it.body()!!
+            }.let {
                 println("newOcoOrder: $it")
                 client.ocoOrder(it.orderListId, null).let {
                     println("ocoOrder: $it")

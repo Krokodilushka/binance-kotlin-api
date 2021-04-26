@@ -3,10 +3,6 @@ package com.binance.api.client.impl
 import com.binance.api.client.BinanceApiConstants
 import com.binance.api.client.BinanceApiMarginRestClient
 import com.binance.api.client.domain.*
-import com.binance.api.client.domain.rest.Amount
-import com.binance.api.client.domain.rest.Empty
-import com.binance.api.client.domain.rest.Transaction
-import com.binance.api.client.domain.rest.margin.*
 import com.binance.api.client.service.BinanceApiServiceGenerator
 import com.binance.api.client.service.BinanceApiServiceMargin
 
@@ -19,7 +15,7 @@ class BinanceApiMarginRestClientImpl(
     private val binanceApiServiceMargin =
         BinanceApiServiceGenerator.createService(BinanceApiServiceMargin::class.java, apiKey, secret, baseUrl)
 
-    override fun newCrossTransfer(asset: String, amount: String, type: Short): Transaction =
+    override fun newCrossTransfer(asset: String, amount: String, type: Short) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiServiceMargin.newCrossTransfer(
                 asset,
@@ -30,7 +26,7 @@ class BinanceApiMarginRestClientImpl(
             )
         )
 
-    override fun newLoan(asset: String, isIsolated: Boolean?, symbol: String?, amount: String): Transaction =
+    override fun newLoan(asset: String, isIsolated: Boolean?, symbol: String?, amount: String) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiServiceMargin.newLoan(
                 asset,
@@ -42,7 +38,7 @@ class BinanceApiMarginRestClientImpl(
             )
         )
 
-    override fun newRepay(asset: String, isIsolated: Boolean?, symbol: String?, amount: String): Transaction =
+    override fun newRepay(asset: String, isIsolated: Boolean?, symbol: String?, amount: String) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiServiceMargin.newRepay(
                 asset,
@@ -54,19 +50,19 @@ class BinanceApiMarginRestClientImpl(
             )
         )
 
-    override fun asset(symbol: String): CrossMarginAsset =
+    override fun asset(symbol: String) =
         BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.asset(symbol))
 
-    override fun pair(symbol: String): MarginPair =
+    override fun pair(symbol: String) =
         BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.pair(symbol))
 
-    override fun allAssets(): List<CrossMarginAsset> =
+    override fun allAssets() =
         BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.allAssets())
 
-    override fun allPairs(): List<MarginPair> =
+    override fun allPairs() =
         BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.allPairs())
 
-    override fun priceIndex(symbol: String): PriceIndex =
+    override fun priceIndex(symbol: String) =
         BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.priceIndex(symbol))
 
     override fun newOrder(
@@ -81,7 +77,7 @@ class BinanceApiMarginRestClientImpl(
         newClientOrderId: String?,
         sideEffectType: OrderSideEffectType?,
         timeInForce: OrderTimeInForce?
-    ): NewOrder = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.newOrder(
             symbol,
             isIsolated,
@@ -106,7 +102,7 @@ class BinanceApiMarginRestClientImpl(
         orderId: Long?,
         origClientOrderId: String?,
         newClientOrderId: String?
-    ): CancelOrder = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.cancelOrder(
             symbol,
             isIsolated,
@@ -125,7 +121,7 @@ class BinanceApiMarginRestClientImpl(
         endTime: String?,
         current: String?,
         size: String?
-    ): TransferHistory = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.crossTransfer(
             asset,
             type,
@@ -146,7 +142,7 @@ class BinanceApiMarginRestClientImpl(
         endTime: Long?,
         current: Long?,
         size: Long?
-    ): LoanRecord = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.loan(
             asset,
             isolatedSymbol,
@@ -168,7 +164,7 @@ class BinanceApiMarginRestClientImpl(
         endTime: Long?,
         current: Long?,
         size: Long?
-    ): RepayRecord = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.repay(
             asset,
             isolatedSymbol,
@@ -189,7 +185,7 @@ class BinanceApiMarginRestClientImpl(
         endTime: Long?,
         current: Long?,
         size: Long?
-    ): InterestHistory = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.interestHistory(
             asset,
             isolatedSymbol,
@@ -208,7 +204,7 @@ class BinanceApiMarginRestClientImpl(
         isolatedSymbol: Boolean?,
         current: Long?,
         size: Long?
-    ): ForceLiquidationRecord = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.forceLiquidationRec(
             startTime,
             endTime,
@@ -220,14 +216,14 @@ class BinanceApiMarginRestClientImpl(
         )
     )
 
-    override fun account(): Account = BinanceApiServiceGenerator.executeSync(
+    override fun account() = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.account(
             BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
             System.currentTimeMillis()
         )
     )
 
-    override fun order(symbol: String, isIsolated: Boolean?, orderId: Long?, origClientOrderId: String?): Order =
+    override fun order(symbol: String, isIsolated: Boolean?, orderId: Long?, origClientOrderId: String?) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiServiceMargin.order(
                 symbol,
@@ -239,7 +235,7 @@ class BinanceApiMarginRestClientImpl(
             )
         )
 
-    override fun openOrders(symbol: String?, isIsolated: Boolean?): List<Order> =
+    override fun openOrders(symbol: String?, isIsolated: Boolean?) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiServiceMargin.openOrders(
                 symbol,
@@ -256,7 +252,7 @@ class BinanceApiMarginRestClientImpl(
         startTime: Long?,
         endTime: Long?,
         limit: Int?
-    ): List<Order> = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.allOrders(
             symbol,
             isIsolated,
@@ -276,7 +272,7 @@ class BinanceApiMarginRestClientImpl(
         endTime: Long?,
         fromId: Long?,
         limit: Int?
-    ): List<Trade> = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.myTrades(
             symbol,
             isIsolated,
@@ -289,7 +285,7 @@ class BinanceApiMarginRestClientImpl(
         )
     )
 
-    override fun maxBorrowable(asset: String, isolatedSymbol: String?): Amount = BinanceApiServiceGenerator.executeSync(
+    override fun maxBorrowable(asset: String, isolatedSymbol: String?) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.maxBorrowable(
             asset,
             isolatedSymbol,
@@ -298,7 +294,7 @@ class BinanceApiMarginRestClientImpl(
         )
     )
 
-    override fun maxTransferable(asset: String, isolatedSymbol: String?): Amount =
+    override fun maxTransferable(asset: String, isolatedSymbol: String?) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiServiceMargin.maxTransferable(
                 asset,
@@ -308,7 +304,7 @@ class BinanceApiMarginRestClientImpl(
             )
         )
 
-    override fun isolatedCreate(base: String, quote: String): CreateIsolatedAccount =
+    override fun isolatedCreate(base: String, quote: String) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiServiceMargin.isolatedCreate(
                 base,
@@ -324,7 +320,7 @@ class BinanceApiMarginRestClientImpl(
         transFrom: TransactionTarget,
         transTo: TransactionTarget,
         amount: String
-    ): Transaction = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.newIsolatedTransfer(
             asset,
             symbol,
@@ -345,7 +341,7 @@ class BinanceApiMarginRestClientImpl(
         endTime: Long?,
         current: Long?,
         size: Long?
-    ): IsolatedTransferHistory = BinanceApiServiceGenerator.executeSync(
+    ) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.isolatedTransfer(
             asset,
             symbol,
@@ -360,14 +356,14 @@ class BinanceApiMarginRestClientImpl(
         )
     )
 
-    override fun isolatedAccount(): IsolatedAccountInfo = BinanceApiServiceGenerator.executeSync(
+    override fun isolatedAccount() = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.isolatedAccount(
             BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
             System.currentTimeMillis()
         )
     )
 
-    override fun isolatedAccount(symbols: List<String>): IsolatedAccountInfo.IsolatedAccountInfoSymbols =
+    override fun isolatedAccount(symbols: List<String>) =
         BinanceApiServiceGenerator.executeSync(
             binanceApiServiceMargin.isolatedAccount(
                 "BTCUSDT,BNBUSDT,ADAUSDT",
@@ -376,7 +372,7 @@ class BinanceApiMarginRestClientImpl(
             )
         )
 
-    override fun isolatedPair(symbol: String): IsolatedPair = BinanceApiServiceGenerator.executeSync(
+    override fun isolatedPair(symbol: String) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.isolatedPair(
             symbol,
             BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
@@ -384,29 +380,29 @@ class BinanceApiMarginRestClientImpl(
         )
     )
 
-    override fun isolatedAllPairs(): List<IsolatedPair> = BinanceApiServiceGenerator.executeSync(
+    override fun isolatedAllPairs() = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.isolatedAllPairs(
             BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
             System.currentTimeMillis()
         )
     )
 
-    override fun startMarginUserDataStream(): String =
-        BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startMarginUserDataStream()).listenKey
+    override fun startMarginUserDataStream() =
+        BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startMarginUserDataStream())
 
-    override fun keepAliveMarginUserDataStream(listenKey: String): Empty =
+    override fun keepAliveMarginUserDataStream(listenKey: String) =
         BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.keepAliveMarginUserDataStream(listenKey))
 
-    override fun deleteMarginUserDataStream(listenKey: String): Empty =
+    override fun deleteMarginUserDataStream(listenKey: String) =
         BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.closeMarginUserDataStream(listenKey))
 
-    override fun startIsolatedMarginUserDataStream(symbol: String): String =
-        BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startIsolatedMarginUserDataStream(symbol)).listenKey
+    override fun startIsolatedMarginUserDataStream(symbol: String) =
+        BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.startIsolatedMarginUserDataStream(symbol))
 
-    override fun keepAliveIsolatedMarginUserDataStream(listenKey: String): Empty =
+    override fun keepAliveIsolatedMarginUserDataStream(listenKey: String) =
         BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.keepAliveIsolatedMarginUserDataStream(listenKey))
 
-    override fun deleteIsolatedMarginUserDataStream(listenKey: String): Empty =
+    override fun deleteIsolatedMarginUserDataStream(listenKey: String) =
         BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.closeIsolatedMarginUserDataStream(listenKey))
 
 }

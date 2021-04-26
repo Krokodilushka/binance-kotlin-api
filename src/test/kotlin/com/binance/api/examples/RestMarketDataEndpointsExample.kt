@@ -24,6 +24,8 @@ class RestMarketDataEndpointsExample {
             }
 
             client.exchangeInfo().let {
+                return@let it.body()!!
+            }.let {
                 println("exchangeInfo: ${it}")
                 it.exchangeFilters.forEach {
                     print("$it")
@@ -84,7 +86,7 @@ class RestMarketDataEndpointsExample {
             client.tickersBookTicker().let {
                 println("tickersBookTicker: $it")
             }
-
         }
+
     }
 }
