@@ -2,8 +2,6 @@
 
 [![Release](https://jitpack.io/v/Krokodilushka/binance-kotlin-api.svg)](https://jitpack.io/#Krokodilushka/binance-kotlin-api)
 
-Websocket, spot trading, margin trading, isolated margin trading.
-
 Endpoints:
 1. Market data ([docs](https://binance-docs.github.io/apidocs/spot/en/#market-data-endpoints "docs") | [examples](https://github.com/Krokodilushka/binance-kotlin-api/blob/master/src/test/kotlin/com/binance/api/examples/RestMarketDataEndpointsExample.kt "examples"))
 2. Spot ([docs](https://binance-docs.github.io/apidocs/spot/en/#spot-account-trade "docs") | [examples](https://github.com/Krokodilushka/binance-kotlin-api/blob/master/src/test/kotlin/com/binance/api/examples/RestSpotEndpointsExample.kt "examples"))
