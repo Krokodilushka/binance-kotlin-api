@@ -187,7 +187,7 @@ class RestMarginEndpointsExample {
                 println("isolatedAllPairs: ${it.joinToString(separator = "\n") { it.toString() }}")
             }
 
-            client.bnbBurn(true, false).let {
+            client.bnbBurn(true, null).let {
                 println("bnbBurn: ${it.body()}")
             }
 

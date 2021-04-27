@@ -502,7 +502,7 @@ class BinanceApiMarginRestClient(
     /**
      * @link https://binance-docs.github.io/apidocs/spot/en/#toggle-bnb-burn-on-spot-trade-and-margin-interest-user_data
      */
-    fun bnbBurn(spotBNBBurn: Boolean, interestBNBBurn: Boolean) = BinanceApiServiceGenerator.executeSync(
+    fun bnbBurn(spotBNBBurn: Boolean?, interestBNBBurn: Boolean?) = BinanceApiServiceGenerator.executeSync(
         binanceApiServiceMargin.bnbBurn(
             spotBNBBurn,
             interestBNBBurn,
