@@ -299,16 +299,14 @@ class BinanceApiSpotRestClient(
      * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
      * @link https://binance-docs.github.io/apidocs/spot/en/#listen-key-spot
      */
-    fun keepAliveUserDataStream(listenKey: String) {
+    fun keepAliveUserDataStream(listenKey: String) =
         BinanceApiServiceGenerator.executeSync(binanceApiService.keepAliveUserDataStream(listenKey))
-    }
 
     /**
      * Close out a user data stream.
      * @link https://binance-docs.github.io/apidocs/spot/en/#listen-key-spot
      */
-    fun closeUserDataStream(listenKey: String) {
+    fun closeUserDataStream(listenKey: String) =
         BinanceApiServiceGenerator.executeSync(binanceApiService.closeUserDataStream(listenKey))
-    }
 
 }
