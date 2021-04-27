@@ -35,9 +35,10 @@ class WebSocketUserDataExample {
             val callback = object : BinanceWebSocketClient.WebSocketCallback {
                 override fun onEvent(eventWrapper: WebSocketEvent.Wrapper<WebSocketEvent>) {
                     if (eventWrapper.stream != "!ticker@arr") {
-                        println("onEvent: $eventWrapper")
+                        println("\nonEvent: $eventWrapper")
+                    } else {
+                        print(".")
                     }
-                    print(".")
                 }
 
                 override fun onMessage(message: WebSocketMessage.Wrapper<WebSocketMessage.Wrapper.Response>) {
