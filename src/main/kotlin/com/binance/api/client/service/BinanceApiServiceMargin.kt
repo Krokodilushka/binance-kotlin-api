@@ -41,7 +41,7 @@ interface BinanceApiServiceMargin {
     fun newRepay(
         @Query("asset") asset: String,
         @Query("isIsolated") isIsolated: Boolean?,
-        @Query("txId") symbol: String?,
+        @Query("symbol") symbol: String?,
         @Query("amount") amount: String,
         @Query("recvWindow") recvWindow: Long?,
         @Query("timestamp") timestamp: Long
