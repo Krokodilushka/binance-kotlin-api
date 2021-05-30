@@ -574,14 +574,24 @@ class BinanceApiMarginRestClient(
      * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
      * @link https://binance-docs.github.io/apidocs/spot/en/#listen-key-isolated-margin
      */
-    fun keepAliveIsolatedMarginUserDataStream(listenKey: String) =
-        BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.keepAliveIsolatedMarginUserDataStream(listenKey))
+    fun keepAliveIsolatedMarginUserDataStream(listenKey: String, symbol: String) =
+        BinanceApiServiceGenerator.executeSync(
+            binanceApiServiceMargin.keepAliveIsolatedMarginUserDataStream(
+                listenKey,
+                symbol
+            )
+        )
 
     /**
      * Close out a user data stream.
      * @link https://binance-docs.github.io/apidocs/spot/en/#listen-key-isolated-margin
      */
-    fun deleteIsolatedMarginUserDataStream(listenKey: String) =
-        BinanceApiServiceGenerator.executeSync(binanceApiServiceMargin.closeIsolatedMarginUserDataStream(listenKey))
+    fun deleteIsolatedMarginUserDataStream(listenKey: String, symbol: String) =
+        BinanceApiServiceGenerator.executeSync(
+            binanceApiServiceMargin.closeIsolatedMarginUserDataStream(
+                listenKey,
+                symbol
+            )
+        )
 
 }

@@ -379,9 +379,15 @@ interface BinanceApiServiceMargin {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @PUT("/sapi/v1/userDataStream/isolated")
-    fun keepAliveIsolatedMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
+    fun keepAliveIsolatedMarginUserDataStream(
+        @Query("listenKey") listenKey: String,
+        @Query("symbol") symbol: String
+    ): Call<Empty>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @DELETE("/sapi/v1/userDataStream/isolated")
-    fun closeIsolatedMarginUserDataStream(@Query("listenKey") listenKey: String): Call<Empty>
+    fun closeIsolatedMarginUserDataStream(
+        @Query("listenKey") listenKey: String,
+        @Query("symbol") symbol: String
+    ): Call<Empty>
 }
