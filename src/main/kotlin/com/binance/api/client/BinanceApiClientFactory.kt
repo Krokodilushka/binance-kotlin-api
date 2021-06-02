@@ -19,6 +19,8 @@ class BinanceApiClientFactory private constructor(
     fun newWebSocketClient(listener: WebSocketListener): BinanceWebSocketClient =
         BinanceWebSocketClient(BinanceApiServiceGenerator.sharedClient, listener)
 
+    fun newUnofficialClient(): BinanceApiUnofficialRestClient = BinanceApiUnofficialRestClient(baseUrl)
+
     companion object {
 
         /**
@@ -35,7 +37,7 @@ class BinanceApiClientFactory private constructor(
         /**
          * New instance without authentication.
          */
-        fun newInstance(baseUrl: String = BinanceApiConstants.DEFAULT_API_BASE_URL): BinanceApiClientFactory {
+        fun newInstance(baseUrl: String = BinanceApiConstants.UNOFFICIAL_API_BASE_URL): BinanceApiClientFactory {
             return BinanceApiClientFactory(null, null, baseUrl)
         }
     }

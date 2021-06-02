@@ -9,6 +9,8 @@ object BinanceApiConstants {
      */
     const val DEFAULT_API_BASE_URL = "https://api.binance.com"
 
+    const val UNOFFICIAL_API_BASE_URL = "https://binance.com"
+
     /**
      * Streaming API base URL.
      */
