@@ -53,7 +53,7 @@ enum class CrossMarginTransferType {
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 enum class RateLimitType {
-    REQUEST_WEIGHT, ORDERS
+    REQUEST_WEIGHT, ORDERS, RAW_REQUESTS
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
