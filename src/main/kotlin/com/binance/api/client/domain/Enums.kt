@@ -23,7 +23,7 @@ enum class OrderType {
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 enum class Permission {
-    SPOT, MARGIN, LEVERAGED
+    SPOT, MARGIN, LEVERAGED, TRD_GRP_003
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -58,7 +58,7 @@ object BinanceApiServiceGenerator {
         if (response.isSuccessful) {
             return response
         } else {
-            val apiError = errorBodyConverter.convert(response.errorBody()!!)
+            val apiError = errorBodyConverter.convert(response.errorBody()!!)!!
             throw BinanceApiException(call.request(), response, apiError)
         }
     }
