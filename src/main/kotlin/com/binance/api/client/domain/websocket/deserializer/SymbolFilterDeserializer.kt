@@ -23,6 +23,7 @@ class SymbolFilterDeserializer : JsonDeserializer<SymbolFilter>() {
             SymbolFilterType.MARKET_LOT_SIZE -> JsonToObject.convert(json, SymbolFilter.MarketLotSize::class.java)
             SymbolFilterType.MAX_NUM_ICEBERG_ORDERS -> JsonToObject.convert(json, SymbolFilter.MaxNumIcebergOrders::class.java)
             SymbolFilterType.MAX_POSITION -> JsonToObject.convert(json, SymbolFilter.MaxPosition::class.java)
+            SymbolFilterType.TRAILING_DELTA -> JsonToObject.convert(json, SymbolFilter.TrailingDelta::class.java)
         }
     }
 

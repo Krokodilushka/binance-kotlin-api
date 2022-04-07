@@ -104,4 +104,18 @@ sealed class SymbolFilter {
             @JsonProperty("maxPosition")
             val maxPosition: String
     ) : SymbolFilter()
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    data class TrailingDelta(
+            @JsonProperty("filterType")
+            val filterType: SymbolFilterType,
+            @JsonProperty("minTrailingAboveDelta")
+            val minTrailingAboveDelta: Int,
+            @JsonProperty("maxTrailingAboveDelta")
+            val maxTrailingAboveDelta: Int,
+            @JsonProperty("minTrailingBelowDelta")
+            val minTrailingBelowDelta: Int,
+            @JsonProperty("maxTrailingBelowDelta")
+            val maxTrailingBelowDelta: Int,
+    ) : SymbolFilter()
 }
