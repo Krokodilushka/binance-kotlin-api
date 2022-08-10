@@ -118,4 +118,21 @@ sealed class SymbolFilter {
             @JsonProperty("maxTrailingBelowDelta")
             val maxTrailingBelowDelta: Int,
     ) : SymbolFilter()
+
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    data class PercentPriceBySide(
+        @JsonProperty("filterType")
+        val filterType: SymbolFilterType,
+        @JsonProperty("bidMultiplierUp")
+        val bidMultiplierUp: String,
+        @JsonProperty("bidMultiplierDown")
+        val bidMultiplierDown: String,
+        @JsonProperty("askMultiplierUp")
+        val askMultiplierUp: String,
+        @JsonProperty("askMultiplierDown")
+        val askMultiplierDown: String,
+        @JsonProperty("avgPriceMins")
+        val avgPriceMins: String,
+    ) : SymbolFilter()
 }

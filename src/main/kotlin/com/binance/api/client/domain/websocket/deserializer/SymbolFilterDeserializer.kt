@@ -24,6 +24,7 @@ class SymbolFilterDeserializer : JsonDeserializer<SymbolFilter>() {
             SymbolFilterType.MAX_NUM_ICEBERG_ORDERS -> JsonToObject.convert(json, SymbolFilter.MaxNumIcebergOrders::class.java)
             SymbolFilterType.MAX_POSITION -> JsonToObject.convert(json, SymbolFilter.MaxPosition::class.java)
             SymbolFilterType.TRAILING_DELTA -> JsonToObject.convert(json, SymbolFilter.TrailingDelta::class.java)
+            SymbolFilterType.PERCENT_PRICE_BY_SIDE -> JsonToObject.convert(json, SymbolFilter.PercentPriceBySide::class.java)
         }
     }
 
