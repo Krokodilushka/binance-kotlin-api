@@ -1,11 +1,12 @@
 package com.binance.api.client.service
 
 import com.binance.api.client.domain.rest.BinanceApiError
-import com.binance.api.client.exception.BinanceApiException
 import com.binance.api.client.security.AuthenticationInterceptor
+import com.fasterxml.jackson.core.JsonParseException
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.ResponseBody
 import org.apache.commons.lang3.StringUtils
 import retrofit2.Call
@@ -58,9 +59,24 @@ object BinanceApiServiceGenerator {
         if (response.isSuccessful) {
             return response
         } else {
-            val apiError = errorBodyConverter.convert(response.errorBody()!!)!!
-            throw BinanceApiException(call.request(), response, apiError)
+            try {
+                val apiError = errorBodyConverter.convert(response.errorBody()!!)!!
+                throw BinanceApiException(call.request(), response, apiError)
+            } catch (e: JsonParseException) {
+                throw BinanceApiDecodeErrorException(call.request(), response)
+            }
         }
     }
 
+    class BinanceApiDecodeErrorException(val request: Request, val response: Response<*>) : RuntimeException()
+
+    class BinanceApiException(
+        val request: Request,
+        val response: Response<*>,
+        val apiError: BinanceApiError
+    ) : RuntimeException() {
+
+        override val message: String
+            get() = "Http code: ${response.code()}. Api error code: ${apiError.code}. Api error message: \"${apiError.msg}\""
+    }
 }
