@@ -1,5 +1,6 @@
 package com.binance.api.client.service
 
+import com.binance.api.client.domain.rest.margin.AssetsThatCanBeConvertedIntoBNB
 import com.binance.api.client.BinanceApiConstants
 import com.binance.api.client.domain.*
 import com.binance.api.client.domain.rest.Amount
@@ -360,6 +361,25 @@ interface BinanceApiServiceMargin {
         timestamp: Long
     ): Call<List<MarginInterestRateHistory>>
 
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/sapi/v1/asset/dust-btc")
+    fun assetsThatCanBeConvertedIntoBNB(
+        @Query("recvWindow")
+        recvWindow: Long?,
+        @Query("timestamp")
+        timestamp: Long
+    ): Call<AssetsThatCanBeConvertedIntoBNB>
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/sapi/v1/asset/dust")
+    fun dustTransfer(
+        @Query("asset")
+        asset: List<String>,
+        @Query("recvWindow")
+        recvWindow: Long?,
+        @Query("timestamp")
+        timestamp: Long
+    ): Call<DustTransfer>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @POST("/sapi/v1/userDataStream")

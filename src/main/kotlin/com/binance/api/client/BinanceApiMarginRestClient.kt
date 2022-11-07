@@ -543,6 +543,27 @@ class BinanceApiMarginRestClient(
     )
 
     /**
+     * @link https://binance-docs.github.io/apidocs/spot/en/#dust-transfer-user_data
+     */
+    fun assetsThatCanBeConvertedIntoBNB() = BinanceApiServiceGenerator.executeSync(
+        binanceApiServiceMargin.assetsThatCanBeConvertedIntoBNB(
+            BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
+
+    /**
+     * @link https://binance-docs.github.io/apidocs/spot/en/#dust-transfer-user_data
+     */
+    fun dustTransfer(asset: List<String>) = BinanceApiServiceGenerator.executeSync(
+        binanceApiServiceMargin.dustTransfer(
+            asset,
+            BinanceApiConstants.MARGIN_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
+
+    /**
      * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active listenKey, that listenKey will be returned and its validity will be extended for 60 minutes.
      * @link https://binance-docs.github.io/apidocs/spot/en/#listen-key-margin
      */

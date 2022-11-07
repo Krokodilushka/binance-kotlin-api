@@ -1,7 +1,9 @@
 package com.binance.api.examples
 
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
+import com.binance.api.client.domain.CandlestickInterval
 import com.binance.api.client.domain.rest.SymbolFilter
+import kotlin.system.exitProcess
 
 class RestMarketDataEndpointsExample {
     companion object {
@@ -13,6 +15,15 @@ class RestMarketDataEndpointsExample {
             )
             val client = factory.newMarketDataRestClient()
 
+            client.candles("BTCUSDT", CandlestickInterval.ONE_MINUTE, null, null, 500).body()!!.forEach {
+                println(
+                    "addBar(${it.openTime}.toZonedDateTime(), \"${it.open.toBigDecimal().setScale(2).toPlainString()
+                    }\", \"${it.high.toBigDecimal().setScale(2).toPlainString()}\", \"${
+                        it.low.toBigDecimal().setScale(2).toPlainString()
+                    }\", \"${it.close.toBigDecimal().setScale(2).toPlainString()}\")"
+                )
+            }
+            exitProcess(0)
 //            client.ping().let {
 //                println("binance headers: " + it.headers().toMultimap().filter { it.key.startsWith("x-mbx") })
 //                println("body: " + it.body()!!)
@@ -47,10 +58,6 @@ class RestMarketDataEndpointsExample {
 //
 //            client.aggTrades("BTCUSDT", null, null, null, null).let {
 //                println("aggTrades: ${it.body()}")
-//            }
-//
-//            client.candles("BTCUSDT", CandlestickInterval.HOURLY, null, null, 5).let {
-//                println("klines: ${it.body()}")
 //            }
 //
 //            client.avgPrice("BTCUSDT").let {
