@@ -3,6 +3,7 @@ package com.binance.api.examples
 import com.binance.api.client.BinanceApiClientFactory.Companion.newInstance
 import com.binance.api.client.domain.CandlestickInterval
 import com.binance.api.client.domain.rest.SymbolFilter
+import java.io.File
 import kotlin.system.exitProcess
 
 class RestMarketDataEndpointsExample {
@@ -15,14 +16,17 @@ class RestMarketDataEndpointsExample {
             )
             val client = factory.newMarketDataRestClient()
 
-            client.candles("BTCUSDT", CandlestickInterval.ONE_MINUTE, null, null, 500).body()!!.forEach {
-                println(
-                    "addBar(${it.openTime}.toZonedDateTime(), \"${it.open.toBigDecimal().setScale(2).toPlainString()
+            val candles = mutableListOf<String>()
+            client.candles("BTCUSDT", CandlestickInterval.FOUR_HOURLY, null, null, 180).body()!!.forEach {
+                candles.add(
+                    "listOf(\"${it.openTime}\", \"${
+                        it.open.toBigDecimal().setScale(2).toPlainString()
                     }\", \"${it.high.toBigDecimal().setScale(2).toPlainString()}\", \"${
                         it.low.toBigDecimal().setScale(2).toPlainString()
                     }\", \"${it.close.toBigDecimal().setScale(2).toPlainString()}\")"
                 )
             }
+            File("candles.txt").writeText(candles.joinToString(separator = ",\n"))
             exitProcess(0)
 //            client.ping().let {
 //                println("binance headers: " + it.headers().toMultimap().filter { it.key.startsWith("x-mbx") })

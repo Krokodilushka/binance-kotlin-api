@@ -43,7 +43,7 @@ class RestMarginEndpointsExample {
 //            }
 //
 //            client.allAssets().let {
-//                println("allAssets: $it")
+//                println("allAssets: ${it.body()}")
 //            }
 //
 //            client.priceIndex("BTCUSDT").let {
@@ -209,6 +209,10 @@ class RestMarginEndpointsExample {
 //
 //            client.dustTransfer(listOf("THETA")).let {
 //                println("dustTransfer: ${it.body()}")
+//            }
+//
+//            client.allPairs().let {
+//                println("allPairs: ${it.body()}")
 //            }
         }
     }

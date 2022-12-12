@@ -37,7 +37,7 @@ class BinanceWebSocketClient(private val client: OkHttpClient, private val liste
     }
 
     interface WebSocketCallback {
-        fun onEvent(eventWrapper: WebSocketEvent.Wrapper<WebSocketEvent>)
+        fun onEvent(eventWrapper: WebSocketEvent.WebSocketEventSealed)
         fun onMessage(message: WebSocketMessage.Wrapper<WebSocketMessage.Wrapper.Response>) {}
         fun onFailure(cause: Throwable)
         fun onClosing(code: Int, reason: String) {}

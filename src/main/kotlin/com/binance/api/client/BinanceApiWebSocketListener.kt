@@ -12,7 +12,7 @@ class BinanceApiWebSocketListener(private val callback: BinanceWebSocketClient.W
     WebSocketListener() {
 
     private val mapper = ObjectMapper().registerKotlinModule()
-    private val eventWrapperReader = mapper.readerFor(WebSocketEvent.Wrapper::class.java)
+    private val eventWrapperReader = mapper.readerFor(WebSocketEvent.WebSocketEventSealed::class.java)
     private val messageWrapperReader = mapper.readerFor(WebSocketMessage.Wrapper::class.java)
     private var isClosed = false
 
@@ -35,8 +35,8 @@ class BinanceApiWebSocketListener(private val callback: BinanceWebSocketClient.W
         }
     }
 
-    private fun textToEventWrapper(text: String): WebSocketEvent.Wrapper<WebSocketEvent>? {
-        return eventWrapperReader.readValue<WebSocketEvent.Wrapper<WebSocketEvent>>(text)
+    private fun textToEventWrapper(text: String): WebSocketEvent.WebSocketEventSealed? {
+        return eventWrapperReader.readValue<WebSocketEvent.WebSocketEventSealed>(text)
     }
 
     private fun textToMessageResponse(text: String): WebSocketMessage.Wrapper<WebSocketMessage.Wrapper.Response>? {

@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 
 
-class WebSocketEventWraperDeserializer : JsonDeserializer<WebSocketEvent.Wrapper<WebSocketEvent>>() {
-    override fun deserialize(jp: JsonParser, ctx: DeserializationContext): WebSocketEvent.Wrapper<WebSocketEvent>? {
+class WebSocketEventWrapperDeserializer : JsonDeserializer<WebSocketEvent.WebSocketEventSealed>() {
+    override fun deserialize(jp: JsonParser, ctx: DeserializationContext): WebSocketEvent.WebSocketEventSealed? {
         val node = jp.codec.readTree<JsonNode>(jp)
         if (null !== node["stream"] && null !== node["data"]) {
             val stream = node["stream"].textValue()
@@ -37,7 +37,9 @@ class WebSocketEventWraperDeserializer : JsonDeserializer<WebSocketEvent.Wrapper
                     else -> return null
                 }
             }
-            return WebSocketEvent.Wrapper(stream, event)
+            return WebSocketEvent.WebSocketEventSealed.Event(stream, event)
+        }else if (null !== node["id"]){
+            return WebSocketEvent.WebSocketEventSealed.MessageResult(node["result"].textValue(),  node["id"].intValue())
         }
         return null
     }
