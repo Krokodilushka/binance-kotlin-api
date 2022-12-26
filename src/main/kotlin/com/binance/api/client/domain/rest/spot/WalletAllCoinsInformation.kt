@@ -57,5 +57,13 @@ data class WalletAllCoinsInformation(
         val resetAddressStatus: Boolean,
         @JsonProperty("specialTips")
         val specialTips: String?,
+        @JsonProperty("withdrawEnable")
+        val withdrawEnable: Boolean,
+        @JsonProperty("withdrawFee")
+        val withdrawFee: String,
+        @JsonProperty("withdrawMin")
+        val withdrawMin: String,
+        @JsonProperty("withdrawMax")
+        val withdrawMax: String,
     )
 }

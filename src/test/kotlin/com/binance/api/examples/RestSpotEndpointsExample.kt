@@ -109,17 +109,16 @@ class RestSpotEndpointsExample {
                                 println("cancelOcoOrder: $it")
                             }
                         }
-            client.walletAllCoinsInformation().body()!!.also {
+            client.walletDepositAddress("BTC", "BNB").body()!!.also {
                 println(it)
             }
             client.walletDepositAddress("BTC", "BNB").body()!!.also {
                 println(it)
             }
             */
-            client.walletDepositAddress("BTC", "BNB").body()!!.also {
+            client.walletAllCoinsInformation().body()!!.also {
                 println(it)
             }
-
         }
     }
 }
