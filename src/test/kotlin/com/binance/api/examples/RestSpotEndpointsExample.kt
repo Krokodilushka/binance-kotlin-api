@@ -119,6 +119,7 @@ class RestSpotEndpointsExample {
             client.walletDepositAddress("BTC", "BNB").body()!!.also {
                 println(it)
             }
+
         }
     }
 }
