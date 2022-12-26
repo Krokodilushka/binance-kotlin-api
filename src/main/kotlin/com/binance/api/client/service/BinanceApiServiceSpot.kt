@@ -7,6 +7,9 @@ import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
 import com.binance.api.client.domain.rest.Empty
 import com.binance.api.client.domain.rest.ListenKey
+import com.binance.api.client.domain.rest.spot.DepositAddress
+import com.binance.api.client.domain.rest.spot.WalletAllCoinsInformation
+import com.binance.api.client.domain.rest.spot.Withdraw
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -177,6 +180,37 @@ interface BinanceApiServiceSpot {
         @Query("timestamp") timestamp: Long
     ): Call<List<com.binance.api.client.domain.rest.spot.Trade>>
 
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/sapi/v1/capital/config/getall")
+    fun walletAllCoinsInformation(
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
+    ): Call<List<WalletAllCoinsInformation>>
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/sapi/v1/capital/deposit/address")
+    fun walletDepositAddress(
+        @Query("coin") coin: String,
+        @Query("network") network: String?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
+    ): Call<DepositAddress>
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/sapi/v1/capital/withdraw/apply")
+    fun withdraw(
+        @Query("coin") coin: String,
+        @Query("withdrawOrderId") withdrawOrderId: String?,
+        @Query("network") network: String?,
+        @Query("address") address: String,
+        @Query("addressTag") addressTag: String?,
+        @Query("amount") amount: String,
+        @Query("transactionFeeFlag") transactionFeeFlag: String?,
+        @Query("name") name: String?,
+        @Query("walletType") walletType: Int?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
+    ): Call<Withdraw>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @POST("/api/v3/userDataStream")

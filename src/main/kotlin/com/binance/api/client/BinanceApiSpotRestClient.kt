@@ -6,6 +6,7 @@ import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
 import com.binance.api.client.service.BinanceApiServiceGenerator
 import com.binance.api.client.service.BinanceApiServiceSpot
+import retrofit2.http.Query
 
 /**
  * Implementation of Binance's REST API using Retrofit with synchronous/blocking method calls.
@@ -309,4 +310,48 @@ class BinanceApiSpotRestClient(
     fun closeUserDataStream(listenKey: String) =
         BinanceApiServiceGenerator.executeSync(binanceApiService.closeUserDataStream(listenKey))
 
+    fun walletAllCoinsInformation() = BinanceApiServiceGenerator.executeSync(
+        binanceApiService.walletAllCoinsInformation(
+            BinanceApiConstants.SPOT_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
+
+    fun walletDepositAddress(
+        coin: String,
+        network: String? = null
+    ) = BinanceApiServiceGenerator.executeSync(
+        binanceApiService.walletDepositAddress(
+            coin,
+            network,
+            BinanceApiConstants.SPOT_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
+
+    fun withdraw(
+        coin: String,
+        withdrawOrderId: String?,
+        network: String?,
+        address: String,
+        addressTag: String?,
+        amount: String,
+        transactionFeeFlag: String?,
+        name: String?,
+        walletType: Int?,
+    ) = BinanceApiServiceGenerator.executeSync(
+        binanceApiService.withdraw(
+            coin,
+            withdrawOrderId,
+            network,
+            address,
+            addressTag,
+            amount,
+            transactionFeeFlag,
+            name,
+            walletType,
+            BinanceApiConstants.SPOT_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
 }
