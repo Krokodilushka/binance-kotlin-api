@@ -7,6 +7,7 @@ import com.binance.api.client.domain.OrderTimeInForce
 import com.binance.api.client.domain.OrderType
 import com.binance.api.client.domain.rest.Empty
 import com.binance.api.client.domain.rest.ListenKey
+import com.binance.api.client.domain.rest.spot.Deposit
 import com.binance.api.client.domain.rest.spot.DepositAddress
 import com.binance.api.client.domain.rest.spot.WalletAllCoinsInformation
 import com.binance.api.client.domain.rest.spot.Withdraw
@@ -211,6 +212,20 @@ interface BinanceApiServiceSpot {
         @Query("recvWindow") recvWindow: Long?,
         @Query("timestamp") timestamp: Long
     ): Call<Withdraw>
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/sapi/v1/capital/deposit/hisrec")
+    fun depositHistory(
+        @Query("coin") coin: String?,
+        @Query("status") status: Int?,
+        @Query("startTime") startTime: Long?,
+        @Query("endTime") endTime: Long?,
+        @Query("offset") offset: Int?,
+        @Query("limit") limit: Int?,
+        @Query("txId") txId: String?,
+        @Query("recvWindow") recvWindow: Long?,
+        @Query("timestamp") timestamp: Long
+    ): Call<List<Deposit>>
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     @POST("/api/v3/userDataStream")

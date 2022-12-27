@@ -354,4 +354,26 @@ class BinanceApiSpotRestClient(
             System.currentTimeMillis()
         )
     )
+
+    fun depositHistory(
+        coin: String? = null,
+        status: Int? = null,
+        startTime: Long? = null,
+        endTime: Long? = null,
+        offset: Int? = null,
+        limit: Int? = null,
+        txId: String? = null,
+    ) = BinanceApiServiceGenerator.executeSync(
+        binanceApiService.depositHistory(
+            coin,
+            status,
+            startTime,
+            endTime,
+            offset,
+            limit,
+            txId,
+            BinanceApiConstants.SPOT_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
 }

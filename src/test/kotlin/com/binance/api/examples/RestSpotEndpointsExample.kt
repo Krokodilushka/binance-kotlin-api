@@ -112,11 +112,14 @@ class RestSpotEndpointsExample {
             client.walletDepositAddress("BTC", "BNB").body()!!.also {
                 println(it)
             }
-            client.walletDepositAddress("BTC", "BNB").body()!!.also {
-                println(it)
-            }
             */
-            client.walletAllCoinsInformation().body()!!.also {
+//            client.walletDepositAddress("BTC", "BNB").body()!!.also {
+//                println(it)
+//            }
+//            client.walletAllCoinsInformation().body()!!.forEach {
+//                println(it)
+//            }
+            client.depositHistory().body()!!.forEach {
                 println(it)
             }
         }
