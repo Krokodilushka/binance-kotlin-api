@@ -16,7 +16,7 @@ data class WithdrawRecord(
     @JsonProperty("address")
     val address: String,
     @JsonProperty("txId")
-    val txId: String,
+    val txId: String?,
     @JsonProperty("applyTime")
     val applyTime: String,
     @JsonProperty("network")
