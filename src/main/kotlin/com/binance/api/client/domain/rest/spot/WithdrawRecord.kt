@@ -30,5 +30,5 @@ data class WithdrawRecord(
     @JsonProperty("walletType")
     val walletType: Int,
     @JsonProperty("txKey")
-    val txKey: String
+    val txKey: String?
 )

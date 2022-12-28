@@ -119,12 +119,9 @@ class RestSpotEndpointsExample {
 //            client.walletAllCoinsInformation().body()!!.forEach {
 //                println(it)
 //            }
-//            client.depositHistory().body()!!.forEach {
-//                println(it)
-//            }
-//            client.depositHistory().body()!!.forEach {
-//                println(it)
-//            }
+            client.depositHistory().body()!!.forEach {
+                println(it)
+            }
             client.withdrawHistory(limit = 100).body()!!.forEach {
                 println(it)
             }
