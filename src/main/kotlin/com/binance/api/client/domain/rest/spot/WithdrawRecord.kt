@@ -24,7 +24,7 @@ data class WithdrawRecord(
     @JsonProperty("transferType")
     val transferType: Int,
     @JsonProperty("info")
-    val info: String,
+    val info: String?,
     @JsonProperty("confirmNo")
     val confirmNo: Int,
     @JsonProperty("walletType")
