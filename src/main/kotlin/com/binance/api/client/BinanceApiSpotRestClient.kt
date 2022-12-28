@@ -376,4 +376,26 @@ class BinanceApiSpotRestClient(
             System.currentTimeMillis()
         )
     )
+
+    fun withdrawHistory(
+        coin: String? = null,
+        withdrawOrderId: String? = null,
+        status: Int? = null,
+        offset: Int? = null,
+        limit: Int? = null,
+        startTime: Long? = null,
+        endTime: Long? = null,
+    ) = BinanceApiServiceGenerator.executeSync(
+        binanceApiService.withdrawHistory(
+            coin,
+            withdrawOrderId,
+            status,
+            offset,
+            limit,
+            startTime,
+            endTime,
+            BinanceApiConstants.SPOT_RECEIVING_WINDOW,
+            System.currentTimeMillis()
+        )
+    )
 }
