@@ -65,5 +65,7 @@ data class WalletAllCoinsInformation(
         val withdrawMin: String,
         @JsonProperty("withdrawMax")
         val withdrawMax: String,
+        @JsonProperty("withdrawIntegerMultiple")
+        val withdrawIntegerMultiple: String,
     )
 }
